@@ -123,13 +123,83 @@ def render_dag(dag: dict, repos: dict) -> str:
     return "\n".join(lines)
 
 
+def render_evidence(claims: dict, dag: dict, repos: dict) -> str:
+    """Experiment -> claims, and the claims nothing can currently test."""
+    exists = {r["id"] for r in repos["repos"] if r["existence"] == "exists"}
+    by_claim: dict[str, list] = {}
+    for n in dag["nodes"]:
+        for cid in n["tests_claims"]:
+            by_claim.setdefault(cid, []).append(n)
+
+    lines = [
+        "| Experiment | Repo exists | Stage | Can move | Admissible |",
+        "|---|---|---|---|---|",
+    ]
+    for n in dag["nodes"]:
+        ok = "yes" if (n["repo"] in exists or n["repo"] == "ccs") else "**no**"
+        if n["repo"] == "ccs":
+            ok = "**no repo**"
+        adm = n.get("admissible_as_evidence")
+        adm_s = {True: "yes", False: "**no**", None: "n/a"}[adm]
+        claims_s = ", ".join(n["tests_claims"]) or "—"
+        lines.append(
+            f"| `{n['id']}` | {ok} | {n['stage']} | {claims_s} | {adm_s} |"
+        )
+
+    lines += ["", "### Claims with no runnable test", "",
+              "| Claim | Blocked on |", "|---|---|"]
+    blocked = 0
+    for c in claims["claims"]:
+        runnable = [
+            n for n in by_claim.get(c["id"], [])
+            if n["repo"] in exists and n["stage"] not in ("planned", "not-designed")
+        ]
+        if not runnable:
+            reasons = []
+            for n in by_claim.get(c["id"], []):
+                if n["repo"] == "ccs":
+                    reasons.append(
+                        "no integration repository — deliberately undesigned"
+                    )
+                elif n["repo"] not in exists:
+                    reasons.append(f"`{n['repo']}` does not exist")
+                elif n["stage"] in ("planned", "not-designed"):
+                    reasons.append(f"`{n['id']}` is {n['stage']}")
+            uniq = sorted(set(reasons)) or ["no experiment mapped"]
+            lines.append(f"| **{c['id']}** | {'; '.join(uniq)} |")
+            blocked += 1
+    lines += ["", f"**{blocked} of {len(claims['claims'])} claims have no runnable test.**"]
+
+    # Evidence actually on file.
+    lines += ["", "### Evidence on file", "",
+              "| Claim | Artefact | Class | Admissible | Direction |", "|---|---|---|---|---|"]
+    rows = 0
+    for c in claims["claims"]:
+        for e in c["evidence"]:
+            lines.append(
+                f"| {c['id']} | `{e['repo']}/{e['artefact']}` | {e['class']} "
+                f"| {'yes' if e['admissible'] else '**no**'} | {e.get('direction', '—')} |"
+            )
+            rows += 1
+    adm = sum(1 for c in claims["claims"] for e in c["evidence"] if e["admissible"])
+    lines += ["", f"**{rows} evidence entries on file. {adm} admissible.**"]
+    return "\n".join(lines)
+
+
 def main() -> int:
     claims = json.loads((LEDGER / "claims.json").read_text())
     dag = json.loads((LEDGER / "dag.json").read_text())
     repos = json.loads((LEDGER / "repos.json").read_text())
     splice(ROOT / "docs" / "CLAIM-LEDGER.md", "claims", render_claims(claims, dag))
     splice(ROOT / "docs" / "DEPENDENCY-DAG.md", "dag", render_dag(dag, repos))
-    print("rendered docs/CLAIM-LEDGER.md, docs/DEPENDENCY-DAG.md")
+    splice(
+        ROOT / "docs" / "EVIDENCE-MAP.md",
+        "evidence",
+        render_evidence(claims, dag, repos),
+    )
+    print(
+        "rendered docs/CLAIM-LEDGER.md, docs/DEPENDENCY-DAG.md, docs/EVIDENCE-MAP.md"
+    )
     return 0
 
 

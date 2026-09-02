@@ -63,10 +63,30 @@ This is the gate that matters, and no part of the programme has approached it.
 **A combination that merely matches its best part is not an integrated system.**
 It is one working component and some overhead, and the programme must say so.
 
-## Current status
+## Current status — reconciled 2026-09-02
 
-No component has cleared **I0**, because no component has a confirmatory result.
-`state-promotion` is the only repository positioned to attempt I0 and I1.
+**No component has cleared I0**, because no component has a confirmatory result.
+Four repositories now satisfy most of I0's *process* boxes — preregistrations
+committed before results, accurate self-declared status, machine-readable
+manifests, negative results published rather than buried — and none satisfies the
+box that matters, which is having an admissible result at all.
 
-Gates I2 and I3 are unreachable in principle until at least three component
-experiments read out. `ccs/EXP-I1` has no repository and no design.
+Gate **I2** has acquired a concrete obstacle that did not exist at the first
+survey. Two of the four tracks do not currently share a budget-accounting scheme:
+
+- `state-promotion` accounts in **write units** (parameter elements in the fast
+  subset) with decision-time inference compute reported separately.
+- `plasticity-routing` accounts in a **unified cost table** over storage, write
+  and compute, with one hard write ceiling shared across arms.
+- `modular-consolidation` accounts in **capacity terms** — `param_total`,
+  `param_active`, `param_peak`, storage including cold storage, and total
+  algorithmic FLOPs.
+- `lifetime-integrity` accounts in **evidence reads** against a capped log.
+
+These are not interchangeable, and I2 requires that budgets be addable before any
+integrated total is meaningful. Reconciling them is a real piece of work that
+nobody currently owns, and it is a prerequisite for EXP-I1 rather than a detail of
+it.
+
+Gate **I3** remains unreachable. `ccs/EXP-I1` has no repository and no design, and
+per the 2026-09-02 reconciliation instruction none is to be created yet.

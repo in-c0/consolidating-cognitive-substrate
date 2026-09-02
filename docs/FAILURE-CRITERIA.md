@@ -78,6 +78,29 @@ These are the failure modes of the *programme*, not of the science:
 6. **Quietly dropping a falsifier** from `ledger/claims.json`. The validator
    rejects any claim with no falsifier.
 
+## Live failure watch — 2026-09-02
+
+Two criteria have development-level signals pointing at them. Neither has fired,
+because neither has admissible evidence behind it, and recording them here is not
+the same as conceding them.
+
+**F4 (the decomposition does not decompose)** — `plasticity-routing` reads COMMIT
+as outward-facing action and therefore classes its own durable `SLOW` write as an
+*allocation* decision, not a commitment. Under the umbrella's definition that
+write is a commitment. Whether this is a vocabulary mismatch or the first sign
+that ALLOCATE and COMMIT are not cleanly separable is unresolved, and it is
+exactly what CCS-C4 exists to settle. See
+[TERMINOLOGY.md](TERMINOLOGY.md#outstanding-divergence--commit).
+
+**An unanticipated failure mode — consolidation may have nothing to fix.**
+`modular-consolidation`'s development simulator finds retention versus capacity
+monotone non-decreasing under competent routing, which would make consolidation a
+compression mechanism rather than a forgetting mechanism in the unbounded regime.
+The original failure criteria did not anticipate this: F1 through F7 all assume
+the mechanisms matter and ask whether they *work*. This asks whether one of them
+has a job. It is now tracked as CCS-C6 against CCS-C11, and if it holds for real
+models the programme's name overstates what the programme does.
+
 ## Publication obligation on failure
 
 Inherited from `state-promotion`: negative results are published. If H1 is

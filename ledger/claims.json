@@ -27,14 +27,18 @@
       "kind": "architectural-framing",
       "status": "theoretical-conjecture",
       "implementation": "partial",
-      "implementation_note": "Only the COMMIT operator and the accompanying state hierarchy exist in code, in state-promotion. ALLOCATE has no implementation anywhere in the programme.",
+      "implementation_note": "COMMIT machinery exists in state-promotion; an ALLOCATE mechanism now exists in plasticity-routing; a long-horizon ACCUMULATE harness exists in lifetime-integrity. Three of the three existing component tracks state explicitly that they do not assume the decomposition and must not be cited as support for it.",
       "evidence": [],
-      "supported_by": ["state-promotion/EXP-001", "plasticity-routing/EXP-P1", "adaptive-commitment/EXP-A1"],
+      "supported_by": [
+        "state-promotion/EXP-001",
+        "plasticity-routing/EXP-001",
+        "adaptive-commitment/EXP-A1"
+      ],
       "falsified_by": [
         "A single-operator or two-operator system matching the full decomposition's performance under identical budgets across every programme benchmark.",
         "Demonstration that ALLOCATE and COMMIT are not separable, i.e. no experiment can vary one while holding the other fixed."
       ],
-      "notes": "This is a research framing, not a finding. It is currently unfalsified only because no experiment has yet been run that could falsify it. Absence of a test is not support.",
+      "notes": "Still a research framing, not a finding. Repository creation is not evidence. modular-consolidation's contamination rules name the decomposition as a conjecture and forbid citing that track as support for it; plasticity-routing scopes itself to ALLOCATE only and refuses to be broadened into a CCS demonstration; lifetime-integrity is architecture-agnostic by construction. The programme's own component tracks are therefore the strictest constraint on this claim.",
       "review_by": "state-promotion/EXP-001 confirmatory readout"
     },
     {
@@ -55,13 +59,17 @@
           "summary": "Toy classifier pilot. Promotion tied with replay within variance (0.457 vs 0.459 final average). The repository states explicitly that this is engineering validation and not evidence for the hypothesis. The fixed-consolidation arm was algebraically identical to replay, so the pilot could not adjudicate the claim at all."
         }
       ],
-      "supported_by": ["state-promotion/EXP-001", "state-promotion/EXP-002", "state-promotion/EXP-003"],
+      "supported_by": [
+        "state-promotion/EXP-001",
+        "state-promotion/EXP-002",
+        "state-promotion/EXP-003"
+      ],
       "falsified_by": [
         "state-promotion/EXP-001 H1 failing under valid, budget-matched conditions.",
         "The promotion arm's advantage disappearing when commit count is matched by the B4 random-routing control (EXP-001 kill criterion 5).",
         "Any observed advantage being attributable to unequal parameter writes, task-identity leakage, or ceiling effects."
       ],
-      "notes": "Status is 'unresolved' rather than 'pilot-supported': the only pilot returned a null result and its fixed-consolidation arm was degenerate by construction.",
+      "notes": "Status is 'unresolved' rather than 'pilot-supported': the only pilot returned a null result and its fixed-consolidation arm was degenerate by construction. As of 2026-09-02 main is unchanged at 3495d49 with an empty results/. A sibling records that an off-main small-LM engineering pilot was run and reviewed and was scientifically uninterpretable because the tested soft-prefix plastic representation underlearned, with an architecture-matched LoRA representation-sufficiency repair predeclared. That work is not merged, not on main, and not admissible.",
       "review_by": "state-promotion/EXP-001 confirmatory readout"
     },
     {
@@ -73,12 +81,14 @@
       "implementation": "implemented",
       "implementation_note": "Implemented in state-promotion; the 'promotion-no-latent' ablation is the designated test.",
       "evidence": [],
-      "supported_by": ["state-promotion/EXP-001"],
+      "supported_by": [
+        "state-promotion/EXP-001"
+      ],
       "falsified_by": [
         "The no-latent and latent-reset ablations matching full B5 on the PALS context/reversal subset.",
         "Any latent-state gain being accompanied by a materially different parameter-write count, which would make it a budget artefact."
       ],
-      "notes": "This is state-promotion H2. EXP-001 Amendment D architecture-matched latent state across B3/B4/B5 so that the routing comparison is not confounded with latent-state access; that makes the H2 ablation the only clean test of this claim.",
+      "notes": "This is state-promotion H2. EXP-001 Amendment D architecture-matched latent state across B3/B4/B5 so that the routing comparison is not confounded with latent-state access; that makes the H2 ablation the only clean test of this claim. As of 2026-09-02 main is unchanged at 3495d49 with an empty results/. A sibling records that an off-main small-LM engineering pilot was run and reviewed and was scientifically uninterpretable because the tested soft-prefix plastic representation underlearned, with an architecture-matched LoRA representation-sufficiency repair predeclared. That work is not merged, not on main, and not admissible.",
       "review_by": "state-promotion/EXP-001 confirmatory readout"
     },
     {
@@ -86,17 +96,29 @@
       "title": "Allocation is a separable lever from commitment",
       "statement": "Where an experience is routed within the substrate affects the stability-plasticity trade-off independently of when commitment occurs, such that an allocation policy can be varied while holding the commit policy fixed and produce a measurable difference.",
       "kind": "empirical",
-      "status": "theoretical-conjecture",
-      "implementation": "none",
-      "implementation_note": "plasticity-routing does not exist. No allocation policy is implemented anywhere in the programme.",
-      "evidence": [],
-      "supported_by": ["plasticity-routing/EXP-P1"],
+      "status": "unresolved",
+      "implementation": "implemented",
+      "implementation_note": "plasticity-routing implements a four-action allocator (IGNORE/EPISODIC/FAST/SLOW) over SDW-1, with a 15-feature decision-time whitelist, seven leakage gates, and an exhaustively searched optimal class-to-action mapping.",
+      "evidence": [
+        {
+          "repo": "plasticity-routing",
+          "artefact": "experiments/EXP-000-RESULT.md",
+          "class": "pilot",
+          "admissible": false,
+          "direction": "mixed",
+          "summary": "DEV_CALIBRATION, trained and evaluated on development seeds {11,12,13}; that track classifies it as not evidence. Two signals point in opposite directions. Kill criterion K1 fired AGAINST learned routing: LEARNED - HEURISTIC = -0.0189, CI [-0.0235,-0.0104], replicating Yoon (2026) in a new setting. K2 did not fire: LEARNED - RANDOM_MATCHED = +0.1108, CI [+0.0927,+0.1264], with a budget-matched control of almost the same action mix, which bears on whether allocation content matters at all. Neither licenses a CCS claim."
+        }
+      ],
+      "supported_by": [
+        "plasticity-routing/EXP-001",
+        "plasticity-routing/EXP-002"
+      ],
       "falsified_by": [
         "Allocation policies producing no measurable difference at fixed commit policy and matched budgets.",
         "Allocation effects being fully explained by the number of commits they induce, which would collapse ALLOCATE into COMMIT."
       ],
-      "notes": "The programme's decomposition (CCS-C1) depends on this separability. If routing turns out to be a reparameterisation of commit frequency, the three-operator framing must be revised to two.",
-      "review_by": "plasticity-routing repository creation"
+      "notes": "Status moved from theoretical-conjecture to unresolved because the claim is now implemented and under inconclusive development calibration. This is NOT an evidence promotion: both statuses assert zero empirical support, and the move was not made because a repository appeared. The K1/K2 split matters for how the claim should eventually be read: a learned allocator failing to beat a calibrated fixed rule would not by itself falsify CCS-C4, because CCS-C4 is about allocation being a separable lever, not about the policy being learned. That distinction must be preserved when EXP-001 reads out.",
+      "review_by": "plasticity-routing/EXP-001 confirmatory readout"
     },
     {
       "id": "CCS-C5",
@@ -105,9 +127,11 @@
       "kind": "empirical",
       "status": "theoretical-conjecture",
       "implementation": "none",
-      "implementation_note": "adaptive-commitment does not exist. state-promotion deliberately uses a frozen, preregistered threshold.",
+      "implementation_note": "adaptive-commitment is now the only uncreated sibling. state-promotion deliberately uses a frozen, preregistered threshold.",
       "evidence": [],
-      "supported_by": ["adaptive-commitment/EXP-A1"],
+      "supported_by": [
+        "adaptive-commitment/EXP-A1"
+      ],
       "falsified_by": [
         "A threshold tuned once on development seeds matching or beating the adaptive policy on confirmatory seeds.",
         "The adaptive policy requiring any held-out or task-identity signal to work, which would make it inadmissible under programme methodology."
@@ -118,36 +142,68 @@
     {
       "id": "CCS-C6",
       "title": "Modular slow state reduces interference",
-      "statement": "Consolidating durable knowledge into separable modules produces less cross-task interference than consolidating into a monolithic slow store of equal total capacity.",
+      "statement": "In an unbounded-capacity regime, consolidating durable knowledge into separable modules produces less cross-task interference than consolidating into a monolithic slow store of equal total capacity.",
       "kind": "empirical",
-      "status": "theoretical-conjecture",
-      "implementation": "none",
-      "implementation_note": "modular-consolidation does not exist. state-promotion's slow adapter bank is a single store.",
-      "evidence": [],
-      "supported_by": ["modular-consolidation/EXP-M1"],
-      "falsified_by": [
-        "Monolithic and modular slow stores showing equal interference at equal capacity and equal write budget.",
-        "Modularity gains vanishing once module-selection overhead is charged as decision-time compute."
+      "status": "unresolved",
+      "implementation": "implemented",
+      "implementation_note": "modular-consolidation implements a generic module lifecycle (allocate, specialise, merge, retire, reinstate) with capacity, cold storage and routing-decision compute all metered.",
+      "evidence": [
+        {
+          "repo": "modular-consolidation",
+          "artefact": "experiments/EXP-000-TOY-RESULT.md",
+          "class": "pilot",
+          "admissible": false,
+          "direction": "against",
+          "summary": "Development toy: a fixed bank of the lifecycle's own final size beat the full lifecycle by 7.8 points at identical capacity. Capacity explained the outcome."
+        },
+        {
+          "repo": "modular-consolidation",
+          "artefact": "experiments/EXP-001-INTERFERENCE-RESULT.md",
+          "class": "pilot",
+          "admissible": false,
+          "direction": "against",
+          "summary": "Development simulator on a closed-form ridge learner: retention versus capacity is monotone non-decreasing under any competent routing, replicated across three independent mechanisms, so no interior optimum exists. That track draws the consequence that in the unbounded regime at matched capacity consolidation has nothing to fix, and records its own track-local claim 'consolidation beats a capacity-matched fixed bank (unbounded regime)' as falsified. Explicitly not evidence about real models."
+        }
       ],
-      "notes": "Capacity matching is the critical control here: more modules must not mean more parameters.",
-      "review_by": "modular-consolidation repository creation"
+      "supported_by": [
+        "modular-consolidation/EXP-100"
+      ],
+      "falsified_by": [
+        "Monolithic and modular slow stores showing equal interference at equal capacity and equal write budget on a real model under a frozen protocol.",
+        "Modularity gains vanishing once module-selection overhead is charged as decision-time compute.",
+        "A fixed bank matched to the dynamic method's own final module count matching or beating it at equal compute."
+      ],
+      "notes": "Held at unresolved rather than falsified, deliberately. The owning track records the unbounded-regime form as falsified in its OWN ledger, but that finding is a development simulator on a closed-form ridge learner, and that track's contamination rule states its results are not evidence for any claim in another track. Promoting a CCS-level status on it would violate both repositories' rules. The claim is NOT rewritten to dodge the negative signal: the unbounded form is kept here with the against-direction evidence attached, and the live constrained question is tracked separately as CCS-C11. Anyone reading CCS-C6 should expect it to end at falsified.",
+      "review_by": "modular-consolidation/EXP-100 readout, or an admissible real-model test of the unbounded regime"
     },
     {
       "id": "CCS-C7",
       "title": "Lifetime coherence is maintainable",
       "statement": "A multi-timescale substrate can be operated over lifetimes far longer than any single experiment stream without unbounded drift, accumulating commitment error, or monotonically increasing staleness.",
       "kind": "empirical",
-      "status": "theoretical-conjecture",
-      "implementation": "none",
-      "implementation_note": "lifetime-integrity does not exist. No experiment in the programme currently runs long enough to observe drift.",
-      "evidence": [],
-      "supported_by": ["lifetime-integrity/EXP-L1"],
+      "status": "unresolved",
+      "implementation": "implemented",
+      "implementation_note": "lifetime-integrity implements the LIS-v0 generator and nine re-grounding mechanisms behind a metered, capped evidence log, with a corruption lock hashed into every manifest. Architecture-agnostic: any system implementing observe/on_gap/on_context_shift/answer/state_bytes can be scored.",
+      "evidence": [
+        {
+          "repo": "lifetime-integrity",
+          "artefact": "experiments/EXP-000-PILOT-RECORD.md",
+          "class": "pilot",
+          "admissible": false,
+          "direction": "mixed",
+          "summary": "Single seed, no replication, no confidence intervals, generator still under construction; declared NOT EVIDENCE by that track. Engineering objectives confirmed: budgets bind, audit separation holds, every metric can move, benchmark between floor and ceiling. Provisional orderings recorded against the track's own framing: last-write-wins is hard to beat, and provenance-regrounding does not dominate on integrity despite winning on accuracy. The pilot also suggests mechanisms are near-indistinguishable at 8 epochs and separate by more than 0.25 absolute integrity-violation rate at 128."
+        }
+      ],
+      "supported_by": [
+        "lifetime-integrity/EXP-A001",
+        "lifetime-integrity/EXP-B001"
+      ],
       "falsified_by": [
         "Drift, stale-answer rate, or commitment error growing without bound as stream length increases.",
         "Coherence being maintainable only by periodic full resets, which would concede that the substrate does not accumulate."
       ],
-      "notes": "This is the claim most likely to be quietly assumed rather than tested. Short experiment streams cannot support it, and no amount of EXP-001 evidence substitutes for it.",
-      "review_by": "lifetime-integrity repository creation"
+      "notes": "Status moved to unresolved because a harness and preregistrations now exist, not because anything was shown. A hard external constraint now applies: lifetime-integrity declares itself architecture-agnostic and states that no result from it may be used to claim a CCS latent architecture is validated without an admissible substrate from state-promotion and subsequent routing work. CCS-C7 therefore cannot reach an empirical-support status from that track alone, however strong its results, until state-promotion/EXP-001 reads out admissibly. The pilot's lifetime-length signal, if it replicates, would also mean any short-horizon result in this programme is uninformative about mechanism choice.",
+      "review_by": "lifetime-integrity/EXP-A001 readout AND an admissible state-promotion substrate"
     },
     {
       "id": "CCS-C8",
@@ -156,15 +212,17 @@
       "kind": "empirical",
       "status": "theoretical-conjecture",
       "implementation": "none",
-      "implementation_note": "No integrated system exists. No repository currently owns the integration experiment.",
+      "implementation_note": "No integrated system exists and no repository owns the integration experiment. Per the 2026-09-02 reconciliation instruction, no integration implementation repository is to be created yet.",
       "evidence": [],
-      "supported_by": ["ccs/EXP-I1"],
+      "supported_by": [
+        "ccs/EXP-I1"
+      ],
       "falsified_by": [
         "The integrated system matching but not exceeding the best single component under matched total budget.",
         "Components interfering, so that the combination is worse than its best part.",
         "The combined gain being fully accounted for by one component's contribution."
       ],
-      "notes": "This is the claim a synthesis paper would exist to make. It cannot be tested until at least three component experiments have confirmatory readouts. EXP-I1 is not yet designed and has no host repository.",
+      "notes": "This is the claim a synthesis paper would exist to make. Four of five component tracks now exist and three have development results, but ccs/EXP-I1 remains undesigned by decision, not by oversight: a non-arbitrary composition test cannot be specified until enough component mechanisms have admissible evidence, and designing it now would bake unsupported component choices into the synthesis programme.",
       "review_by": "synthesis readiness review"
     },
     {
@@ -174,14 +232,17 @@
       "kind": "empirical",
       "status": "unresolved",
       "implementation": "partial",
-      "implementation_note": "state-promotion's B1/B2 arms are single-timescale controls, so the comparison is implemented for the COMMIT operator only.",
+      "implementation_note": "state-promotion's B1/B2 arms are single-timescale controls for COMMIT. plasticity-routing's ALL_FAST / ALL_SLOW / ALL_EPISODIC single-depth arms are the corresponding controls for ALLOCATE.",
       "evidence": [],
-      "supported_by": ["state-promotion/EXP-001", "plasticity-routing/EXP-P1"],
+      "supported_by": [
+        "state-promotion/EXP-001",
+        "plasticity-routing/EXP-001"
+      ],
       "falsified_by": [
         "A budget-matched single-timescale baseline (B1 or B2) matching the multi-timescale arms on average forgetting and plasticity.",
         "Multi-timescale gains disappearing once decision-time routing compute is added to the total-compute accounting (see CCS-C10)."
       ],
-      "notes": "The programme's own related work already places multi-timescale learning in prior art. This claim is about necessity under matched budgets, which is the only version that is still open.",
+      "notes": "The programme's own related work already places multi-timescale learning in prior art. This claim is about necessity under matched budgets, which is the only version that is still open. plasticity-routing's development calibration shows every single-depth arm well below its routed arms (best single depth ALL_FAST at 0.230 against LEARNED 0.386), and its K4 criterion would have invalidated the benchmark had a single depth matched. That is a development signal on a synthetic world, not evidence.",
       "review_by": "state-promotion/EXP-001 confirmatory readout"
     },
     {
@@ -193,13 +254,45 @@
       "implementation": "implemented",
       "implementation_note": "state-promotion records decision_forward_calls, decision_tokens_processed and an estimated frozen-backbone decision FLOP proxy separately from adaptation compute.",
       "evidence": [],
-      "supported_by": ["state-promotion/EXP-001"],
+      "supported_by": [
+        "state-promotion/EXP-001"
+      ],
       "falsified_by": [
         "Gating overhead being large enough that a compute-augmented baseline, given the same total budget, matches the promotion arm.",
         "The performance-vs-total-compute curve showing no region where the promotion arm dominates."
       ],
-      "notes": "state-promotion Amendment E locked this before results and forbids describing B5 as compute-matched without qualification. This is a genuine falsifier for the practical version of CCS-C2, not a caveat.",
+      "notes": "state-promotion Amendment E locked this before results and forbids describing B5 as compute-matched without qualification. This is a genuine falsifier for the practical version of CCS-C2, not a caveat. As of 2026-09-02 main is unchanged at 3495d49 with an empty results/. A sibling records that an off-main small-LM engineering pilot was run and reviewed and was scientifically uninterpretable because the tested soft-prefix plastic representation underlearned, with an architecture-matched LoRA representation-sufficiency repair predeclared. That work is not merged, not on main, and not admissible.",
       "review_by": "state-promotion/EXP-001 confirmatory readout"
+    },
+    {
+      "id": "CCS-C11",
+      "title": "Under a binding capacity ceiling, pooling beats destroying",
+      "statement": "Under a hard capacity ceiling below the number of distinct skills, and at identical live module count, parameters, storage and compute, freeing a slot by pooling modules retains more than freeing it by destroying a module or by refusing to admit a new one.",
+      "kind": "empirical",
+      "status": "unresolved",
+      "implementation": "implemented",
+      "implementation_note": "Implemented in modular-consolidation as the B-MERGE / B-EVICT-LRU / B-DENY arms under an enforced ceiling, with a random-merge control separating the criterion from the rate.",
+      "evidence": [
+        {
+          "repo": "modular-consolidation",
+          "artefact": "experiments/EXP-002-CEILING-RESULT.md",
+          "class": "pilot",
+          "admissible": false,
+          "direction": "mixed",
+          "summary": "Development simulator, ceiling 3 with K*=6, 8 paired seeds at identical live-module count, 576 parameters and 33408 bytes of storage per arm. merge - evict = +0.204 retention, CI [+0.125,+0.296]. merge - deny = -0.017 retention with the CI spanning zero, concealing plasticity +0.023 and forgetting +0.039 with CIs excluding zero, i.e. stability converted into plasticity at roughly par. merge - random-merge = +0.009, CI spanning zero, so the pair-selection criterion did not survive to the aggregate. Not evidence about real models."
+        }
+      ],
+      "supported_by": [
+        "modular-consolidation/EXP-003",
+        "modular-consolidation/EXP-100"
+      ],
+      "falsified_by": [
+        "merge and evict showing equal retention at an identical binding ceiling under a frozen protocol.",
+        "deny matching or beating merge on retention once plasticity is held equal, which would make consolidation a trade rather than a gain.",
+        "The advantage over a random-merge control failing to exclude zero, which would mean the rate mattered and the criterion did not."
+      ],
+      "notes": "Added at the 2026-09-02 reconciliation to keep the live question separate from the unbounded-regime form in CCS-C6, rather than rewriting CCS-C6 to follow the evidence. Two cautions carried from the owning track: 'deny' is a strong and usually-missing baseline that currently leads on retention, and the merge-versus-deny null conceals a significant two-way trade, so a single retention headline would misreport it.",
+      "review_by": "modular-consolidation/EXP-003 readout under a frozen protocol"
     }
   ]
 }

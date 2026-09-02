@@ -49,21 +49,55 @@ Rejects a consolidation candidate if protected replay-derived probes regress
 beyond a preregistered tolerance, and restores the prior slow state. This is the
 mechanism that makes "candidate ≠ committed" real rather than rhetorical.
 
+## Implemented components — `plasticity-routing`
+
+### Allocator
+Decides *where* an incoming experience is assigned. Implemented over four
+actions — `IGNORE`, `EPISODIC`, `FAST`, `SLOW` — chosen so that write *depth*
+stays a real axis, with `IGNORE` making "write nowhere" an explicit option the
+umbrella's state hierarchy does not otherwise name. Owns **CCS-C4**.
+
+The definitional hazard is handled rather than assumed away: the track runs a
+budget-matched random allocator with nearly the same action mix, so an advantage
+that is really about write volume cannot be read as an advantage about placement.
+It also excludes `UPDATE_EXISTING_MODULE` and `SPAWN_NEW_MODULE` precisely
+because they add capacity, which is the primary confound.
+
+Whether four actions are *justified* is tested rather than asserted: the
+benchmark is admissible only if the empirically optimal class-to-action mapping
+is a bijection.
+
+## Implemented components — `modular-consolidation`
+
+### Slow-state structure
+Module allocation, specialisation, merging, retirement with reinstatement, and
+reuse, with capacity, cold storage for retired modules, and routing decision
+compute all metered. Owns **CCS-C6** and **CCS-C11**.
+
+Constraint the track enforces and the umbrella has adopted programme-wide: a
+dynamic method must be compared against a fixed configuration of *its own final
+size* at equal compute. Without that control, "dynamic allocation helps" is
+indistinguishable from "N modules is the right size".
+
+## Implemented components — `lifetime-integrity`
+
+### Integrity monitor
+Nine re-grounding mechanisms scored behind a metered, capped evidence log, with
+integrity scored separately from accuracy: answering a correct value nobody ever
+supplied counts as a failure, not a success. Owns **CCS-C7**.
+
+Architecture-agnostic by construction — anything implementing
+`observe / on_gap / on_context_shift / answer / state_bytes` can be scored. That
+track states this is a hard dependency rather than a stylistic choice, and that
+no result from it may be used to claim a CCS latent architecture is validated
+without an admissible substrate from `state-promotion`.
+
 ## Components with no implementation anywhere
 
 These are named so the DAG can reference them. Naming a component is not
 designing it.
 
-### Allocator — `plasticity-routing` *(repository not created)*
-Would decide *where* an incoming experience is assigned, holding the commit
-policy fixed. Owns **CCS-C4**.
-
-The definitional hazard: an allocator that changes how often commitment happens
-is not testing allocation, it is testing commitment frequency under another name.
-Any design must hold commit count fixed while varying placement, or it cannot
-support the claim.
-
-### Commit policy — `adaptive-commitment` *(repository not created)*
+### Commit policy — `adaptive-commitment` *(the only uncreated sibling)*
 Would make the commit threshold a function of observed stream statistics rather
 than a frozen constant. Owns **CCS-C5**.
 
@@ -71,23 +105,19 @@ Constraint inherited from programme methodology: the policy may not consume
 held-out or task-identity signal. An adaptive threshold that peeks is not a
 weaker result, it is an inadmissible one.
 
-### Slow-state structure — `modular-consolidation` *(repository not created)*
-Would make slow parametric state separable into modules. Owns **CCS-C6**.
-
-Constraint: modules must be compared at *equal total capacity*. More modules
-meaning more parameters would make any observed advantage a budget artefact.
-
-### Integrity monitor — `lifetime-integrity` *(repository not created)*
-Would measure whether the substrate stays coherent over lifetimes much longer
-than a single experiment stream: drift, staleness, accumulated commitment error.
-Owns **CCS-C7**.
-
-Constraint: this is the one component whose claim cannot be supported by any
-short-stream experiment, however well controlled. No quantity of EXP-001 evidence
-substitutes for a long run.
-
 ## Ownership rule
 
 A component is defined here and implemented in exactly one sibling repository. If
 two repositories implement the same component, that is programme drift and the
 next reconciliation must record it. The umbrella repository implements nothing.
+
+### Overlap under watch
+
+`plasticity-routing` and `modular-consolidation` both touch slow parametric
+state. They are not currently in conflict: the former treats `SLOW` as one
+destination among four and deliberately excludes the module-spawning actions,
+while the latter owns the internal structure of that destination. The boundary
+holds only as long as `plasticity-routing` keeps excluding
+`UPDATE_EXISTING_MODULE` and `SPAWN_NEW_MODULE`. If that exclusion is ever
+relaxed, the two tracks would be varying the same factor and the next
+reconciliation must record an ownership conflict.

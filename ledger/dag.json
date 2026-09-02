@@ -1,11 +1,12 @@
 {
   "_comment": [
     "Experiment dependency DAG for the CCS programme.",
-    "A node's 'depends_on' means: this experiment should not be run to",
-    "confirmatory status until the named nodes have reached a readout, because",
-    "its design or its interpretation depends on their outcome.",
-    "Nodes owned by repositories that do not exist are marked stage 'planned'",
-    "and carry no design detail beyond a question and a falsifier."
+    "'depends_on' means: this experiment should not be run to confirmatory status",
+    "until the named nodes have read out, because its design or interpretation",
+    "depends on their outcome.",
+    "'ccs_claim_gate' is separate: work may proceed, but the named condition must",
+    "hold before the node's results can license a CCS-level claim.",
+    "Stages are observed from the sibling repositories, not assigned from here."
   ],
   "schema_version": 1,
   "nodes": [
@@ -30,7 +31,7 @@
       "tests_claims": ["CCS-C2", "CCS-C3", "CCS-C9", "CCS-C10"],
       "readout": null,
       "admissible_as_evidence": true,
-      "gating_note": "This is the programme's single load-bearing node. Every other empirical claim is either downstream of it or interpreted in its light."
+      "gating_note": "Still the programme's load-bearing node. main is unchanged at 3495d49 with an empty results/. Off-main branches carry an LM pilot that a sibling records as mechanically valid but scientifically uninterpretable (soft-prefix plastic representation underlearned), plus a predeclared LoRA representation-sufficiency repair and an Amendment F. None of that is merged and none of it is admissible."
     },
     {
       "id": "state-promotion/EXP-002",
@@ -56,17 +57,150 @@
       "admissible_as_evidence": true,
       "gating_note": "Scale replication only. Does not substitute for small-model ablations."
     },
+
     {
-      "id": "plasticity-routing/EXP-P1",
+      "id": "plasticity-routing/EXP-000",
+      "repo": "plasticity-routing",
+      "stage": "development-calibration-complete",
+      "operator": "ALLOCATE",
+      "question": "Is the SDW-1 harness mechanically valid, and does the benchmark expose design defects before the protocol is frozen?",
+      "depends_on": [],
+      "tests_claims": [],
+      "readout": "DEV_CALIBRATION, trained and evaluated on development seeds {11,12,13}. All leakage gates L1-L7 pass, no ceiling or floor, optimal mapping is a bijection. Kill criterion K1 fired AGAINST the method: LEARNED - HEURISTIC = -0.0189, CI [-0.0235,-0.0104]. K2 did not fire: LEARNED - RANDOM_MATCHED = +0.1108, CI [+0.0927,+0.1264]. Declared not evidence.",
+      "admissible_as_evidence": false
+    },
+    {
+      "id": "plasticity-routing/EXP-001",
+      "repo": "plasticity-routing",
+      "stage": "pre-result-scaffold",
+      "operator": "ALLOCATE",
+      "question": "Can a policy learn from delayed future task utility, under a unified resource budget, to allocate experience across substrates of differing persistence - and is any gain attributable to routing rather than capacity, compute, or privileged task identity?",
+      "depends_on": ["plasticity-routing/EXP-000"],
+      "tests_claims": ["CCS-C4", "CCS-C1", "CCS-C9"],
+      "readout": null,
+      "admissible_as_evidence": true,
+      "gating_note": "Confirmatory synthetic on five held-out seeds. Not blocked by state-promotion because it is synthetic. The track sets a deliberately low prior on the learned router beating the calibrated fixed heuristic, and a negative replication of Yoon (2026) is a preregistered publishable outcome."
+    },
+    {
+      "id": "plasticity-routing/EXP-002",
       "repo": "plasticity-routing",
       "stage": "planned",
       "operator": "ALLOCATE",
-      "question": "Holding the commit policy fixed, does varying the allocation policy change the stability-plasticity trade-off?",
-      "depends_on": ["state-promotion/EXP-001"],
-      "tests_claims": ["CCS-C4", "CCS-C1", "CCS-C9"],
+      "question": "Does the allocation result transfer to a language model?",
+      "depends_on": ["plasticity-routing/EXP-001", "state-promotion/EXP-001"],
+      "tests_claims": ["CCS-C4"],
+      "readout": null,
+      "admissible_as_evidence": true,
+      "gating_note": "Declared BLOCKED by that track until the first mechanically valid state-promotion engineering pilot has been reviewed, so that shared two-timescale defects are not baked in."
+    },
+
+    {
+      "id": "modular-consolidation/EXP-000",
+      "repo": "modular-consolidation",
+      "stage": "development-calibration-complete",
+      "operator": "COMMIT",
+      "question": "Does a full module lifecycle beat a fixed bank of its own final size at identical capacity?",
+      "depends_on": [],
+      "tests_claims": [],
+      "readout": "Development toy. The fixed bank of the lifecycle's own final size beat the lifecycle by 7.8 points at identical capacity. Capacity explained the outcome. Not evidence about real models.",
+      "admissible_as_evidence": false
+    },
+    {
+      "id": "modular-consolidation/EXP-001",
+      "repo": "modular-consolidation",
+      "stage": "development-calibration-complete",
+      "operator": "COMMIT",
+      "question": "Is there an interior optimum in retention versus module capacity?",
+      "depends_on": ["modular-consolidation/EXP-000"],
+      "tests_claims": ["CCS-C6"],
+      "readout": "Development simulator on a closed-form ridge learner. Retention versus capacity is monotone non-decreasing under any competent routing, across three independent mechanisms. Consequence drawn by that track: in the unbounded regime at matched capacity, consolidation has nothing to fix, and its only possible benefit is compression rather than forgetting. Not evidence about real models.",
+      "admissible_as_evidence": false
+    },
+    {
+      "id": "modular-consolidation/EXP-002",
+      "repo": "modular-consolidation",
+      "stage": "development-calibration-complete",
+      "operator": "COMMIT",
+      "question": "Under a hard capacity ceiling below the number of distinct skills, does freeing a slot by pooling retain more than freeing it by destroying or by refusing to admit?",
+      "depends_on": ["modular-consolidation/EXP-001"],
+      "tests_claims": ["CCS-C11"],
+      "readout": "Development simulator, ceiling 3 with K*=6, 8 paired seeds at identical live-module count, parameters and storage. merge - evict = +0.204 retention, CI [+0.125,+0.296]. merge - deny = -0.017, CI spans zero, concealing plasticity +0.023 and forgetting +0.039 with CIs excluding zero. merge - random-merge = +0.009, CI spans zero. Not evidence about real models.",
+      "admissible_as_evidence": false
+    },
+    {
+      "id": "modular-consolidation/EXP-003",
+      "repo": "modular-consolidation",
+      "stage": "planned",
+      "operator": "COMMIT",
+      "question": "Does the binding-ceiling effect hold across ceiling phases under a frozen protocol?",
+      "depends_on": ["modular-consolidation/EXP-002"],
+      "tests_claims": ["CCS-C11"],
+      "readout": null,
+      "admissible_as_evidence": true,
+      "gating_note": "Preregistration exists in that repository. Still a synthetic simulator; would not by itself license a real-model claim."
+    },
+    {
+      "id": "modular-consolidation/EXP-100",
+      "repo": "modular-consolidation",
+      "stage": "planned",
+      "operator": "COMMIT",
+      "question": "Do published modular continual-learning gains survive a budget-matched six-factor attribution lattice on real models?",
+      "depends_on": ["modular-consolidation/EXP-003", "plasticity-routing/EXP-001"],
+      "tests_claims": ["CCS-C6", "CCS-C11"],
+      "readout": null,
+      "admissible_as_evidence": true,
+      "gating_note": "Preregistration is an explicit DRAFT and NOT FROZEN. Blocked until plasticity-routing freezes or exports the shared LM backbone, adapter family/rank, training budget and routing substrate. That track states the removal of its own upstream blocker is not equivalent to that substrate having been selected."
+    },
+
+    {
+      "id": "lifetime-integrity/EXP-000",
+      "repo": "lifetime-integrity",
+      "stage": "pilot-complete",
+      "operator": "ACCUMULATE",
+      "question": "Does the harness run, do budgets bind, does audit separation hold, can every declared metric move, and does the benchmark sit between floor and ceiling?",
+      "depends_on": [],
+      "tests_claims": [],
+      "readout": "Single seed, no replication, no confidence intervals, generator still under construction. All four engineering objectives confirmed. Provisional orderings recorded: last-write-wins is hard to beat, and provenance-regrounding does not dominate on integrity despite winning on accuracy. Declared NOT EVIDENCE.",
+      "admissible_as_evidence": false
+    },
+    {
+      "id": "lifetime-integrity/EXP-A001",
+      "repo": "lifetime-integrity",
+      "stage": "pre-result-scaffold",
+      "operator": "ACCUMULATE",
+      "question": "Does persistent state gradually depart from the evidence supposed to support it, and what does re-grounding cost at a matched ceiling?",
+      "depends_on": ["lifetime-integrity/EXP-000"],
+      "tests_claims": ["CCS-C7"],
+      "readout": null,
+      "admissible_as_evidence": true,
+      "ccs_claim_gate": "state-promotion must establish an admissible substrate before any result here can license a CCS latent-architecture claim. That track declares itself architecture-agnostic and forbids such use of its results.",
+      "gating_note": "Preregistered. Lifetime length is the independent variable; the pilot suggests mechanisms are near-indistinguishable at 8 epochs and separate at 128, which if it replicates would mean short-horizon evaluation misleads about mechanism choice."
+    },
+    {
+      "id": "lifetime-integrity/EXP-B001",
+      "repo": "lifetime-integrity",
+      "stage": "pre-result-scaffold",
+      "operator": "ACCUMULATE",
+      "question": "When a late failure indicates one of several beliefs was wrong without saying which, can offline consolidation repair the culprit without corrupting the others?",
+      "depends_on": ["lifetime-integrity/EXP-000"],
+      "tests_claims": ["CCS-C7"],
+      "readout": null,
+      "admissible_as_evidence": true,
+      "ccs_claim_gate": "Same substrate gate as EXP-A001.",
+      "gating_note": "Five credit-assignment rules share one belief substrate so the rule is the only variable."
+    },
+
+    {
+      "id": "ccs/EXP-I1",
+      "repo": "ccs",
+      "stage": "not-designed",
+      "operator": "ALL",
+      "question": "Does an integrated ACCUMULATE + ALLOCATE + COMMIT system beat the best single component under matched total budget?",
+      "depends_on": ["state-promotion/EXP-001", "plasticity-routing/EXP-001", "adaptive-commitment/EXP-A1", "modular-consolidation/EXP-100", "lifetime-integrity/EXP-A001"],
+      "tests_claims": ["CCS-C8", "CCS-C1"],
       "readout": null,
       "admissible_as_evidence": null,
-      "gating_note": "Repository does not exist. Design must include a control that varies commit count alone, otherwise ALLOCATE cannot be distinguished from COMMIT."
+      "gating_note": "Deliberately left unresolved and undesigned. No host repository, and none is to be created yet: a dedicated integration repository becomes justified only once enough component mechanisms have admissible evidence to specify a non-arbitrary composition test. Designing it now would bake unsupported component choices into the synthesis programme. Its edges point at the confirmatory nodes it would need, not at the development calibrations that currently exist."
     },
     {
       "id": "adaptive-commitment/EXP-A1",
@@ -78,43 +212,7 @@
       "tests_claims": ["CCS-C5", "CCS-C1"],
       "readout": null,
       "admissible_as_evidence": null,
-      "gating_note": "Repository does not exist. Only worth building if EXP-001 shows the gate matters at all."
-    },
-    {
-      "id": "modular-consolidation/EXP-M1",
-      "repo": "modular-consolidation",
-      "stage": "planned",
-      "operator": "COMMIT",
-      "question": "At equal total slow capacity, does modular consolidation interfere less than monolithic consolidation?",
-      "depends_on": ["state-promotion/EXP-001"],
-      "tests_claims": ["CCS-C6"],
-      "readout": null,
-      "admissible_as_evidence": null,
-      "gating_note": "Repository does not exist despite being reported as existing on 2026-09-02."
-    },
-    {
-      "id": "lifetime-integrity/EXP-L1",
-      "repo": "lifetime-integrity",
-      "stage": "planned",
-      "operator": "ACCUMULATE",
-      "question": "Over lifetimes far longer than a single experiment stream, does the substrate stay coherent or does drift accumulate without bound?",
-      "depends_on": ["state-promotion/EXP-001", "modular-consolidation/EXP-M1"],
-      "tests_claims": ["CCS-C7"],
-      "readout": null,
-      "admissible_as_evidence": null,
-      "gating_note": "Repository does not exist despite being reported as existing on 2026-09-02. Requires a stream length no current experiment reaches."
-    },
-    {
-      "id": "ccs/EXP-I1",
-      "repo": "ccs",
-      "stage": "not-designed",
-      "operator": "ALL",
-      "question": "Does an integrated ACCUMULATE + ALLOCATE + COMMIT system beat the best single component under matched total budget?",
-      "depends_on": ["state-promotion/EXP-001", "plasticity-routing/EXP-P1", "adaptive-commitment/EXP-A1", "modular-consolidation/EXP-M1", "lifetime-integrity/EXP-L1"],
-      "tests_claims": ["CCS-C8", "CCS-C1"],
-      "readout": null,
-      "admissible_as_evidence": null,
-      "gating_note": "No host repository, no design, no protocol. Listed so that the synthesis paper's missing prerequisite is visible rather than implicit. If this experiment is ever built, it needs its own repository; the umbrella must not become an implementation repo."
+      "gating_note": "Repository still does not exist. Only worth building if EXP-001 shows the gate matters at all."
     }
   ]
 }

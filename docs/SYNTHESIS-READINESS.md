@@ -30,9 +30,11 @@ to be filled in.
 ### Tier 3 — the decomposition is real (required, none cleared)
 
 - [ ] At least one experiment establishing ALLOCATE as separable from COMMIT
-      (`plasticity-routing`, repository not created)
+      (`plasticity-routing/EXP-001` — preregistered, not read out)
 - [ ] At least one long-horizon result on lifetime coherence
-      (`lifetime-integrity`, repository not created)
+      (`lifetime-integrity/EXP-A001` — preregistered, not read out)
+- [ ] An admissible substrate established by `state-promotion`, without which
+      `lifetime-integrity` results cannot license a CCS architecture claim at all
 - [ ] Each component's contribution isolated by ablation
 
 ### Tier 4 — composition (required for a *synthesis* claim, none cleared)
@@ -59,20 +61,41 @@ honestly publishable, as each tier clears:
 The gap between row 4 and row 5 is the entire difference between "we built several
 things" and "these things constitute a substrate". Only Tier 4 evidence closes it.
 
-## Where the programme actually stands — 2026-09-02
+## Where the programme actually stands — reconciled 2026-09-02
 
 **Zero of four tiers cleared. Zero checkboxes cleared.**
 
-- One repository of five exists.
-- That repository has no confirmatory results and an empty `results/` directory.
-- Its only pilot returned a null result on the central mechanism, with a
-  degenerate fixed-schedule control.
-- Five of ten programme claims have no runnable test anywhere.
-- The integration experiment has no design and no host repository.
+The programme grew substantially between the first survey and this
+reconciliation, and cleared nothing:
 
-The correct description of this programme today is: **a well-controlled
-preregistration and one scaffold.** That is a respectable place to be. It is not a
-substrate, and it is not a paper.
+- Four repositories of five now exist; `adaptive-commitment` is the last gap.
+- **Six evidence entries are on file and none is admissible.** Every one is a
+  development calibration or an engineering pilot that its own track classifies
+  as non-evidential.
+- `state-promotion` main is unchanged with an empty `results/`. An off-main
+  small-LM pilot exists; a sibling records it as mechanically valid but
+  scientifically uninterpretable, with a LoRA representation repair predeclared.
+- `plasticity-routing`'s development calibration fired K1 **against** learned
+  routing.
+- `modular-consolidation` records the unbounded-regime consolidation claim as
+  falsified in its own track-local ledger.
+- The integration experiment still has no design and no host repository, by
+  decision rather than oversight.
+
+The correct description of this programme today is: **four well-controlled
+scaffolds, several preregistrations, and no admissible evidence.** That is a
+respectable place to be after one day of parallel work. It is not a substrate,
+and it is not a paper.
+
+### The specific trap this page exists to block
+
+Four repositories now contain real code, real controls, real confidence
+intervals, and numbers that look like results. None of it is admissible, every
+track says so about its own output, and each has declared that its results do not
+travel to other tracks. The temptation to assemble a synthesis narrative from six
+inadmissible development readouts is precisely the failure mode
+[FAILURE-CRITERIA.md](FAILURE-CRITERIA.md) calls F2, arriving earlier than
+expected and looking more like progress than F1 would.
 
 ## The rule this page exists to enforce
 

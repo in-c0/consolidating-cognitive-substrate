@@ -35,9 +35,14 @@ STAGES = {
     "not-designed",
     "planned",
     "pre-result-scaffold",
+    # A development/calibration run: trained and evaluated on development seeds,
+    # so mechanically informative but never admissible as evidence.
+    "development-calibration-complete",
     "pilot-complete",
     "confirmatory-complete",
 }
+# Stages whose readouts can never be admissible evidence, by construction.
+NON_EVIDENTIAL_STAGES = {"development-calibration-complete", "pilot-complete"}
 EXISTENCE = {"exists", "planned", "archived"}
 
 errors: list[str] = []
@@ -182,6 +187,13 @@ def check_dag(dag_doc: dict, repos_doc: dict) -> None:
         # A node with a readout must say whether that readout is admissible.
         if n.get("readout") and n.get("admissible_as_evidence") is None:
             err(f"{nid}: has a readout but admissibility is unstated")
+
+        # INVARIANT -- a development calibration or pilot cannot be admissible.
+        if n.get("stage") in NON_EVIDENTIAL_STAGES and n.get("admissible_as_evidence"):
+            err(
+                f"{nid}: stage {n['stage']!r} is non-evidential by construction "
+                f"but is marked admissible"
+            )
 
     # Cycle detection.
     colour: dict[str, int] = {}

@@ -66,12 +66,42 @@ this reason.
 
 ## Cross-repository mapping
 
-| Programme term | `state-promotion` term | Note |
+| Programme term | Track term | Note |
 |---|---|---|
-| COMMIT operator | "promotion" / "state promotion" | The repository predates the operator vocabulary. Not a conflict. |
-| Slow parametric state | "slow adapter bank" | Same thing. |
-| Write unit | "write unit" | Identical; defined in EXP-001 Amendment A. |
-| Decision-time compute | "decision-time inference compute" | Identical; defined in EXP-001 Amendment E. |
+| COMMIT operator | `state-promotion`: "promotion" / "state promotion" | The repository predates the operator vocabulary. Not a conflict. |
+| Slow parametric state | `state-promotion`: "slow adapter bank" | Same thing. |
+| Write unit | `state-promotion`: "write unit" | Identical; defined in EXP-001 Amendment A. |
+| Decision-time compute | `state-promotion`: "decision-time inference compute" | Identical; defined in EXP-001 Amendment E. |
+| ALLOCATE operator | `plasticity-routing`: "allocation" / "routing" | Identical. |
+| Slow parametric state | `plasticity-routing`: `SLOW` action | One destination among four, not a level the track owns. |
+| Slow-state structure | `modular-consolidation`: "module lifecycle" | Same thing. |
+| Latent state | `lifetime-integrity`: "belief store" / "persistent state" | Deliberately substrate-neutral there; not a claim about a CCS latent architecture. |
 
-No terminology conflicts are outstanding as of 2026-09-02. New repositories
-should adopt the programme terms directly.
+## Outstanding divergence — COMMIT
+
+**Recorded 2026-09-02. Not resolved, and not to be resolved by editing a sibling.**
+
+`plasticity-routing` reads COMMIT as an *outward-facing* commitment — an external
+action, a tool call, something irreversible in the world — and states that its
+durable `SLOW` write is therefore "not a commitment in the CCS sense".
+
+This umbrella defines COMMIT as the decision that a change becomes **durable**,
+which does include a purely internal durable write.
+
+Both readings are coherent; they are not the same operator. The divergence
+matters because CCS-C1 asserts that ALLOCATE and COMMIT are separable, and under
+the narrower reading `plasticity-routing`'s `SLOW` action is an allocation
+decision that the umbrella would class as a commitment. Whether that is a
+terminological gap or a genuine sign that the two operators are not cleanly
+separable is exactly what CCS-C4 is meant to settle.
+
+The umbrella records the disagreement rather than harmonising the vocabulary,
+because harmonising it now would decide by definition a question that is supposed
+to be decided by experiment.
+
+A second, smaller divergence: `plasticity-routing` describes `state-promotion` as
+sitting at the ALLOCATE-to-COMMIT boundary, whereas this registry assigns it the
+COMMIT operator. Recorded; no action.
+
+New repositories should adopt the programme terms directly, and declare any
+departure in their own documentation.

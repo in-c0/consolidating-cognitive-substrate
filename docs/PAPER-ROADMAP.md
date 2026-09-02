@@ -31,30 +31,49 @@ in progress.
 
 ## P3 — Allocation paper
 
-- **Host:** `plasticity-routing` *(repository not created)*
-- **Requires:** Tier 1, plus a design that holds commit count fixed while varying
-  placement
-- **Status:** not writable, not designed, no repository
+- **Host:** `plasticity-routing`
+- **Requires:** Tier 1, plus a design that holds write budget fixed while varying
+  placement — which that track has built
+- **Status:** not writable. EXP-001 is preregistered and has not read out.
 - **May claim:** that allocation is or is not a lever separable from commitment
 - **Note:** a negative result here is disproportionately valuable, because it
   would collapse the programme's three-operator framing to two operators. That is
   a finding about the decomposition, and should be reported as one.
+- **Live expectation:** that track sets a deliberately low prior on its learned
+  router beating a calibrated fixed rule, and its development calibration already
+  fired K1 against the method. A negative replication of Yoon (2026) is its
+  preregistered publishable outcome. Note carefully that this would *not* falsify
+  CCS-C4: allocation being a separable lever and the allocation policy being
+  *learned* are different claims, and only the second is at stake in K1.
 
 ## P4 — Long-horizon integrity paper
 
-- **Host:** `lifetime-integrity` *(repository not created)*
-- **Requires:** Tier 1 + Tier 3, and stream lengths no current experiment reaches
-- **Status:** not writable, not designed, no repository
-- **May claim:** measured drift, staleness and commitment-error behaviour over
-  long lifetimes
-- **Note:** the claim this paper would test (CCS-C7) is the one most likely to be
-  assumed rather than measured elsewhere in the programme.
+- **Host:** `lifetime-integrity`
+- **Requires:** Tier 1 + Tier 3
+- **Status:** not writable. EXP-A001 and EXP-B001 are preregistered; the only run
+  is a single-seed pilot marked NOT EVIDENCE.
+- **May claim:** measured drift, staleness and re-grounding cost over long
+  lifetimes, **for whatever substrate was scored** — that track is
+  architecture-agnostic and forbids its results being read as validating a CCS
+  latent architecture.
+- **Note:** this paper is separable from the CCS programme and its track intends
+  it to remain useful if the programme goes nowhere. Under P7 it is a component;
+  on its own it is a benchmark paper.
 
-## P5 — Modular consolidation paper
+## P5 — Modular consolidation: methods/attribution paper
 
-- **Host:** `modular-consolidation` *(repository not created)*
-- **Requires:** Tier 1, plus equal-total-capacity controls
-- **Status:** not writable, not designed, no repository
+- **Host:** `modular-consolidation`
+- **Requires:** the control lattice applied to published methods; **not** a new
+  policy and **not** Tier 1
+- **Status:** not writable. EXP-100 is an explicit DRAFT, NOT FROZEN, and blocked
+  until `plasticity-routing` freezes or exports the shared LM substrate.
+- **May claim:** whether published modular continual-learning gains survive
+  capacity- and compute-matched attribution
+- **Note:** that track has made this its *primary* near-term output, ahead of any
+  architecture paper, and its thesis is falsifiable in the useful direction — if
+  published gains do survive the controls, the paper becomes a validation of the
+  field's evaluation practice rather than a critique. It is the one paper on this
+  roadmap that does not depend on the CCS conjecture being correct.
 
 ## P6 — Adaptive commitment paper
 

@@ -6,11 +6,14 @@ evidence status.
 
 > ## Status: no claim in this programme has empirical support.
 >
-> As of 2026-09-02: one of five sibling repositories exists, it has no
-> confirmatory results, and its only pilot returned a null result on the central
-> mechanism. **0 of 4 synthesis-readiness tiers are cleared.**
+> Reconciled 2026-09-02 against live GitHub state. **Four of five** sibling
+> repositories now exist and three carry substantial development results — and
+> **0 of 11 claims** have admissible evidence, because every result on file is a
+> development calibration or an engineering pilot that its own track classifies
+> as non-evidential. **0 of 4 synthesis-readiness tiers are cleared.**
 >
-> This repository exists to keep that fact visible.
+> Repositories existing is not progress toward a claim. This repository exists to
+> keep that distinction visible.
 
 ## What this repository is
 
@@ -55,30 +58,37 @@ that ALLOCATE is not separable from COMMIT — are in
 
 ## Programme repositories
 
-| Repository | Operator | Exists | Owns claims |
-|---|---|---|---|
-| [`in-c0/state-promotion`](https://github.com/in-c0/state-promotion) | COMMIT | ✅ | CCS-C2, C3, C10 |
-| `in-c0/adaptive-commitment` | COMMIT policy | ❌ planned | CCS-C5 |
-| `in-c0/plasticity-routing` | ALLOCATE | ❌ planned | CCS-C4 |
-| `in-c0/modular-consolidation` | slow-state structure | ❌ planned | CCS-C6 |
-| `in-c0/lifetime-integrity` | ACCUMULATE / long horizon | ❌ planned | CCS-C7 |
+| Repository | Operator | Exists | Owns claims | Best result on file |
+|---|---|---|---|---|
+| [`in-c0/state-promotion`](https://github.com/in-c0/state-promotion) | COMMIT | ✅ | CCS-C2, C3, C10 | engineering pilot, null on the mechanism |
+| [`in-c0/plasticity-routing`](https://github.com/in-c0/plasticity-routing) | ALLOCATE | ✅ | CCS-C4 | development calibration, `DEV_CALIBRATION` |
+| [`in-c0/modular-consolidation`](https://github.com/in-c0/modular-consolidation) | slow-state structure | ✅ | CCS-C6, C11 | development simulator, synthetic |
+| [`in-c0/lifetime-integrity`](https://github.com/in-c0/lifetime-integrity) | ACCUMULATE / long horizon | ✅ | CCS-C7 | single-seed pilot, non-evidential |
+| `in-c0/adaptive-commitment` | COMMIT policy | ❌ planned | CCS-C5 | — |
 
-`modular-consolidation` and `lifetime-integrity` were reported as existing on
-2026-09-02 but were not found; see
-[the reconciliation report](docs/reconciliation/2026-09-02.md).
+Each existing track declares its own results non-evidential and declares that
+they do not travel to other tracks. The umbrella honours those declarations: see
+[the live reconciliation](docs/reconciliation/2026-09-02-live.md).
 
 ## Claim status
 
 | Status | Count |
 |---|---:|
-| `theoretical-conjecture` | 6 |
-| `unresolved` | 4 |
+| `theoretical-conjecture` | 3 |
+| `unresolved` | 8 |
 | `pilot-supported` | 0 |
 | `confirmatory-supported` | **0** |
 | `falsified` | 0 |
 
-Five of ten claims have **no runnable test anywhere**, because their repositories
-do not exist. Full table: [docs/CLAIM-LEDGER.md](docs/CLAIM-LEDGER.md).
+Six evidence entries are on file and **none is admissible**. Two of eleven claims
+have no runnable test: CCS-C5 (`adaptive-commitment` does not exist) and CCS-C8
+(no integration repository, deliberately). Full table:
+[docs/CLAIM-LEDGER.md](docs/CLAIM-LEDGER.md).
+
+Two claims are worth reading before the rest. **CCS-C6** carries two
+against-direction development results and should be expected to end at
+`falsified`; its live successor is **CCS-C11**, added rather than substituted so
+the original is not quietly rewritten to follow the evidence.
 
 ## The eventual synthesis paper
 

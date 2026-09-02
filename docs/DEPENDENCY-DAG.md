@@ -21,30 +21,52 @@ graph TD
   class state_promotion_EXP_002 planned;
   state_promotion_EXP_003["state-promotion<br/>EXP-003<br/><i>planned</i>"]
   class state_promotion_EXP_003 planned;
-  plasticity_routing_EXP_P1["plasticity-routing<br/>EXP-P1<br/><i>repo not created</i>"]
-  class plasticity_routing_EXP_P1 planned;
-  adaptive_commitment_EXP_A1["adaptive-commitment<br/>EXP-A1<br/><i>repo not created</i>"]
-  class adaptive_commitment_EXP_A1 planned;
-  modular_consolidation_EXP_M1["modular-consolidation<br/>EXP-M1<br/><i>repo not created</i>"]
-  class modular_consolidation_EXP_M1 planned;
-  lifetime_integrity_EXP_L1["lifetime-integrity<br/>EXP-L1<br/><i>repo not created</i>"]
-  class lifetime_integrity_EXP_L1 planned;
+  plasticity_routing_EXP_000["plasticity-routing<br/>EXP-000<br/><i>development-calibration-complete</i>"]
+  class plasticity_routing_EXP_000 planned;
+  plasticity_routing_EXP_001["plasticity-routing<br/>EXP-001<br/><i>pre-result</i>"]
+  class plasticity_routing_EXP_001 active;
+  plasticity_routing_EXP_002["plasticity-routing<br/>EXP-002<br/><i>planned</i>"]
+  class plasticity_routing_EXP_002 planned;
+  modular_consolidation_EXP_000["modular-consolidation<br/>EXP-000<br/><i>development-calibration-complete</i>"]
+  class modular_consolidation_EXP_000 planned;
+  modular_consolidation_EXP_001["modular-consolidation<br/>EXP-001<br/><i>development-calibration-complete</i>"]
+  class modular_consolidation_EXP_001 planned;
+  modular_consolidation_EXP_002["modular-consolidation<br/>EXP-002<br/><i>development-calibration-complete</i>"]
+  class modular_consolidation_EXP_002 planned;
+  modular_consolidation_EXP_003["modular-consolidation<br/>EXP-003<br/><i>planned</i>"]
+  class modular_consolidation_EXP_003 planned;
+  modular_consolidation_EXP_100["modular-consolidation<br/>EXP-100<br/><i>planned</i>"]
+  class modular_consolidation_EXP_100 planned;
+  lifetime_integrity_EXP_000["lifetime-integrity<br/>EXP-000<br/><i>pilot only</i>"]
+  class lifetime_integrity_EXP_000 pilot;
+  lifetime_integrity_EXP_A001["lifetime-integrity<br/>EXP-A001<br/><i>pre-result</i>"]
+  class lifetime_integrity_EXP_A001 active;
+  lifetime_integrity_EXP_B001["lifetime-integrity<br/>EXP-B001<br/><i>pre-result</i>"]
+  class lifetime_integrity_EXP_B001 active;
   ccs_EXP_I1["ccs<br/>EXP-I1<br/><i>not designed</i>"]
   class ccs_EXP_I1 undesigned;
+  adaptive_commitment_EXP_A1["adaptive-commitment<br/>EXP-A1<br/><i>repo not created</i>"]
+  class adaptive_commitment_EXP_A1 planned;
 
   state_promotion_EXP_000 --> state_promotion_EXP_001
   state_promotion_EXP_001 --> state_promotion_EXP_002
   state_promotion_EXP_001 --> state_promotion_EXP_003
-  state_promotion_EXP_001 --> plasticity_routing_EXP_P1
-  state_promotion_EXP_001 --> adaptive_commitment_EXP_A1
-  state_promotion_EXP_001 --> modular_consolidation_EXP_M1
-  state_promotion_EXP_001 --> lifetime_integrity_EXP_L1
-  modular_consolidation_EXP_M1 --> lifetime_integrity_EXP_L1
+  plasticity_routing_EXP_000 --> plasticity_routing_EXP_001
+  plasticity_routing_EXP_001 --> plasticity_routing_EXP_002
+  state_promotion_EXP_001 --> plasticity_routing_EXP_002
+  modular_consolidation_EXP_000 --> modular_consolidation_EXP_001
+  modular_consolidation_EXP_001 --> modular_consolidation_EXP_002
+  modular_consolidation_EXP_002 --> modular_consolidation_EXP_003
+  modular_consolidation_EXP_003 --> modular_consolidation_EXP_100
+  plasticity_routing_EXP_001 --> modular_consolidation_EXP_100
+  lifetime_integrity_EXP_000 --> lifetime_integrity_EXP_A001
+  lifetime_integrity_EXP_000 --> lifetime_integrity_EXP_B001
   state_promotion_EXP_001 --> ccs_EXP_I1
-  plasticity_routing_EXP_P1 --> ccs_EXP_I1
+  plasticity_routing_EXP_001 --> ccs_EXP_I1
   adaptive_commitment_EXP_A1 --> ccs_EXP_I1
-  modular_consolidation_EXP_M1 --> ccs_EXP_I1
-  lifetime_integrity_EXP_L1 --> ccs_EXP_I1
+  modular_consolidation_EXP_100 --> ccs_EXP_I1
+  lifetime_integrity_EXP_A001 --> ccs_EXP_I1
+  state_promotion_EXP_001 --> adaptive_commitment_EXP_A1
 
   classDef active fill:#1f6feb,stroke:#1f6feb,color:#fff;
   classDef pilot fill:#8b5cf6,stroke:#8b5cf6,color:#fff;
@@ -60,43 +82,70 @@ Solid nodes exist in code. Dashed nodes have no repository. The red node has no 
 | `state-promotion/EXP-001` | COMMIT | pre-result-scaffold | CCS-C2, CCS-C3, CCS-C9, CCS-C10 | `state-promotion/EXP-000` |
 | `state-promotion/EXP-002` | COMMIT | planned | CCS-C2 | `state-promotion/EXP-001` |
 | `state-promotion/EXP-003` | COMMIT | planned | CCS-C2 | `state-promotion/EXP-001` |
-| `plasticity-routing/EXP-P1` | ALLOCATE | planned | CCS-C4, CCS-C1, CCS-C9 | `state-promotion/EXP-001` |
+| `plasticity-routing/EXP-000` | ALLOCATE | development-calibration-complete | — | — |
+| `plasticity-routing/EXP-001` | ALLOCATE | pre-result-scaffold | CCS-C4, CCS-C1, CCS-C9 | `plasticity-routing/EXP-000` |
+| `plasticity-routing/EXP-002` | ALLOCATE | planned | CCS-C4 | `plasticity-routing/EXP-001`, `state-promotion/EXP-001` |
+| `modular-consolidation/EXP-000` | COMMIT | development-calibration-complete | — | — |
+| `modular-consolidation/EXP-001` | COMMIT | development-calibration-complete | CCS-C6 | `modular-consolidation/EXP-000` |
+| `modular-consolidation/EXP-002` | COMMIT | development-calibration-complete | CCS-C11 | `modular-consolidation/EXP-001` |
+| `modular-consolidation/EXP-003` | COMMIT | planned | CCS-C11 | `modular-consolidation/EXP-002` |
+| `modular-consolidation/EXP-100` | COMMIT | planned | CCS-C6, CCS-C11 | `modular-consolidation/EXP-003`, `plasticity-routing/EXP-001` |
+| `lifetime-integrity/EXP-000` | ACCUMULATE | pilot-complete | — | — |
+| `lifetime-integrity/EXP-A001` | ACCUMULATE | pre-result-scaffold | CCS-C7 | `lifetime-integrity/EXP-000` |
+| `lifetime-integrity/EXP-B001` | ACCUMULATE | pre-result-scaffold | CCS-C7 | `lifetime-integrity/EXP-000` |
+| `ccs/EXP-I1` | ALL | not-designed | CCS-C8, CCS-C1 | `state-promotion/EXP-001`, `plasticity-routing/EXP-001`, `adaptive-commitment/EXP-A1`, `modular-consolidation/EXP-100`, `lifetime-integrity/EXP-A001` |
 | `adaptive-commitment/EXP-A1` | COMMIT | planned | CCS-C5, CCS-C1 | `state-promotion/EXP-001` |
-| `modular-consolidation/EXP-M1` | COMMIT | planned | CCS-C6 | `state-promotion/EXP-001` |
-| `lifetime-integrity/EXP-L1` | ACCUMULATE | planned | CCS-C7 | `state-promotion/EXP-001`, `modular-consolidation/EXP-M1` |
-| `ccs/EXP-I1` | ALL | not-designed | CCS-C8, CCS-C1 | `state-promotion/EXP-001`, `plasticity-routing/EXP-P1`, `adaptive-commitment/EXP-A1`, `modular-consolidation/EXP-M1`, `lifetime-integrity/EXP-L1` |
 
 <!-- /GENERATED:dag -->
 
 ## The shape of the problem
 
-The graph is a fan-out from a single node. `state-promotion/EXP-001` is the only
-experiment in the programme that is implemented, budget-controlled, and capable
-of reading out. Everything else is downstream of it or does not exist.
+The graph is no longer a fan-out from one node. Three tracks have run development
+work in parallel, and the useful structure is now the pattern of *blocking* edges
+between them:
 
-This has two consequences worth stating plainly:
+- `plasticity-routing/EXP-002` (language model) is blocked on
+  `state-promotion/EXP-001`, so that a shared two-timescale defect is not baked in.
+- `modular-consolidation/EXP-100` is blocked on `plasticity-routing/EXP-001`
+  freezing the shared LM backbone, adapter family and routing substrate. That
+  track notes that the removal of its own upstream blocker is **not** the same as
+  the substrate having been chosen.
+- `lifetime-integrity` has no experimental dependency on any sibling, but carries
+  a `ccs_claim_gate`: its results cannot license a CCS architecture claim until
+  `state-promotion` establishes an admissible substrate.
 
-1. **The programme has one point of failure.** If EXP-001 is falsified under valid
-   conditions, four of the five planned repositories lose their motivating premise
-   — not their subject matter, but their reason to be built in this programme's
-   framing. See [FAILURE-CRITERIA.md](FAILURE-CRITERIA.md).
-2. **Parallelising is tempting and mostly wrong.** Creating `plasticity-routing`
-   or `adaptive-commitment` before EXP-001 reads out would produce experiments
-   designed against an untested premise. The dependency edges exist to make that
-   cost visible.
+`state-promotion/EXP-001` therefore remains load-bearing, not because everything
+waits on it to *run*, but because almost nothing can be *interpreted* as CCS
+evidence without it.
 
-## Planned nodes are not scheduled work
+### Parallelism did not remove the risk
 
-Four repositories in this graph do not exist. Their nodes carry a question and a
-design hazard, and nothing else. They deliberately have no protocol, no metric
-list, and no baselines, because designing those before the upstream readout would
-be designing against an assumption.
+Three tracks ran ahead of the node they depend on. That was reasonable — each
+confined itself to literature, benchmark design, preregistration and synthetic
+calibration, which is exactly the work that does not depend on the upstream
+outcome. But it means the programme now holds a large amount of *inadmissible*
+material, and the pressure to treat volume as progress is correspondingly higher.
+
+### One edge was removed at this reconciliation
+
+The umbrella previously had `lifetime-integrity` depending on
+`modular-consolidation`. That edge was an umbrella-side assumption.
+`modular-consolidation` states there is no dependency in either direction, on the
+grounds that long-lifetime coherence and capacity growth are separate failure
+classes. The edge is gone.
+
+## Planned and undesigned nodes
+
+`adaptive-commitment/EXP-A1` is the only node whose repository does not exist. It
+carries a question and a hazard and nothing else.
 
 `ccs/EXP-I1` — the integration experiment the synthesis paper would rest on — has
-no host repository and no design at all. It appears in the graph so that the
-synthesis paper's missing prerequisite is visible rather than implicit. If it is
-ever built it needs its own repository: this umbrella must not become an
-implementation repo.
+no host repository and no design, **by decision**. A dedicated integration
+repository becomes justified only once enough component mechanisms have
+admissible evidence to specify a non-arbitrary composition test; designing it now
+would bake unsupported component choices into the synthesis programme. Its edges
+point at confirmatory nodes, not at the development calibrations that currently
+exist. It appears in the graph so the missing prerequisite stays visible.
 
 ## Maintaining the graph
 

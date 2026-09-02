@@ -30,29 +30,51 @@ Two things this vocabulary deliberately refuses to allow:
 
 | Claim | Statement (abbreviated) | Status | Implementation | Tested by |
 |---|---|---|---|---|
-| **CCS-C1** Three-operator decomposition | Continual-agent competence over a lifetime decomposes usefully into ACCUMULATE (retain candidate… | `conjecture` | partial | `state-promotion/EXP-001`, `plasticity-routing/EXP-P1`, `adaptive-commitment/EXP-A1` |
+| **CCS-C1** Three-operator decomposition | Continual-agent competence over a lifetime decomposes usefully into ACCUMULATE (retain candidate… | `conjecture` | partial | `state-promotion/EXP-001`, `plasticity-routing/EXP-001`, `adaptive-commitment/EXP-A1` |
 | **CCS-C2** Evidence-gated commitment beats scheduled commitment | Under matched trainable-parameter capacity, replay budget, online-token budget and parameter-write… | `unresolved` | implemented | `state-promotion/EXP-001`, `state-promotion/EXP-002`, `state-promotion/EXP-003` |
 | **CCS-C3** Persistent latent state carries context-dependent exceptions | A bounded persistent latent state carried across stream items contributes specifically to handling… | `unresolved` | implemented | `state-promotion/EXP-001` |
-| **CCS-C4** Allocation is a separable lever from commitment | Where an experience is routed within the substrate affects the stability-plasticity trade-off… | `conjecture` | none | `plasticity-routing/EXP-P1` |
+| **CCS-C4** Allocation is a separable lever from commitment | Where an experience is routed within the substrate affects the stability-plasticity trade-off… | `unresolved` | implemented | `plasticity-routing/EXP-001`, `plasticity-routing/EXP-002` |
 | **CCS-C5** Adaptive commitment thresholds beat fixed thresholds | A commitment criterion that adapts to observed stream statistics outperforms a well-tuned constant… | `conjecture` | none | `adaptive-commitment/EXP-A1` |
-| **CCS-C6** Modular slow state reduces interference | Consolidating durable knowledge into separable modules produces less cross-task interference than… | `conjecture` | none | `modular-consolidation/EXP-M1` |
-| **CCS-C7** Lifetime coherence is maintainable | A multi-timescale substrate can be operated over lifetimes far longer than any single experiment stream… | `conjecture` | none | `lifetime-integrity/EXP-L1` |
+| **CCS-C6** Modular slow state reduces interference | In an unbounded-capacity regime, consolidating durable knowledge into separable modules produces less… | `unresolved` | implemented | `modular-consolidation/EXP-100` |
+| **CCS-C7** Lifetime coherence is maintainable | A multi-timescale substrate can be operated over lifetimes far longer than any single experiment stream… | `unresolved` | implemented | `lifetime-integrity/EXP-A001`, `lifetime-integrity/EXP-B001` |
 | **CCS-C8** The components compose | A system combining accumulation, allocation and commitment outperforms the best single-component system… | `conjecture` | none | `ccs/EXP-I1` |
-| **CCS-C9** Multiple timescales are necessary, not merely sufficient | A single-timescale controller given the same total capacity, write budget and compute cannot match a… | `unresolved` | partial | `state-promotion/EXP-001`, `plasticity-routing/EXP-P1` |
+| **CCS-C9** Multiple timescales are necessary, not merely sufficient | A single-timescale controller given the same total capacity, write budget and compute cannot match a… | `unresolved` | partial | `state-promotion/EXP-001`, `plasticity-routing/EXP-001` |
 | **CCS-C10** Gating overhead does not erase the gain | The decision-time inference cost of evidence gating is small enough that the method retains its advantage… | `unresolved` | implemented | `state-promotion/EXP-001` |
+| **CCS-C11** Under a binding capacity ceiling, pooling beats destroying | Under a hard capacity ceiling below the number of distinct skills, and at identical live module count,… | `unresolved` | implemented | `modular-consolidation/EXP-003`, `modular-consolidation/EXP-100` |
 
-**10 claims. 0 with empirical support. 0 confirmatory.**
+**11 claims. 0 with empirical support. 0 confirmatory.**
 
 <!-- /GENERATED:claims -->
 
 ## Reading this table honestly
 
-As of 2026-09-02, **no claim in this programme has empirical support.** The single
-pilot that has run ([EXP-000](https://github.com/in-c0/state-promotion/blob/main/experiments/EXP-000-RESULT.md))
-returned a null result on the central mechanism, and its own repository classifies
-it as engineering validation that is not paper evidence.
+Reconciled 2026-09-02 against live GitHub state. **No claim in this programme has
+empirical support.** Six evidence entries are on file and none is admissible:
+every one is a development calibration or an engineering pilot that its own track
+classifies as non-evidential.
 
-That is the expected state of a programme at this stage. It stops being expected
+Four claims moved from `theoretical-conjecture` to `unresolved` at this
+reconciliation, and one claim was added. **None of that is an evidence
+promotion** — both statuses assert zero empirical support. The moves record that
+the claims are now implemented and under inconclusive test, which is what the
+`implementation` column is for.
+
+Three entries deserve attention before the rest:
+
+- **CCS-C6** carries two against-direction development results. Its owning track
+  records the equivalent track-local claim as falsified. It is held at
+  `unresolved` here only because that finding is a synthetic simulator on a
+  closed-form ridge learner and that track's own rules forbid its results
+  travelling. Expect this one to end at `falsified`.
+- **CCS-C11** was *added* rather than substituted for CCS-C6, so that narrowing
+  the question to the regime where it survives cannot be mistaken for the
+  original claim having held.
+- **CCS-C7** now has a hard external gate: its owning track forbids any of its
+  results being read as validating a CCS latent architecture until
+  `state-promotion` establishes an admissible substrate. No quantity of
+  long-horizon evidence lifts that on its own.
+
+This is the expected state of a programme at this stage. It stops being expected
 if it is still true after `state-promotion/EXP-001` reads out.
 
 ## Per-claim detail

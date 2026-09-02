@@ -3,7 +3,8 @@
     "CCS sibling repository registry. This file is descriptive.",
     "The umbrella repository never writes to these repositories.",
     "Fields under 'observed' are maintained by tools/reconcile.py against the",
-    "real remote state and must not be hand-edited to describe intent."
+    "real remote state and must not be hand-edited. Experiment staging lives in",
+    "dag.json, not here, so that 'observed' stays purely machine-fetched."
   ],
   "schema_version": 1,
   "last_reconciled": "2026-09-02",
@@ -12,79 +13,162 @@
       "id": "state-promotion",
       "slug": "in-c0/state-promotion",
       "existence": "exists",
-      "role": "Owns the COMMIT operator. Tests whether evidence-gated promotion from fast to slow parametric state beats schedule-based consolidation under matched resource budgets.",
-      "owns_components": ["ephemeral", "latent", "fast-parametric", "slow-parametric", "promotion-gate", "retention-gate", "episodic-replay"],
-      "owns_claims": ["CCS-C2", "CCS-C3", "CCS-C10"],
-      "contributes_claims": ["CCS-C1", "CCS-C9"],
+      "role": "Owns the COMMIT operator as the umbrella defines it: evidence-gated promotion from fast to slow parametric state, versus schedule-based consolidation, under matched resource budgets.",
+      "owns_components": [
+        "ephemeral",
+        "latent",
+        "fast-parametric",
+        "slow-parametric",
+        "promotion-gate",
+        "retention-gate",
+        "episodic-replay"
+      ],
+      "owns_claims": [
+        "CCS-C2",
+        "CCS-C3",
+        "CCS-C10"
+      ],
+      "contributes_claims": [
+        "CCS-C1",
+        "CCS-C9"
+      ],
       "blocked_by": [],
+      "notes": [
+        "main is unchanged at 3495d49 since the first survey; results/ on main holds only .gitkeep.",
+        "Off-main branches carry LM pilot work not merged to main: exp001r/lora-representation-gate (EXP-001R, adds Amendment F) and exp001/dynamic-input-and-snapshot-pin.",
+        "in-c0/modular-consolidation records that a mechanically valid small-LM engineering pilot has been run and reviewed, and that it was scientifically uninterpretable because the tested soft-prefix plastic representation underlearned; an architecture-matched LoRA representation-sufficiency repair is predeclared. None of that is on main and none of it is admissible CCS evidence.",
+        "plasticity-routing describes this track as sitting at the ALLOCATE-to-COMMIT boundary rather than owning COMMIT outright. Recorded as a framing divergence, not corrected from here."
+      ],
       "observed": {
         "default_branch": "main",
         "visibility": "public",
+        "pushed_at": "2026-09-02T07:24:42Z",
         "head": "3495d49",
-        "pushed_at": "2026-09-02T00:39:14Z",
-        "stated_status": "pre-results / experiment scaffold. No empirical claim is made yet.",
-        "results_dir_populated": false,
-        "experiments": [
-          {"id": "EXP-000", "stage": "pilot-complete", "admissible_as_paper_evidence": false},
-          {"id": "EXP-001", "stage": "pre-result-scaffold", "prereg": "experiments/EXP-001-PREREG.md", "prereg_state": "draft-lock-candidate", "amendments": ["A", "B", "C", "D", "E"]},
-          {"id": "EXP-002", "stage": "planned"},
-          {"id": "EXP-003", "stage": "planned"}
-        ]
+        "results_dir_populated": false
       }
     },
     {
       "id": "adaptive-commitment",
       "slug": "in-c0/adaptive-commitment",
       "existence": "planned",
-      "existence_note": "Repository does not exist as of 2026-09-02.",
+      "existence_note": "Repository still does not exist as of 2026-09-02. The only remaining uncreated sibling.",
       "role": "Would own the commitment-threshold policy: whether the commit criterion should itself adapt to stream statistics rather than remaining a frozen preregistered constant.",
-      "owns_components": ["commit-policy"],
-      "owns_claims": ["CCS-C5"],
-      "contributes_claims": ["CCS-C1"],
-      "blocked_by": ["state-promotion/EXP-001"],
+      "owns_components": [
+        "commit-policy"
+      ],
+      "owns_claims": [
+        "CCS-C5"
+      ],
+      "contributes_claims": [
+        "CCS-C1"
+      ],
+      "blocked_by": [
+        "state-promotion/EXP-001"
+      ],
+      "notes": [
+        "modular-consolidation records no dependency on this track and explicitly does not assume an accessible repository."
+      ],
       "observed": null
     },
     {
       "id": "plasticity-routing",
       "slug": "in-c0/plasticity-routing",
-      "existence": "planned",
-      "existence_note": "Repository does not exist as of 2026-09-02.",
-      "role": "Would own the ALLOCATE operator: where in the substrate capacity is assigned to an incoming experience, independent of when commitment occurs.",
-      "owns_components": ["allocator"],
-      "owns_claims": ["CCS-C4"],
-      "contributes_claims": ["CCS-C1", "CCS-C9"],
-      "blocked_by": ["state-promotion/EXP-001"],
-      "observed": null
+      "existence": "exists",
+      "role": "Owns the ALLOCATE operator: which substrate of differing persistence an experience is written to, including the option of no write at all. Scoped to ALLOCATE only and explicitly not a full CCS demonstration.",
+      "owns_components": [
+        "allocator"
+      ],
+      "owns_claims": [
+        "CCS-C4"
+      ],
+      "contributes_claims": [
+        "CCS-C1",
+        "CCS-C9"
+      ],
+      "blocked_by": [
+        "state-promotion/EXP-001"
+      ],
+      "notes": [
+        "Self-declared status: pre-result / experiment scaffold. Everything in results/ is classified DEV_CALIBRATION and is not evidence.",
+        "TERMINOLOGY DIVERGENCE: this track reads COMMIT as an outward-facing or external commitment (tool call, irreversible action) and states that its durable SLOW write is 'not a commitment in the CCS sense'. The umbrella defines COMMIT as the decision that a change becomes durable, which does include an internal durable write. Recorded, not corrected. See docs/TERMINOLOGY.md.",
+        "Its EXP-002 (language model) is blocked on review of the first mechanically valid state-promotion engineering pilot. Its EXP-001 is synthetic and not blocked by that gate.",
+        "modular-consolidation treats this track as a blocking substrate dependency: it must freeze or export the shared LM backbone, adapter family/rank, training budget and routing substrate before that track's real-model panel and EXP-100 can proceed."
+      ],
+      "observed": {
+        "default_branch": "main",
+        "visibility": "public",
+        "pushed_at": "2026-09-02T02:46:04Z",
+        "head": "1e9b390",
+        "results_dir_populated": true
+      }
     },
     {
       "id": "modular-consolidation",
       "slug": "in-c0/modular-consolidation",
-      "existence": "planned",
-      "existence_note": "Reported as existing in the 2026-09-02 programme brief, but NOT FOUND on GitHub during reconciliation on that date. Recorded as planned. See docs/reconciliation/2026-09-02.md.",
-      "role": "Would own the structure of slow parametric state: whether consolidating into separable modules reduces interference relative to a monolithic slow store at equal capacity.",
-      "owns_components": ["slow-parametric-structure"],
-      "owns_claims": ["CCS-C6"],
-      "contributes_claims": ["CCS-C8"],
-      "blocked_by": ["state-promotion/EXP-001"],
-      "observed": null
+      "existence": "exists",
+      "role": "Owns the structure of slow parametric state: whether module allocation, merging, retirement and reuse buy retention that equal capacity alone does not. Positions its primary near-term output as a methods/attribution paper rather than an architecture paper.",
+      "owns_components": [
+        "slow-parametric-structure"
+      ],
+      "owns_claims": [
+        "CCS-C6",
+        "CCS-C11"
+      ],
+      "contributes_claims": [
+        "CCS-C8"
+      ],
+      "blocked_by": [
+        "state-promotion/EXP-001",
+        "plasticity-routing/EXP-001"
+      ],
+      "notes": [
+        "Self-declared status: research/design track. No confirmatory experiment has been run and none may be frozen until design lessons from plasticity-routing are available.",
+        "Its own track-local ledger records 'consolidation beats a capacity-matched fixed bank (unbounded regime)' as falsified, explained by its EXP-001 interference result. That is a development-simulator finding on a closed-form ridge learner and its own contamination rule states that results from that track are not evidence for any claim in another track.",
+        "Declares no dependency in either direction with lifetime-integrity. The umbrella's earlier DAG edge from modular-consolidation to lifetime-integrity was an umbrella-side assumption and has been removed."
+      ],
+      "observed": {
+        "default_branch": "main",
+        "visibility": "public",
+        "pushed_at": "2026-09-02T07:53:28Z",
+        "head": "5156e8a",
+        "results_dir_populated": true
+      }
     },
     {
       "id": "lifetime-integrity",
       "slug": "in-c0/lifetime-integrity",
-      "existence": "planned",
-      "existence_note": "Reported as existing in the 2026-09-02 programme brief, but NOT FOUND on GitHub during reconciliation on that date. Recorded as planned. See docs/reconciliation/2026-09-02.md.",
-      "role": "Would own long-horizon behaviour: whether the substrate stays coherent over lifetimes far longer than any single experiment stream, or degrades through drift, staleness, or accumulated commitment error.",
-      "owns_components": ["integrity-monitor"],
-      "owns_claims": ["CCS-C7"],
-      "contributes_claims": ["CCS-C8"],
-      "blocked_by": ["state-promotion/EXP-001", "modular-consolidation"],
-      "observed": null
+      "existence": "exists",
+      "role": "Owns long-horizon coherence: whether persistent state departs from its supporting evidence over very long interrupted lifetimes, and what re-grounding costs. Architecture-agnostic by construction.",
+      "owns_components": [
+        "integrity-monitor"
+      ],
+      "owns_claims": [
+        "CCS-C7"
+      ],
+      "contributes_claims": [
+        "CCS-C8"
+      ],
+      "blocked_by": [
+        "state-promotion/EXP-001"
+      ],
+      "notes": [
+        "Self-declared status: pre-results / experiment scaffold. Its single-seed EXP-000 pilot is explicitly not evidence.",
+        "HARD CONSTRAINT declared by that track: no result from it may be used to claim that a CCS latent architecture is validated. That requires an admissible substrate established by state-promotion and subsequent routing work. The benchmark is built to remain useful if the CCS programme goes nowhere.",
+        "Consequence for the umbrella: CCS-C7 cannot reach an empirical-support status from lifetime-integrity results alone, however strong, until an admissible substrate exists."
+      ],
+      "observed": {
+        "default_branch": "main",
+        "visibility": "public",
+        "pushed_at": "2026-09-02T07:55:26Z",
+        "head": "eb8547c",
+        "results_dir_populated": false
+      }
     }
   ],
   "not_in_programme": [
     {
       "slug": "in-c0/reference-worlds",
-      "reason": "Reference-anchored visual world synthesis. Shares the word 'persistence' but not the substrate, the claims, or the evaluation protocol."
+      "reason": "Reference-anchored visual world synthesis. Shares the word 'persistence' but not the substrate, claims, or evaluation protocol."
     }
   ]
 }
