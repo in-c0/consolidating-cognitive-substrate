@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+title: "Consolidating Cognitive Substrate (CCS) — research programme umbrella"
+message: >-
+  This repository maintains programme-level theory, terminology and claim status.
+  It reports no empirical results. Cite the individual component repositories for
+  any experimental claim.
+type: software
+authors:
+  - alias: in-c0
+repository-code: "https://github.com/in-c0/consolidating-cognitive-substrate"
+license: Apache-2.0

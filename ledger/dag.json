@@ -1,0 +1,120 @@
+{
+  "_comment": [
+    "Experiment dependency DAG for the CCS programme.",
+    "A node's 'depends_on' means: this experiment should not be run to",
+    "confirmatory status until the named nodes have reached a readout, because",
+    "its design or its interpretation depends on their outcome.",
+    "Nodes owned by repositories that do not exist are marked stage 'planned'",
+    "and carry no design detail beyond a question and a falsifier."
+  ],
+  "schema_version": 1,
+  "nodes": [
+    {
+      "id": "state-promotion/EXP-000",
+      "repo": "state-promotion",
+      "stage": "pilot-complete",
+      "operator": "COMMIT",
+      "question": "Does the harness correctly compute retention matrices, forgetting, rollback and write accounting?",
+      "depends_on": [],
+      "tests_claims": [],
+      "readout": "Engineering validation passed. Promotion arm tied with replay; fixed-consolidation arm degenerate by construction. Explicitly not paper evidence.",
+      "admissible_as_evidence": false
+    },
+    {
+      "id": "state-promotion/EXP-001",
+      "repo": "state-promotion",
+      "stage": "pre-result-scaffold",
+      "operator": "COMMIT",
+      "question": "Under matched budgets, does evidence-gated promotion across timescales improve the stability-plasticity trade-off for a frozen 0.5B language model?",
+      "depends_on": ["state-promotion/EXP-000"],
+      "tests_claims": ["CCS-C2", "CCS-C3", "CCS-C9", "CCS-C10"],
+      "readout": null,
+      "admissible_as_evidence": true,
+      "gating_note": "This is the programme's single load-bearing node. Every other empirical claim is either downstream of it or interpreted in its light."
+    },
+    {
+      "id": "state-promotion/EXP-002",
+      "repo": "state-promotion",
+      "stage": "planned",
+      "operator": "COMMIT",
+      "question": "Does the EXP-001 effect survive on established continual-learning benchmarks (CITB / TRACE)?",
+      "depends_on": ["state-promotion/EXP-001"],
+      "tests_claims": ["CCS-C2"],
+      "readout": null,
+      "admissible_as_evidence": true,
+      "gating_note": "Mandatory before any broad continual-learning claim, per the EXP-001 preregistration."
+    },
+    {
+      "id": "state-promotion/EXP-003",
+      "repo": "state-promotion",
+      "stage": "planned",
+      "operator": "COMMIT",
+      "question": "Does the strongest preregistered comparison replicate at ~7B?",
+      "depends_on": ["state-promotion/EXP-001"],
+      "tests_claims": ["CCS-C2"],
+      "readout": null,
+      "admissible_as_evidence": true,
+      "gating_note": "Scale replication only. Does not substitute for small-model ablations."
+    },
+    {
+      "id": "plasticity-routing/EXP-P1",
+      "repo": "plasticity-routing",
+      "stage": "planned",
+      "operator": "ALLOCATE",
+      "question": "Holding the commit policy fixed, does varying the allocation policy change the stability-plasticity trade-off?",
+      "depends_on": ["state-promotion/EXP-001"],
+      "tests_claims": ["CCS-C4", "CCS-C1", "CCS-C9"],
+      "readout": null,
+      "admissible_as_evidence": null,
+      "gating_note": "Repository does not exist. Design must include a control that varies commit count alone, otherwise ALLOCATE cannot be distinguished from COMMIT."
+    },
+    {
+      "id": "adaptive-commitment/EXP-A1",
+      "repo": "adaptive-commitment",
+      "stage": "planned",
+      "operator": "COMMIT",
+      "question": "Does a commit threshold that adapts to stream statistics beat a threshold tuned once on development seeds?",
+      "depends_on": ["state-promotion/EXP-001"],
+      "tests_claims": ["CCS-C5", "CCS-C1"],
+      "readout": null,
+      "admissible_as_evidence": null,
+      "gating_note": "Repository does not exist. Only worth building if EXP-001 shows the gate matters at all."
+    },
+    {
+      "id": "modular-consolidation/EXP-M1",
+      "repo": "modular-consolidation",
+      "stage": "planned",
+      "operator": "COMMIT",
+      "question": "At equal total slow capacity, does modular consolidation interfere less than monolithic consolidation?",
+      "depends_on": ["state-promotion/EXP-001"],
+      "tests_claims": ["CCS-C6"],
+      "readout": null,
+      "admissible_as_evidence": null,
+      "gating_note": "Repository does not exist despite being reported as existing on 2026-09-02."
+    },
+    {
+      "id": "lifetime-integrity/EXP-L1",
+      "repo": "lifetime-integrity",
+      "stage": "planned",
+      "operator": "ACCUMULATE",
+      "question": "Over lifetimes far longer than a single experiment stream, does the substrate stay coherent or does drift accumulate without bound?",
+      "depends_on": ["state-promotion/EXP-001", "modular-consolidation/EXP-M1"],
+      "tests_claims": ["CCS-C7"],
+      "readout": null,
+      "admissible_as_evidence": null,
+      "gating_note": "Repository does not exist despite being reported as existing on 2026-09-02. Requires a stream length no current experiment reaches."
+    },
+    {
+      "id": "ccs/EXP-I1",
+      "repo": "ccs",
+      "stage": "not-designed",
+      "operator": "ALL",
+      "question": "Does an integrated ACCUMULATE + ALLOCATE + COMMIT system beat the best single component under matched total budget?",
+      "depends_on": ["state-promotion/EXP-001", "plasticity-routing/EXP-P1", "adaptive-commitment/EXP-A1", "modular-consolidation/EXP-M1", "lifetime-integrity/EXP-L1"],
+      "tests_claims": ["CCS-C8", "CCS-C1"],
+      "readout": null,
+      "admissible_as_evidence": null,
+      "gating_note": "No host repository, no design, no protocol. Listed so that the synthesis paper's missing prerequisite is visible rather than implicit. If this experiment is ever built, it needs its own repository; the umbrella must not become an implementation repo."
+    }
+  ]
+}

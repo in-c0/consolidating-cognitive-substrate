@@ -1,0 +1,90 @@
+{
+  "_comment": [
+    "CCS sibling repository registry. This file is descriptive.",
+    "The umbrella repository never writes to these repositories.",
+    "Fields under 'observed' are maintained by tools/reconcile.py against the",
+    "real remote state and must not be hand-edited to describe intent."
+  ],
+  "schema_version": 1,
+  "last_reconciled": "2026-09-02",
+  "repos": [
+    {
+      "id": "state-promotion",
+      "slug": "in-c0/state-promotion",
+      "existence": "exists",
+      "role": "Owns the COMMIT operator. Tests whether evidence-gated promotion from fast to slow parametric state beats schedule-based consolidation under matched resource budgets.",
+      "owns_components": ["ephemeral", "latent", "fast-parametric", "slow-parametric", "promotion-gate", "retention-gate", "episodic-replay"],
+      "owns_claims": ["CCS-C2", "CCS-C3", "CCS-C10"],
+      "contributes_claims": ["CCS-C1", "CCS-C9"],
+      "blocked_by": [],
+      "observed": {
+        "default_branch": "main",
+        "visibility": "public",
+        "head": "3495d49",
+        "pushed_at": "2026-09-02T00:39:14Z",
+        "stated_status": "pre-results / experiment scaffold. No empirical claim is made yet.",
+        "results_dir_populated": false,
+        "experiments": [
+          {"id": "EXP-000", "stage": "pilot-complete", "admissible_as_paper_evidence": false},
+          {"id": "EXP-001", "stage": "pre-result-scaffold", "prereg": "experiments/EXP-001-PREREG.md", "prereg_state": "draft-lock-candidate", "amendments": ["A", "B", "C", "D", "E"]},
+          {"id": "EXP-002", "stage": "planned"},
+          {"id": "EXP-003", "stage": "planned"}
+        ]
+      }
+    },
+    {
+      "id": "adaptive-commitment",
+      "slug": "in-c0/adaptive-commitment",
+      "existence": "planned",
+      "existence_note": "Repository does not exist as of 2026-09-02.",
+      "role": "Would own the commitment-threshold policy: whether the commit criterion should itself adapt to stream statistics rather than remaining a frozen preregistered constant.",
+      "owns_components": ["commit-policy"],
+      "owns_claims": ["CCS-C5"],
+      "contributes_claims": ["CCS-C1"],
+      "blocked_by": ["state-promotion/EXP-001"],
+      "observed": null
+    },
+    {
+      "id": "plasticity-routing",
+      "slug": "in-c0/plasticity-routing",
+      "existence": "planned",
+      "existence_note": "Repository does not exist as of 2026-09-02.",
+      "role": "Would own the ALLOCATE operator: where in the substrate capacity is assigned to an incoming experience, independent of when commitment occurs.",
+      "owns_components": ["allocator"],
+      "owns_claims": ["CCS-C4"],
+      "contributes_claims": ["CCS-C1", "CCS-C9"],
+      "blocked_by": ["state-promotion/EXP-001"],
+      "observed": null
+    },
+    {
+      "id": "modular-consolidation",
+      "slug": "in-c0/modular-consolidation",
+      "existence": "planned",
+      "existence_note": "Reported as existing in the 2026-09-02 programme brief, but NOT FOUND on GitHub during reconciliation on that date. Recorded as planned. See docs/reconciliation/2026-09-02.md.",
+      "role": "Would own the structure of slow parametric state: whether consolidating into separable modules reduces interference relative to a monolithic slow store at equal capacity.",
+      "owns_components": ["slow-parametric-structure"],
+      "owns_claims": ["CCS-C6"],
+      "contributes_claims": ["CCS-C8"],
+      "blocked_by": ["state-promotion/EXP-001"],
+      "observed": null
+    },
+    {
+      "id": "lifetime-integrity",
+      "slug": "in-c0/lifetime-integrity",
+      "existence": "planned",
+      "existence_note": "Reported as existing in the 2026-09-02 programme brief, but NOT FOUND on GitHub during reconciliation on that date. Recorded as planned. See docs/reconciliation/2026-09-02.md.",
+      "role": "Would own long-horizon behaviour: whether the substrate stays coherent over lifetimes far longer than any single experiment stream, or degrades through drift, staleness, or accumulated commitment error.",
+      "owns_components": ["integrity-monitor"],
+      "owns_claims": ["CCS-C7"],
+      "contributes_claims": ["CCS-C8"],
+      "blocked_by": ["state-promotion/EXP-001", "modular-consolidation"],
+      "observed": null
+    }
+  ],
+  "not_in_programme": [
+    {
+      "slug": "in-c0/reference-worlds",
+      "reason": "Reference-anchored visual world synthesis. Shares the word 'persistence' but not the substrate, the claims, or the evaluation protocol."
+    }
+  ]
+}

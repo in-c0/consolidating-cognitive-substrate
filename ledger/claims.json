@@ -1,0 +1,205 @@
+{
+  "_comment": [
+    "CCS claim ledger. One record per programme-level claim.",
+    "RULE 1: 'status' describes EVIDENCE, not intent, effort, or plausibility.",
+    "RULE 2: 'implementation' is a separate axis. Code existing is not evidence.",
+    "RULE 3: Any status above 'theoretical-conjecture' requires >=1 evidence entry",
+    "        pointing at a committed artefact in a sibling repository.",
+    "RULE 4: Every claim must name at least one experiment able to FALSIFY it.",
+    "RULE 5: Nothing in this file may be restated as a result anywhere in this repo.",
+    "tools/validate_ledger.py enforces rules 3 and 4 mechanically."
+  ],
+  "schema_version": 1,
+  "last_reviewed": "2026-09-02",
+  "status_vocabulary": [
+    "theoretical-conjecture",
+    "implemented",
+    "pilot-supported",
+    "confirmatory-supported",
+    "falsified",
+    "unresolved"
+  ],
+  "claims": [
+    {
+      "id": "CCS-C1",
+      "title": "Three-operator decomposition",
+      "statement": "Continual-agent competence over a lifetime decomposes usefully into ACCUMULATE (retain candidate experience), ALLOCATE (decide where capacity is assigned), and COMMIT (decide whether and when a change becomes durable), with state maintained at multiple timescales.",
+      "kind": "architectural-framing",
+      "status": "theoretical-conjecture",
+      "implementation": "partial",
+      "implementation_note": "Only the COMMIT operator and the accompanying state hierarchy exist in code, in state-promotion. ALLOCATE has no implementation anywhere in the programme.",
+      "evidence": [],
+      "supported_by": ["state-promotion/EXP-001", "plasticity-routing/EXP-P1", "adaptive-commitment/EXP-A1"],
+      "falsified_by": [
+        "A single-operator or two-operator system matching the full decomposition's performance under identical budgets across every programme benchmark.",
+        "Demonstration that ALLOCATE and COMMIT are not separable, i.e. no experiment can vary one while holding the other fixed."
+      ],
+      "notes": "This is a research framing, not a finding. It is currently unfalsified only because no experiment has yet been run that could falsify it. Absence of a test is not support.",
+      "review_by": "state-promotion/EXP-001 confirmatory readout"
+    },
+    {
+      "id": "CCS-C2",
+      "title": "Evidence-gated commitment beats scheduled commitment",
+      "statement": "Under matched trainable-parameter capacity, replay budget, online-token budget and parameter-write ceiling, gating consolidation on already-observed evidence yields lower average forgetting than a fixed or random consolidation schedule, while retaining at least 95% of the strongest baseline's new-task plasticity.",
+      "kind": "empirical",
+      "status": "unresolved",
+      "implementation": "implemented",
+      "implementation_note": "Implemented in state-promotion as arm B5 against B0-B4. Scaffold is pre-result; results/ is empty.",
+      "evidence": [
+        {
+          "repo": "state-promotion",
+          "artefact": "experiments/EXP-000-RESULT.md",
+          "class": "pilot",
+          "admissible": false,
+          "direction": "null",
+          "summary": "Toy classifier pilot. Promotion tied with replay within variance (0.457 vs 0.459 final average). The repository states explicitly that this is engineering validation and not evidence for the hypothesis. The fixed-consolidation arm was algebraically identical to replay, so the pilot could not adjudicate the claim at all."
+        }
+      ],
+      "supported_by": ["state-promotion/EXP-001", "state-promotion/EXP-002", "state-promotion/EXP-003"],
+      "falsified_by": [
+        "state-promotion/EXP-001 H1 failing under valid, budget-matched conditions.",
+        "The promotion arm's advantage disappearing when commit count is matched by the B4 random-routing control (EXP-001 kill criterion 5).",
+        "Any observed advantage being attributable to unequal parameter writes, task-identity leakage, or ceiling effects."
+      ],
+      "notes": "Status is 'unresolved' rather than 'pilot-supported': the only pilot returned a null result and its fixed-consolidation arm was degenerate by construction.",
+      "review_by": "state-promotion/EXP-001 confirmatory readout"
+    },
+    {
+      "id": "CCS-C3",
+      "title": "Persistent latent state carries context-dependent exceptions",
+      "statement": "A bounded persistent latent state carried across stream items contributes specifically to handling context-scoped exceptions and reversals, beyond what fast and slow parametric state provide, without materially changing parameter-write volume.",
+      "kind": "empirical",
+      "status": "unresolved",
+      "implementation": "implemented",
+      "implementation_note": "Implemented in state-promotion; the 'promotion-no-latent' ablation is the designated test.",
+      "evidence": [],
+      "supported_by": ["state-promotion/EXP-001"],
+      "falsified_by": [
+        "The no-latent and latent-reset ablations matching full B5 on the PALS context/reversal subset.",
+        "Any latent-state gain being accompanied by a materially different parameter-write count, which would make it a budget artefact."
+      ],
+      "notes": "This is state-promotion H2. EXP-001 Amendment D architecture-matched latent state across B3/B4/B5 so that the routing comparison is not confounded with latent-state access; that makes the H2 ablation the only clean test of this claim.",
+      "review_by": "state-promotion/EXP-001 confirmatory readout"
+    },
+    {
+      "id": "CCS-C4",
+      "title": "Allocation is a separable lever from commitment",
+      "statement": "Where an experience is routed within the substrate affects the stability-plasticity trade-off independently of when commitment occurs, such that an allocation policy can be varied while holding the commit policy fixed and produce a measurable difference.",
+      "kind": "empirical",
+      "status": "theoretical-conjecture",
+      "implementation": "none",
+      "implementation_note": "plasticity-routing does not exist. No allocation policy is implemented anywhere in the programme.",
+      "evidence": [],
+      "supported_by": ["plasticity-routing/EXP-P1"],
+      "falsified_by": [
+        "Allocation policies producing no measurable difference at fixed commit policy and matched budgets.",
+        "Allocation effects being fully explained by the number of commits they induce, which would collapse ALLOCATE into COMMIT."
+      ],
+      "notes": "The programme's decomposition (CCS-C1) depends on this separability. If routing turns out to be a reparameterisation of commit frequency, the three-operator framing must be revised to two.",
+      "review_by": "plasticity-routing repository creation"
+    },
+    {
+      "id": "CCS-C5",
+      "title": "Adaptive commitment thresholds beat fixed thresholds",
+      "statement": "A commitment criterion that adapts to observed stream statistics outperforms a well-tuned constant threshold under matched budgets, and does so without requiring held-out evaluation signal.",
+      "kind": "empirical",
+      "status": "theoretical-conjecture",
+      "implementation": "none",
+      "implementation_note": "adaptive-commitment does not exist. state-promotion deliberately uses a frozen, preregistered threshold.",
+      "evidence": [],
+      "supported_by": ["adaptive-commitment/EXP-A1"],
+      "falsified_by": [
+        "A threshold tuned once on development seeds matching or beating the adaptive policy on confirmatory seeds.",
+        "The adaptive policy requiring any held-out or task-identity signal to work, which would make it inadmissible under programme methodology."
+      ],
+      "notes": "This claim is only worth testing if CCS-C2 survives. A threshold that adapts is a refinement of a mechanism that must first be shown to matter at all.",
+      "review_by": "state-promotion/EXP-001 confirmatory readout"
+    },
+    {
+      "id": "CCS-C6",
+      "title": "Modular slow state reduces interference",
+      "statement": "Consolidating durable knowledge into separable modules produces less cross-task interference than consolidating into a monolithic slow store of equal total capacity.",
+      "kind": "empirical",
+      "status": "theoretical-conjecture",
+      "implementation": "none",
+      "implementation_note": "modular-consolidation does not exist. state-promotion's slow adapter bank is a single store.",
+      "evidence": [],
+      "supported_by": ["modular-consolidation/EXP-M1"],
+      "falsified_by": [
+        "Monolithic and modular slow stores showing equal interference at equal capacity and equal write budget.",
+        "Modularity gains vanishing once module-selection overhead is charged as decision-time compute."
+      ],
+      "notes": "Capacity matching is the critical control here: more modules must not mean more parameters.",
+      "review_by": "modular-consolidation repository creation"
+    },
+    {
+      "id": "CCS-C7",
+      "title": "Lifetime coherence is maintainable",
+      "statement": "A multi-timescale substrate can be operated over lifetimes far longer than any single experiment stream without unbounded drift, accumulating commitment error, or monotonically increasing staleness.",
+      "kind": "empirical",
+      "status": "theoretical-conjecture",
+      "implementation": "none",
+      "implementation_note": "lifetime-integrity does not exist. No experiment in the programme currently runs long enough to observe drift.",
+      "evidence": [],
+      "supported_by": ["lifetime-integrity/EXP-L1"],
+      "falsified_by": [
+        "Drift, stale-answer rate, or commitment error growing without bound as stream length increases.",
+        "Coherence being maintainable only by periodic full resets, which would concede that the substrate does not accumulate."
+      ],
+      "notes": "This is the claim most likely to be quietly assumed rather than tested. Short experiment streams cannot support it, and no amount of EXP-001 evidence substitutes for it.",
+      "review_by": "lifetime-integrity repository creation"
+    },
+    {
+      "id": "CCS-C8",
+      "title": "The components compose",
+      "statement": "A system combining accumulation, allocation and commitment outperforms the best single-component system under matched budgets, and the combined gain is not merely the largest individual gain.",
+      "kind": "empirical",
+      "status": "theoretical-conjecture",
+      "implementation": "none",
+      "implementation_note": "No integrated system exists. No repository currently owns the integration experiment.",
+      "evidence": [],
+      "supported_by": ["ccs/EXP-I1"],
+      "falsified_by": [
+        "The integrated system matching but not exceeding the best single component under matched total budget.",
+        "Components interfering, so that the combination is worse than its best part.",
+        "The combined gain being fully accounted for by one component's contribution."
+      ],
+      "notes": "This is the claim a synthesis paper would exist to make. It cannot be tested until at least three component experiments have confirmatory readouts. EXP-I1 is not yet designed and has no host repository.",
+      "review_by": "synthesis readiness review"
+    },
+    {
+      "id": "CCS-C9",
+      "title": "Multiple timescales are necessary, not merely sufficient",
+      "statement": "A single-timescale controller given the same total capacity, write budget and compute cannot match a multi-timescale substrate on the programme's benchmarks.",
+      "kind": "empirical",
+      "status": "unresolved",
+      "implementation": "partial",
+      "implementation_note": "state-promotion's B1/B2 arms are single-timescale controls, so the comparison is implemented for the COMMIT operator only.",
+      "evidence": [],
+      "supported_by": ["state-promotion/EXP-001", "plasticity-routing/EXP-P1"],
+      "falsified_by": [
+        "A budget-matched single-timescale baseline (B1 or B2) matching the multi-timescale arms on average forgetting and plasticity.",
+        "Multi-timescale gains disappearing once decision-time routing compute is added to the total-compute accounting (see CCS-C10)."
+      ],
+      "notes": "The programme's own related work already places multi-timescale learning in prior art. This claim is about necessity under matched budgets, which is the only version that is still open.",
+      "review_by": "state-promotion/EXP-001 confirmatory readout"
+    },
+    {
+      "id": "CCS-C10",
+      "title": "Gating overhead does not erase the gain",
+      "statement": "The decision-time inference cost of evidence gating is small enough that the method retains its advantage when compared on total algorithmic compute rather than adaptation compute alone.",
+      "kind": "empirical",
+      "status": "unresolved",
+      "implementation": "implemented",
+      "implementation_note": "state-promotion records decision_forward_calls, decision_tokens_processed and an estimated frozen-backbone decision FLOP proxy separately from adaptation compute.",
+      "evidence": [],
+      "supported_by": ["state-promotion/EXP-001"],
+      "falsified_by": [
+        "Gating overhead being large enough that a compute-augmented baseline, given the same total budget, matches the promotion arm.",
+        "The performance-vs-total-compute curve showing no region where the promotion arm dominates."
+      ],
+      "notes": "state-promotion Amendment E locked this before results and forbids describing B5 as compute-matched without qualification. This is a genuine falsifier for the practical version of CCS-C2, not a caveat.",
+      "review_by": "state-promotion/EXP-001 confirmatory readout"
+    }
+  ]
+}
