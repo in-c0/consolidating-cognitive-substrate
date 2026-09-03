@@ -39,12 +39,13 @@
         "Off-main branches carry LM pilot work not merged to main: exp001r/lora-representation-gate (EXP-001R, adds Amendment F) and exp001/dynamic-input-and-snapshot-pin.",
         "in-c0/modular-consolidation records that a mechanically valid small-LM engineering pilot has been run and reviewed, and that it was scientifically uninterpretable because the tested soft-prefix plastic representation underlearned; an architecture-matched LoRA representation-sufficiency repair is predeclared. None of that is on main and none of it is admissible CCS evidence.",
         "plasticity-routing describes this track as sitting at the ALLOCATE-to-COMMIT boundary rather than owning COMMIT outright. Recorded as a framing divergence, not corrected from here.",
-        "CCS-C5 (adaptive consolidation thresholds) was reassigned here on 2026-09-03 as a COMMIT_INTERNAL follow-on. This track has NOT adopted it into its plan of record and state-promotion/EXP-F1 is an umbrella-side candidate node only."
+        "CCS-C5 (adaptive consolidation thresholds) was reassigned here on 2026-09-03 as a COMMIT_INTERNAL follow-on. This track has NOT adopted it into its plan of record and state-promotion/EXP-F1 is an umbrella-side candidate node only.",
+        "2026-09-03: main still 3495d49 with results/ holding only .gitkeep. Off-main EXP-001R work persists and remains NON-ADMISSIBLE for CCS until merged under that track's own rules. main is the authoritative admissible head."
       ],
       "observed": {
         "default_branch": "main",
         "visibility": "public",
-        "pushed_at": "2026-09-02T07:24:42Z",
+        "pushed_at": "2026-09-03T04:06:31Z",
         "head": "3495d49",
         "results_dir_populated": false
       }
@@ -94,13 +95,14 @@
         "Self-declared status: pre-result / experiment scaffold. Everything in results/ is classified DEV_CALIBRATION and is not evidence.",
         "TERMINOLOGY DIVERGENCE: this track reads COMMIT as an outward-facing or external commitment (tool call, irreversible action) and states that its durable SLOW write is 'not a commitment in the CCS sense'. The umbrella defines COMMIT as the decision that a change becomes durable, which does include an internal durable write. Recorded, not corrected. See docs/TERMINOLOGY.md.",
         "Its EXP-002 (language model) is blocked on review of the first mechanically valid state-promotion engineering pilot. Its EXP-001 is synthetic and not blocked by that gate.",
-        "modular-consolidation treats this track as a blocking substrate dependency: it must freeze or export the shared LM backbone, adapter family/rank, training budget and routing substrate before that track's real-model panel and EXP-100 can proceed."
+        "modular-consolidation treats this track as a blocking substrate dependency: it must freeze or export the shared LM backbone, adapter family/rank, training budget and routing substrate before that track's real-model panel and EXP-100 can proceed.",
+        "2026-09-03: PROTOCOL v1.0 FROZEN at commit 61c4935, blockers none, five confirmatory seeds held out and NOT executed. L5a retained as permanently failed and non-gating; predeclared L5b cross-world attribution gate PASSED on spent one-shot audit seeds. A validity and protocol milestone, not empirical support: no CCS status changed and no evidence entry was recorded. The freeze covers the SYNTHETIC SDW-1 protocol only - no common LM/adaptation/routing substrate has been exported, and that track's own EXP-002 language-model experiment remains BLOCKED."
       ],
       "observed": {
         "default_branch": "main",
         "visibility": "public",
-        "pushed_at": "2026-09-02T02:46:04Z",
-        "head": "1e9b390",
+        "pushed_at": "2026-09-03T01:25:19Z",
+        "head": "b5075ee",
         "results_dir_populated": true
       }
     },
@@ -126,13 +128,14 @@
       "notes": [
         "Self-declared status: research/design track. No confirmatory experiment has been run and none may be frozen until design lessons from plasticity-routing are available.",
         "Its own track-local ledger records 'consolidation beats a capacity-matched fixed bank (unbounded regime)' as falsified, explained by its EXP-001 interference result. That is a development-simulator finding on a closed-form ridge learner and its own contamination rule states that results from that track are not evidence for any claim in another track.",
-        "Declares no dependency in either direction with lifetime-integrity. The umbrella's earlier DAG edge from modular-consolidation to lifetime-integrity was an umbrella-side assumption and has been removed."
+        "Declares no dependency in either direction with lifetime-integrity. The umbrella's earlier DAG edge from modular-consolidation to lifetime-integrity was an umbrella-side assumption and has been removed.",
+        "2026-09-03: EXP-003 EXECUTED and interpreted (commits 4fc469e, 7dca358), landing after the reconciliation brief was written. This is a readout, not the schema/reporting completion the brief anticipated. Preregistered frozen grid, 600 rows, 2619 merge events, construction VALID - but development seeds 900-907 only, so non-admissible. Recorded against CCS-C11 with direction 'mixed'. That track reports two readings of its own predeclared Pareto rule, notes that the strict reading is unsatisfiable by construction, and explicitly defers the choice to its owner; the umbrella does not resolve it."
       ],
       "observed": {
         "default_branch": "main",
         "visibility": "public",
-        "pushed_at": "2026-09-02T07:53:28Z",
-        "head": "5156e8a",
+        "pushed_at": "2026-09-03T01:34:48Z",
+        "head": "7dca358",
         "results_dir_populated": true
       }
     },
@@ -156,12 +159,13 @@
       "notes": [
         "Self-declared status: pre-results / experiment scaffold. Its single-seed EXP-000 pilot is explicitly not evidence.",
         "HARD CONSTRAINT declared by that track: no result from it may be used to claim that a CCS latent architecture is validated. That requires an admissible substrate established by state-promotion and subsequent routing work. The benchmark is built to remain useful if the CCS programme goes nowhere.",
-        "Consequence for the umbrella: CCS-C7 cannot reach an empirical-support status from lifetime-integrity results alone, however strong, until an admissible substrate exists."
+        "Consequence for the umbrella: CCS-C7 cannot reach an empirical-support status from lifetime-integrity results alone, however strong, until an admissible substrate exists.",
+        "2026-09-03: main unchanged at eb8547c and results/ still holds only .gitkeep. The push activity since the last reconciliation is a new branch, phase2-matched-controls (7632378), which is branch-only and non-admissible. No evidence or status change."
       ],
       "observed": {
         "default_branch": "main",
         "visibility": "public",
-        "pushed_at": "2026-09-02T07:55:26Z",
+        "pushed_at": "2026-09-03T01:24:10Z",
         "head": "eb8547c",
         "results_dir_populated": false
       }

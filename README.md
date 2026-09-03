@@ -6,11 +6,11 @@ evidence status.
 
 > ## Status: no claim in this programme has empirical support.
 >
-> Reconciled 2026-09-02 against live GitHub state. **Four of five** sibling
-> repositories now exist and three carry substantial development results — and
-> **0 of 11 claims** have admissible evidence, because every result on file is a
-> development calibration or an engineering pilot that its own track classifies
-> as non-evidential. **0 of 4 synthesis-readiness tiers are cleared.**
+> Reconciled 2026-09-03 against live GitHub state. **Four of five** sibling
+> repositories exist, one has a **frozen confirmatory protocol** and another has a
+> **preregistered frozen-grid result** — and **0 of 12 claims** have admissible
+> evidence, because every result on file is on development seeds and every track
+> says so about its own output. **0 of 4 synthesis-readiness tiers are cleared.**
 >
 > Repositories existing is not progress toward a claim. This repository exists to
 > keep that distinction visible.
@@ -75,8 +75,8 @@ COMMIT_EXTERNAL belongs in the pipeline above is unresolved.
 | Repository | Operator | Exists | Owns claims | Best result on file |
 |---|---|---|---|---|
 | [`in-c0/state-promotion`](https://github.com/in-c0/state-promotion) | COMMIT_INTERNAL | ✅ | CCS-C2, C3, C5, C10 | engineering pilot, null on the mechanism |
-| [`in-c0/plasticity-routing`](https://github.com/in-c0/plasticity-routing) | ALLOCATE | ✅ | CCS-C4 | development calibration, `DEV_CALIBRATION` |
-| [`in-c0/modular-consolidation`](https://github.com/in-c0/modular-consolidation) | COMMIT_INTERNAL target structure | ✅ | CCS-C6, C11 | development simulator, synthetic |
+| [`in-c0/plasticity-routing`](https://github.com/in-c0/plasticity-routing) | ALLOCATE | ✅ | CCS-C4 | **protocol v1.0 frozen**, confirmatory seeds unspent |
+| [`in-c0/modular-consolidation`](https://github.com/in-c0/modular-consolidation) | COMMIT_INTERNAL target structure | ✅ | CCS-C6, C11 | preregistered frozen grid, development seeds |
 | [`in-c0/lifetime-integrity`](https://github.com/in-c0/lifetime-integrity) | ACCUMULATE / long horizon | ✅ | CCS-C7 | single-seed pilot, non-evidential |
 | `in-c0/adaptive-commitment` | COMMIT_EXTERNAL | ❌ planned | *(none yet)* | — |
 
@@ -94,7 +94,7 @@ they do not travel to other tracks. The umbrella honours those declarations: see
 | `confirmatory-supported` | **0** |
 | `falsified` | 0 |
 
-Six evidence entries are on file and **none is admissible**. Three of twelve
+Seven evidence entries are on file and **none is admissible**. Three of twelve
 claims have no runnable test: CCS-C5, CCS-C8 and CCS-C12 — the last two because
 their experiments have no host repository, deliberately. Full table:
 [docs/CLAIM-LEDGER.md](docs/CLAIM-LEDGER.md).
@@ -103,6 +103,12 @@ Two claims are worth reading before the rest. **CCS-C6** carries two
 against-direction development results and should be expected to end at
 `falsified`; its live successor is **CCS-C11**, added rather than substituted so
 the original is not quietly rewritten to follow the evidence.
+
+**CCS-C11 is now itself under pressure.** A preregistered frozen-grid run found
+that pooling beats refusing-to-admit only above a threshold in *absolute skill
+count*, and that its advantage grows as the ceiling **loosens** — the opposite of
+the claim's motivating intuition, which pointed at high pressure. The claim has
+not been rewritten; the tension is recorded on it.
 
 ## The eventual synthesis paper
 

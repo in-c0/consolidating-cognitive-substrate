@@ -118,6 +118,20 @@ the mechanisms matter and ask whether they *work*. This asks whether one of them
 has a job. It is now tracked as CCS-C6 against CCS-C11, and if it holds for real
 models the programme's name overstates what the programme does.
 
+**F9 — a preregistered criterion turns out to be unsatisfiable.** New as of
+2026-09-03, observed in `modular-consolidation`'s EXP-003, where the strict
+reading of the predeclared Pareto rule required dominating an arm that maximises
+plasticity by construction. This is a failure of the *protocol*, not of the
+hypothesis, and it is the most dangerous kind for a programme that leans on
+preregistration: it is invisible until results arrive, and at that point every
+available response looks like moving the goalposts.
+
+The programme's answer is prevention, not adjudication — see admissibility rule
+13 in [EVIDENCE-MAP.md](EVIDENCE-MAP.md#added-2026-09-03). When it does happen,
+the honest handling is what that track did: report both readings, compute both
+over the complete grid, decline to choose unilaterally, and escalate the choice
+to the owner. The umbrella records the open decision and does not resolve it.
+
 ## Publication obligation on failure
 
 Inherited from `state-promotion`: negative results are published. If H1 is

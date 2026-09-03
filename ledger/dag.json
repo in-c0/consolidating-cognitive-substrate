@@ -103,7 +103,7 @@
     {
       "id": "plasticity-routing/EXP-001",
       "repo": "plasticity-routing",
-      "stage": "pre-result-scaffold",
+      "stage": "protocol-frozen",
       "operator": "ALLOCATE",
       "question": "Can a policy learn from delayed future task utility, under a unified resource budget, to allocate experience across substrates of differing persistence - and is any gain attributable to routing rather than capacity, compute, or privileged task identity?",
       "depends_on": [
@@ -116,7 +116,28 @@
       ],
       "readout": null,
       "admissible_as_evidence": true,
-      "gating_note": "Confirmatory synthetic on five held-out seeds. Not blocked by state-promotion because it is synthetic. The track sets a deliberately low prior on the learned router beating the calibrated fixed heuristic, and a negative replication of Yoon (2026) is a preregistered publishable outcome."
+      "gating_note": "PROTOCOL v1.0 FROZEN 2026-09-03; blockers none; confirmatory seeds held out and NOT executed. That track's validator refuses to certify a confirmatory run whose commit, source-tree hash, config hash or seed does not match the lock, and any edit to src/, scripts/ or the frozen configuration invalidates it. 105 tests pass and the gating leakage suite passes; L5a is retained as permanently failed and non-gating, with the predeclared L5b cross-world attribution gate passing on one-shot audit seeds (Delta_real 0.4929 CI [0.4822, 0.5032]). THIS IS A VALIDITY AND PROTOCOL MILESTONE, NOT EMPIRICAL SUPPORT FOR CCS-C4. No confirmatory number exists. The track retains its deliberately low prior on the learned router beating the calibrated fixed heuristic. This synthetic freeze does NOT satisfy modular-consolidation's separate dependency, which requires an explicitly frozen or exported common LM/adaptation/routing substrate; verified 2026-09-03 that no such export exists and that EXP-002 remains BLOCKED.",
+      "protocol_lock": {
+        "frozen_at": "2026-09-03",
+        "commit": "61c493549e741bebe9becaba599b01e4c8e0a7f9",
+        "source_tree_sha256": "18d319d33712ee0b0dcbe044c604ea4a72cf3413da00acb1261cccb9b7caa75d",
+        "config_hash": "7a2d06f526ace1c0",
+        "development_seeds": [
+          11,
+          12,
+          13
+        ],
+        "audit_seeds_spent": "91001..91032 (L5b, one-shot, may not be reused)",
+        "confirmatory_seeds": [
+          20260902,
+          20260903,
+          20260904,
+          20260905,
+          20260906
+        ],
+        "confirmatory_seeds_executed": false,
+        "blockers": "none"
+      }
     },
     {
       "id": "plasticity-routing/EXP-002",
@@ -179,7 +200,7 @@
     {
       "id": "modular-consolidation/EXP-003",
       "repo": "modular-consolidation",
-      "stage": "planned",
+      "stage": "development-calibration-complete",
       "operator": "COMMIT_INTERNAL",
       "question": "Does the binding-ceiling effect hold across ceiling phases under a frozen protocol?",
       "depends_on": [
@@ -188,9 +209,10 @@
       "tests_claims": [
         "CCS-C11"
       ],
-      "readout": null,
-      "admissible_as_evidence": true,
-      "gating_note": "Preregistration exists in that repository. Still a synthetic simulator; would not by itself license a real-model claim."
+      "readout": "Executed as preregistered (prereg 74dc652 committed before runner 5b6314c) over the full frozen grid: K* in {6,12,24} x ceiling/K* in {1/6,1/3,1/2,2/3,5/6}, 8 development seeds 900-907, 5 arms, 600 rows, 2619 merge events. Construction VALID; capacity identical across arms within every cell. merge - evict is strongly positive everywhere non-degenerate (+0.16 to +0.29 retention, CI excludes zero). merge - deny changes SIGN with absolute K*, not with pressure: negative at every non-degenerate ratio for K*=6, positive from ratio 1/3 upward for K*=12 and K*=24. Within a K*, merge's advantage grows as the ceiling LOOSENS, and at the tightest ratio deny wins - the opposite of the motivating expectation. Merge criterion is no longer inert: at K*>=12, ratio >=1/3 it separates from random pairing on every event-level axis (precision 0.45-0.81 vs 0.07-0.19). DEVELOPMENT SEEDS ONLY; no confirmatory seed set has been drawn.",
+      "admissible_as_evidence": false,
+      "gating_note": "Preregistration exists in that repository. Still a synthetic simulator; would not by itself license a real-model claim.",
+      "open_owner_decision": "That track reports two readings of its own predeclared Pareto rule and declines to choose. Reading A (strict, as literally written) requires merge to dominate deny AND evict separately: no cell qualifies, verdict OPERATING_POINT. That track notes the clause is UNSATISFIABLE BY CONSTRUCTION, because B-EVICT-LRU installs a fresh module on every admission and so maximises plasticity by definition. Reading B (standard Pareto extension against the baseline set) finds a reproducible region: merge strictly dominates deny on both axes in 8 contiguous cells, replicated at two absolute K*. Both are computed over the complete grid and reported in analysis.json. Explicitly flagged as an owner decision. The umbrella does not resolve it and does not prefer a reading."
     },
     {
       "id": "modular-consolidation/EXP-100",
@@ -208,7 +230,7 @@
       ],
       "readout": null,
       "admissible_as_evidence": true,
-      "gating_note": "Preregistration is an explicit DRAFT and NOT FROZEN. Blocked until plasticity-routing freezes or exports the shared LM backbone, adapter family/rank, training budget and routing substrate. That track states the removal of its own upstream blocker is not equivalent to that substrate having been selected."
+      "gating_note": "Preregistration is an explicit DRAFT and NOT FROZEN. Blocked until plasticity-routing freezes or exports the shared LM backbone, adapter family/rank, training budget and routing substrate. RE-VERIFIED 2026-09-03: plasticity-routing's Protocol v1.0 freeze covers its SYNTHETIC SDW-1 EXP-001 only; no LM substrate has been exported and its own EXP-002 language-model experiment remains BLOCKED. The blocker therefore stands. That track states explicitly that EXP-003 does not re-open EXP-100 by itself: D4 additionally requires a real-model result surviving capacity, storage and decision-compute accounting."
     },
     {
       "id": "lifetime-integrity/EXP-000",

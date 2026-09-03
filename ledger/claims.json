@@ -121,7 +121,7 @@
         "Allocation policies producing no measurable difference at fixed commit policy and matched budgets.",
         "Allocation effects being fully explained by the number of commits they induce, which would collapse ALLOCATE into COMMIT."
       ],
-      "notes": "Status moved from theoretical-conjecture to unresolved because the claim is now implemented and under inconclusive development calibration. This is NOT an evidence promotion: both statuses assert zero empirical support, and the move was not made because a repository appeared. The K1/K2 split matters for how the claim should eventually be read: a learned allocator failing to beat a calibrated fixed rule would not by itself falsify CCS-C4, because CCS-C4 is about allocation being a separable lever, not about the policy being learned. That distinction must be preserved when EXP-001 reads out.",
+      "notes": "Status moved from theoretical-conjecture to unresolved because the claim is now implemented and under inconclusive development calibration. This is NOT an evidence promotion: both statuses assert zero empirical support, and the move was not made because a repository appeared. The K1/K2 split matters for how the claim should eventually be read: a learned allocator failing to beat a calibrated fixed rule would not by itself falsify CCS-C4, because CCS-C4 is about allocation being a separable lever, not about the policy being learned. That distinction must be preserved when EXP-001 reads out. Updated 2026-09-03: plasticity-routing froze Protocol v1.0 with no blockers, a pinned commit and source-tree hash, and five held-out confirmatory seeds that have NOT been executed. Its L5a leakage control is retained as permanently failed and non-gating, and the predeclared L5b cross-world attribution gate passed on spent one-shot audit seeds. This is a validity and protocol milestone and adds NO evidence entry here: a frozen protocol is a statement about what may be run, not a result. The claim's status is unchanged and no evidence was recorded.",
       "review_by": "plasticity-routing/EXP-001 confirmatory readout",
       "domain": "ALLOCATE"
     },
@@ -291,6 +291,14 @@
           "admissible": false,
           "direction": "mixed",
           "summary": "Development simulator, ceiling 3 with K*=6, 8 paired seeds at identical live-module count, 576 parameters and 33408 bytes of storage per arm. merge - evict = +0.204 retention, CI [+0.125,+0.296]. merge - deny = -0.017 retention with the CI spanning zero, concealing plasticity +0.023 and forgetting +0.039 with CIs excluding zero, i.e. stability converted into plasticity at roughly par. merge - random-merge = +0.009, CI spanning zero, so the pair-selection criterion did not survive to the aggregate. Not evidence about real models."
+        },
+        {
+          "repo": "modular-consolidation",
+          "artefact": "experiments/EXP-003-CEILING-PHASE-RESULT.md",
+          "class": "pilot",
+          "admissible": false,
+          "direction": "mixed",
+          "summary": "Preregistered frozen-grid development run (prereg committed before the runner), K* in {6,12,24} x ceiling/K* in {1/6..5/6}, 8 development seeds, 600 rows, 2619 merge events, capacity identical across arms per cell. Construction VALID. SUPPORTS the merge-over-evict half decisively: +0.16 to +0.29 retention with CI excluding zero in every non-degenerate cell. CONTRADICTS the claim's motivating framing on the deny half: merge - deny changes sign with absolute K* rather than with pressure (negative at every non-degenerate ratio for K*=6, positive from ratio 1/3 up for K*>=12), AND within a K* merge's advantage grows as the ceiling LOOSENS, with deny winning at the tightest ratio. Also weakens the third falsifier: the merge criterion separates cleanly from random pairing at K*>=12 (precision 0.45-0.81 vs 0.07-0.19), so EXP-002's weak-coupling observation does not generalise beyond the small-K*, tight-ceiling regime. DEVELOPMENT SEEDS ONLY; no confirmatory seed set drawn; closed-form ridge learner."
         }
       ],
       "supported_by": [
@@ -300,10 +308,11 @@
       "falsified_by": [
         "merge and evict showing equal retention at an identical binding ceiling under a frozen protocol.",
         "deny matching or beating merge on retention once plasticity is held equal, which would make consolidation a trade rather than a gain.",
-        "The advantage over a random-merge control failing to exclude zero, which would mean the rate mattered and the criterion did not."
+        "The advantage over a random-merge control failing to exclude zero, which would mean the rate mattered and the criterion did not.",
+        "The merge-over-deny advantage failing to replicate on confirmatory seeds, or remaining confined to a single absolute K*."
       ],
-      "notes": "Added at the 2026-09-02 reconciliation to keep the live question separate from the unbounded-regime form in CCS-C6, rather than rewriting CCS-C6 to follow the evidence. Two cautions carried from the owning track: 'deny' is a strong and usually-missing baseline that currently leads on retention, and the merge-versus-deny null conceals a significant two-way trade, so a single retention headline would misreport it.",
-      "review_by": "modular-consolidation/EXP-003 readout under a frozen protocol",
+      "notes": "Added at the 2026-09-02 reconciliation to keep the live question separate from the unbounded-regime form in CCS-C6, rather than rewriting CCS-C6 to follow the evidence. Two cautions carried from the owning track: 'deny' is a strong and usually-missing baseline that currently leads on retention, and the merge-versus-deny null conceals a significant two-way trade, so a single retention headline would misreport it. Updated 2026-09-03 after EXP-003. Status deliberately UNCHANGED at unresolved: the run used development seeds only and no confirmatory seed set has been drawn, so it is not admissible however well constructed it is. The claim is NOT rewritten to follow the evidence, on the same principle applied to CCS-C6. But the reader should know that its motivating intuition is now under direct pressure: 'under a hard capacity ceiling' was meant to point at high pressure, and high pressure is exactly where the deny half fails - merging needs slack to select well and degenerates when forced. If this survives confirmatory seeds, the honest successor claim is about absolute skill count and selection headroom, not about ceiling tightness. That successor must be ADDED, not substituted.",
+      "review_by": "a modular-consolidation run on a drawn confirmatory seed set",
       "domain": "COMMIT_INTERNAL"
     },
     {

@@ -25,8 +25,8 @@ graph TD
   class state_promotion_EXP_F1 undesigned;
   plasticity_routing_EXP_000["plasticity-routing<br/>EXP-000<br/><i>development-calibration-complete</i>"]
   class plasticity_routing_EXP_000 planned;
-  plasticity_routing_EXP_001["plasticity-routing<br/>EXP-001<br/><i>pre-result</i>"]
-  class plasticity_routing_EXP_001 active;
+  plasticity_routing_EXP_001["plasticity-routing<br/>EXP-001<br/><i>protocol-frozen</i>"]
+  class plasticity_routing_EXP_001 planned;
   plasticity_routing_EXP_002["plasticity-routing<br/>EXP-002<br/><i>planned</i>"]
   class plasticity_routing_EXP_002 planned;
   modular_consolidation_EXP_000["modular-consolidation<br/>EXP-000<br/><i>development-calibration-complete</i>"]
@@ -35,7 +35,7 @@ graph TD
   class modular_consolidation_EXP_001 planned;
   modular_consolidation_EXP_002["modular-consolidation<br/>EXP-002<br/><i>development-calibration-complete</i>"]
   class modular_consolidation_EXP_002 planned;
-  modular_consolidation_EXP_003["modular-consolidation<br/>EXP-003<br/><i>planned</i>"]
+  modular_consolidation_EXP_003["modular-consolidation<br/>EXP-003<br/><i>development-calibration-complete</i>"]
   class modular_consolidation_EXP_003 planned;
   modular_consolidation_EXP_100["modular-consolidation<br/>EXP-100<br/><i>planned</i>"]
   class modular_consolidation_EXP_100 planned;
@@ -90,12 +90,12 @@ Solid nodes exist in code. Dashed nodes have no repository. The red node has no 
 | `state-promotion/EXP-003` | COMMIT_INTERNAL | planned | CCS-C2 | `state-promotion/EXP-001` |
 | `state-promotion/EXP-F1` | COMMIT_INTERNAL | not-designed | CCS-C5 | `state-promotion/EXP-001` |
 | `plasticity-routing/EXP-000` | ALLOCATE | development-calibration-complete | — | — |
-| `plasticity-routing/EXP-001` | ALLOCATE | pre-result-scaffold | CCS-C4, CCS-C1, CCS-C9 | `plasticity-routing/EXP-000` |
+| `plasticity-routing/EXP-001` | ALLOCATE | protocol-frozen | CCS-C4, CCS-C1, CCS-C9 | `plasticity-routing/EXP-000` |
 | `plasticity-routing/EXP-002` | ALLOCATE | planned | CCS-C4 | `plasticity-routing/EXP-001`, `state-promotion/EXP-001` |
 | `modular-consolidation/EXP-000` | COMMIT_INTERNAL | development-calibration-complete | — | — |
 | `modular-consolidation/EXP-001` | COMMIT_INTERNAL | development-calibration-complete | CCS-C6 | `modular-consolidation/EXP-000` |
 | `modular-consolidation/EXP-002` | COMMIT_INTERNAL | development-calibration-complete | CCS-C11 | `modular-consolidation/EXP-001` |
-| `modular-consolidation/EXP-003` | COMMIT_INTERNAL | planned | CCS-C11 | `modular-consolidation/EXP-002` |
+| `modular-consolidation/EXP-003` | COMMIT_INTERNAL | development-calibration-complete | CCS-C11 | `modular-consolidation/EXP-002` |
 | `modular-consolidation/EXP-100` | COMMIT_INTERNAL | planned | CCS-C6, CCS-C11 | `modular-consolidation/EXP-003`, `plasticity-routing/EXP-001` |
 | `lifetime-integrity/EXP-000` | ACCUMULATE | pilot-complete | — | — |
 | `lifetime-integrity/EXP-A001` | ACCUMULATE | pre-result-scaffold | CCS-C7 | `lifetime-integrity/EXP-000` |
@@ -132,6 +132,18 @@ track could in principle produce the programme's first admissible result without
 `state-promotion` reading out. Both `ccs` nodes additionally require the
 [resource envelope](RESOURCE-ENVELOPE.md) to be populated before their primary
 comparison can even be stated.
+
+### The first frozen protocol — 2026-09-03
+
+`plasticity-routing/EXP-001` is the programme's first node at `protocol-frozen`:
+commit, source-tree hash, config hash and a held-out confirmatory seed set all
+pinned, with blockers cleared and the seeds unspent. Its own validator refuses a
+run that does not match the lock.
+
+A freeze is a statement about *what may be run*, not a result, so it moved no
+claim and recorded no evidence. The stage exists precisely so that a freeze can
+never be mistaken for a readout — the validator refuses to let a `protocol-frozen`
+node carry one.
 
 ### Parallelism did not remove the risk
 

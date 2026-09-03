@@ -38,6 +38,10 @@ STAGES = {
     # A development/calibration run: trained and evaluated on development seeds,
     # so mechanically informative but never admissible as evidence.
     "development-calibration-complete",
+    # Protocol locked: code hash, config hash and a held-out confirmatory seed
+    # set are pinned, and the track's validator refuses a run that does not match.
+    # A validity milestone, NOT a result -- confirmatory seeds are still unspent.
+    "protocol-frozen",
     "pilot-complete",
     "confirmatory-complete",
 }
@@ -292,6 +296,27 @@ def check_dag(dag_doc: dict, repos_doc: dict) -> None:
         # A node with a readout must say whether that readout is admissible.
         if n.get("readout") and n.get("admissible_as_evidence") is None:
             err(f"{nid}: has a readout but admissibility is unstated")
+
+        # INVARIANT -- a frozen protocol must show its lock, and must not have
+        # spent its confirmatory seeds. A freeze is a claim about provenance; if
+        # it cannot name the commit and the held-out seeds it is not a freeze.
+        if n.get("stage") == "protocol-frozen":
+            lock = n.get("protocol_lock") or {}
+            for field in ("commit", "source_tree_sha256", "confirmatory_seeds"):
+                if not lock.get(field):
+                    err(
+                        f"{nid}: stage 'protocol-frozen' requires "
+                        f"protocol_lock.{field}"
+                    )
+            if lock.get("confirmatory_seeds_executed") is not False:
+                err(
+                    f"{nid}: stage 'protocol-frozen' means confirmatory seeds are "
+                    f"held out and UNSPENT; set "
+                    f"protocol_lock.confirmatory_seeds_executed to false, or move "
+                    f"the node past this stage"
+                )
+            if n.get("readout"):
+                err(f"{nid}: a frozen protocol has no readout yet")
 
         # INVARIANT -- a development calibration or pilot cannot be admissible.
         if n.get("stage") in NON_EVIDENTIAL_STAGES and n.get("admissible_as_evidence"):

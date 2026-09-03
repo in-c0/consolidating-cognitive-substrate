@@ -61,7 +61,7 @@ honestly publishable, as each tier clears:
 The gap between row 4 and row 5 is the entire difference between "we built several
 things" and "these things constitute a substrate". Only Tier 4 evidence closes it.
 
-## Where the programme actually stands — reconciled 2026-09-02
+## Where the programme actually stands — reconciled 2026-09-03
 
 **Zero of four tiers cleared. Zero checkboxes cleared.**
 
@@ -69,14 +69,17 @@ The programme grew substantially between the first survey and this
 reconciliation, and cleared nothing:
 
 - Four repositories of five now exist; `adaptive-commitment` is the last gap.
-- **Six evidence entries are on file and none is admissible.** Every one is a
-  development calibration or an engineering pilot that its own track classifies
-  as non-evidential.
+- **Seven evidence entries are on file and none is admissible.** Every one is on
+  development seeds, and every track classifies its own output that way.
+- `plasticity-routing` has a **frozen confirmatory protocol** with unspent seeds —
+  the closest the programme has come to admissible evidence, and still not it.
+- `modular-consolidation` executed a **preregistered frozen grid** (EXP-003, 600
+  rows, 2 619 merge events, construction valid) on development seeds only.
 - `state-promotion` main is unchanged with an empty `results/`. An off-main
   small-LM pilot exists; a sibling records it as mechanically valid but
   scientifically uninterpretable, with a LoRA representation repair predeclared.
 - `plasticity-routing`'s development calibration fired K1 **against** learned
-  routing.
+  routing, and its confirmatory seeds remain unspent.
 - `modular-consolidation` records the unbounded-regime consolidation claim as
   falsified in its own track-local ledger.
 - The integration experiment still has no design and no host repository, by

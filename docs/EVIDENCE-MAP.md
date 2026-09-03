@@ -21,12 +21,12 @@ mapped to it is a claim nobody is testing, and the validator rejects it.
 | `state-promotion/EXP-003` | yes | planned | CCS-C2 | yes |
 | `state-promotion/EXP-F1` | yes | not-designed | CCS-C5 | n/a |
 | `plasticity-routing/EXP-000` | yes | development-calibration-complete | — | **no** |
-| `plasticity-routing/EXP-001` | yes | pre-result-scaffold | CCS-C4, CCS-C1, CCS-C9 | yes |
+| `plasticity-routing/EXP-001` | yes | protocol-frozen | CCS-C4, CCS-C1, CCS-C9 | yes |
 | `plasticity-routing/EXP-002` | yes | planned | CCS-C4 | yes |
 | `modular-consolidation/EXP-000` | yes | development-calibration-complete | — | **no** |
 | `modular-consolidation/EXP-001` | yes | development-calibration-complete | CCS-C6 | **no** |
 | `modular-consolidation/EXP-002` | yes | development-calibration-complete | CCS-C11 | **no** |
-| `modular-consolidation/EXP-003` | yes | planned | CCS-C11 | yes |
+| `modular-consolidation/EXP-003` | yes | development-calibration-complete | CCS-C11 | **no** |
 | `modular-consolidation/EXP-100` | yes | planned | CCS-C6, CCS-C11 | yes |
 | `lifetime-integrity/EXP-000` | yes | pilot-complete | — | **no** |
 | `lifetime-integrity/EXP-A001` | yes | pre-result-scaffold | CCS-C7 | yes |
@@ -55,8 +55,9 @@ mapped to it is a claim nobody is testing, and the validator rejects it.
 | CCS-C6 | `modular-consolidation/experiments/EXP-001-INTERFERENCE-RESULT.md` | pilot | **no** | against |
 | CCS-C7 | `lifetime-integrity/experiments/EXP-000-PILOT-RECORD.md` | pilot | **no** | mixed |
 | CCS-C11 | `modular-consolidation/experiments/EXP-002-CEILING-RESULT.md` | pilot | **no** | mixed |
+| CCS-C11 | `modular-consolidation/experiments/EXP-003-CEILING-PHASE-RESULT.md` | pilot | **no** | mixed |
 
-**6 evidence entries on file. 0 admissible.**
+**7 evidence entries on file. 0 admissible.**
 
 <!-- /GENERATED:evidence -->
 
@@ -131,6 +132,27 @@ The newer tracks brought controls strong enough to be worth generalising:
 12. **Lock the corruption/difficulty process and hash it into every manifest**
     (from `lifetime-integrity`). Rates may not be retuned after seeing which arm
     won.
+
+### Added 2026-09-03
+
+13. **A preregistered success criterion must be satisfiable by some possible
+    policy.** From `modular-consolidation`'s EXP-003: its strict reading required
+    merging to dominate *both* deny and evict on both axes, but `B-EVICT-LRU`
+    installs a fresh module on every admission and therefore maximises plasticity
+    by construction. No arm can dominate it on that axis, so the criterion could
+    never fire. **A criterion no policy can meet carries no information, and its
+    failure is not evidence against the method.** Preregistration protects against
+    post-hoc reinterpretation; it does not protect against writing an impossible
+    bar, and that failure mode is invisible until results arrive. New
+    preregistrations in this programme should demonstrate satisfiability — name a
+    hypothetical policy that would clear the bar — before the protocol is frozen.
+
+14. **A protocol freeze is a provenance claim, not a result.** From
+    `plasticity-routing`: a freeze pins a commit, a source-tree hash, a config
+    hash and a held-out seed set, and it constrains what may be run. It licenses
+    no claim whatsoever, and the umbrella records no evidence entry for one. The
+    DAG has a distinct `protocol-frozen` stage so a freeze can never be mistaken
+    for a readout, and the validator refuses to let such a node carry one.
 
 Any new sibling repository inherits all of these by default. A departure must be
 declared in that repository's own preregistration and recorded here at the next
