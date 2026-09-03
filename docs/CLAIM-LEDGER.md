@@ -42,8 +42,9 @@ Two things this vocabulary deliberately refuses to allow:
 | **CCS-C10** Gating overhead does not erase the gain | COMMIT_INTERNAL | The decision-time inference cost of evidence gating is small enough that the method retains its advantage… | `unresolved` | implemented | `state-promotion/EXP-001` |
 | **CCS-C11** Under a binding capacity ceiling, pooling beats destroying | COMMIT_INTERNAL | Under a hard capacity ceiling below the number of distinct skills, and at identical live module count,… | `unresolved` | implemented | `modular-consolidation/EXP-003`, `modular-consolidation/EXP-100` |
 | **CCS-C12** Internal and external commitment share one mechanism | COMMIT_INTERNAL + COMMIT_EXTERNAL | COMMIT_INTERNAL and COMMIT_EXTERNAL are instances of a single commitment principle: one learned mechanism,… | `conjecture` | none | `ccs/EXP-U1` |
+| **CCS-C13** Useful consolidation needs pressure AND candidate diversity | COMMIT_INTERNAL | Consolidation improves the retention-plasticity frontier only when capacity pressure coincides with enough… | `unresolved` | implemented | `modular-consolidation/CANDIDATE-DIVERSITY`, `modular-consolidation/EXP-100` |
 
-**12 claims. 0 with empirical support. 0 confirmatory.**
+**13 claims. 0 with empirical support. 0 confirmatory.**
 
 <!-- /GENERATED:claims -->
 

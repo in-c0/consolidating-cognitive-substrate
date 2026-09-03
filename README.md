@@ -89,12 +89,12 @@ they do not travel to other tracks. The umbrella honours those declarations: see
 | Status | Count |
 |---|---:|
 | `theoretical-conjecture` | 4 |
-| `unresolved` | 8 |
+| `unresolved` | 9 |
 | `pilot-supported` | 0 |
 | `confirmatory-supported` | **0** |
 | `falsified` | 0 |
 
-Seven evidence entries are on file and **none is admissible**. Three of twelve
+Eight evidence entries are on file and **none is admissible**. Three of thirteen
 claims have no runnable test: CCS-C5, CCS-C8 and CCS-C12 — the last two because
 their experiments have no host repository, deliberately. Full table:
 [docs/CLAIM-LEDGER.md](docs/CLAIM-LEDGER.md).
@@ -108,7 +108,9 @@ the original is not quietly rewritten to follow the evidence.
 that pooling beats refusing-to-admit only above a threshold in *absolute skill
 count*, and that its advantage grows as the ceiling **loosens** — the opposite of
 the claim's motivating intuition, which pointed at high pressure. The claim has
-not been rewritten; the tension is recorded on it.
+not been rewritten; the tension is recorded on it, and the successor mechanism
+was **added** as **CCS-C13** (consolidation needs pressure *and* candidate
+diversity) rather than substituted.
 
 ## The eventual synthesis paper
 

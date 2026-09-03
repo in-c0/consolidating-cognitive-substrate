@@ -116,7 +116,8 @@
       ],
       "owns_claims": [
         "CCS-C6",
-        "CCS-C11"
+        "CCS-C11",
+        "CCS-C13"
       ],
       "contributes_claims": [
         "CCS-C8"
@@ -129,13 +130,14 @@
         "Self-declared status: research/design track. No confirmatory experiment has been run and none may be frozen until design lessons from plasticity-routing are available.",
         "Its own track-local ledger records 'consolidation beats a capacity-matched fixed bank (unbounded regime)' as falsified, explained by its EXP-001 interference result. That is a development-simulator finding on a closed-form ridge learner and its own contamination rule states that results from that track are not evidence for any claim in another track.",
         "Declares no dependency in either direction with lifetime-integrity. The umbrella's earlier DAG edge from modular-consolidation to lifetime-integrity was an umbrella-side assumption and has been removed.",
-        "2026-09-03: EXP-003 EXECUTED and interpreted (commits 4fc469e, 7dca358), landing after the reconciliation brief was written. This is a readout, not the schema/reporting completion the brief anticipated. Preregistered frozen grid, 600 rows, 2619 merge events, construction VALID - but development seeds 900-907 only, so non-admissible. Recorded against CCS-C11 with direction 'mixed'. That track reports two readings of its own predeclared Pareto rule, notes that the strict reading is unsatisfiable by construction, and explicitly defers the choice to its owner; the umbrella does not resolve it."
+        "2026-09-03: EXP-003 EXECUTED and interpreted (commits 4fc469e, 7dca358), landing after the reconciliation brief was written. This is a readout, not the schema/reporting completion the brief anticipated. Preregistered frozen grid, 600 rows, 2619 merge events, construction VALID - but development seeds 900-907 only, so non-admissible. Recorded against CCS-C11 with direction 'mixed'. That track reports two readings of its own predeclared Pareto rule, notes that the strict reading is unsatisfiable by construction, and explicitly defers the choice to its owner; the umbrella does not resolve it.",
+        "2026-09-03 (later same day): owner decisions D7/D8/D9 landed while this reconciliation was running. D7 adopts the standard nondominated-frontier reading; D8 verdict SIMULATOR FRONTIER CONDITION SATISFIED; D9 keeps the architecture-paper gate CLOSED pending a real-model result. Candidate-diversity predictions predeclared for that pilot, which stays blocked on the plasticity-routing substrate export. No admissibility change: still development seeds."
       ],
       "observed": {
         "default_branch": "main",
         "visibility": "public",
-        "pushed_at": "2026-09-03T01:34:48Z",
-        "head": "7dca358",
+        "pushed_at": "2026-09-03T04:13:05Z",
+        "head": "28b2c4d",
         "results_dir_populated": true
       }
     },

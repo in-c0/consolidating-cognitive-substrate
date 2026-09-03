@@ -209,10 +209,10 @@
       "tests_claims": [
         "CCS-C11"
       ],
-      "readout": "Executed as preregistered (prereg 74dc652 committed before runner 5b6314c) over the full frozen grid: K* in {6,12,24} x ceiling/K* in {1/6,1/3,1/2,2/3,5/6}, 8 development seeds 900-907, 5 arms, 600 rows, 2619 merge events. Construction VALID; capacity identical across arms within every cell. merge - evict is strongly positive everywhere non-degenerate (+0.16 to +0.29 retention, CI excludes zero). merge - deny changes SIGN with absolute K*, not with pressure: negative at every non-degenerate ratio for K*=6, positive from ratio 1/3 upward for K*=12 and K*=24. Within a K*, merge's advantage grows as the ceiling LOOSENS, and at the tightest ratio deny wins - the opposite of the motivating expectation. Merge criterion is no longer inert: at K*>=12, ratio >=1/3 it separates from random pairing on every event-level axis (precision 0.45-0.81 vs 0.07-0.19). DEVELOPMENT SEEDS ONLY; no confirmatory seed set has been drawn.",
+      "readout": "Executed as preregistered (prereg 74dc652 committed before runner 5b6314c) over the full frozen grid: K* in {6,12,24} x ceiling/K* in {1/6,1/3,1/2,2/3,5/6}, 8 development seeds 900-907, 5 arms, 600 rows, 2619 merge events. Construction VALID; capacity identical across arms within every cell. merge - evict is strongly positive everywhere non-degenerate (+0.16 to +0.29 retention, CI excludes zero). merge - deny changes SIGN with absolute K*, not with pressure: negative at every non-degenerate ratio for K*=6, positive from ratio 1/3 upward for K*=12 and K*=24. Within a K*, merge's advantage grows as the ceiling LOOSENS, and at the tightest ratio deny wins - the opposite of the motivating expectation. Merge criterion is no longer inert: at K*>=12, ratio >=1/3 it separates from random pairing on every event-level axis (precision 0.45-0.81 vs 0.07-0.19). DEVELOPMENT SEEDS ONLY; no confirmatory seed set has been drawn. Owner verdict D8: SIMULATOR FRONTIER CONDITION SATISFIED; architecture-paper gate D9 remains CLOSED pending a real-model result. Still DEVELOPMENT_SIMULATOR on development seeds; classification unchanged.",
       "admissible_as_evidence": false,
       "gating_note": "Preregistration exists in that repository. Still a synthetic simulator; would not by itself license a real-model claim.",
-      "open_owner_decision": "That track reports two readings of its own predeclared Pareto rule and declines to choose. Reading A (strict, as literally written) requires merge to dominate deny AND evict separately: no cell qualifies, verdict OPERATING_POINT. That track notes the clause is UNSATISFIABLE BY CONSTRUCTION, because B-EVICT-LRU installs a fresh module on every admission and so maximises plasticity by definition. Reading B (standard Pareto extension against the baseline set) finds a reproducible region: merge strictly dominates deny on both axes in 8 contiguous cells, replicated at two absolute K*. Both are computed over the complete grid and reported in analysis.json. Explicitly flagged as an owner decision. The umbrella does not resolve it and does not prefer a reading."
+      "owner_decision_resolved": "RESOLVED 2026-09-03 by that track's owner decisions D7/D8/D9, after this umbrella first recorded the choice as open. D7 adopts the standard nondominated-frontier reading over the baseline set (the reading the strict clause could not express, being unsatisfiable by construction). D8 verdict: SIMULATOR FRONTIER CONDITION SATISFIED - B-MERGE strictly dominates B-DENY on both axes in 8 contiguous cells replicated at two absolute K*, and is dominated by neither baseline anywhere. D9 keeps the ARCHITECTURE-PAPER GATE CLOSED: the verdict clears only the simulator prerequisite, and a real-model result surviving capacity/storage/decision-compute accounting is still required. The umbrella records the resolution and did not influence it."
     },
     {
       "id": "modular-consolidation/EXP-100",
@@ -333,6 +333,23 @@
       "readout": null,
       "admissible_as_evidence": null,
       "gating_note": "No host repository and no design, like EXP-I1, and for the same reason: it cannot be specified until both domains have admissible mechanisms to unify. It is listed so that CCS-C12 has a mapped test and so the unification hypothesis stays visible as a claim rather than dissolving back into vocabulary. Note that it needs the resource envelope for the same reason EXP-I1 does: an internal write costs parameters and interference, an external action costs latency and consequence, and comparing them at 'matched total budget' presupposes an exchange rate that does not yet exist."
+    },
+    {
+      "id": "modular-consolidation/CANDIDATE-DIVERSITY",
+      "repo": "modular-consolidation",
+      "stage": "pre-result-scaffold",
+      "operator": "COMMIT_INTERNAL",
+      "question": "At matched adaptation capacity, does selective consolidation create a nondominated retention-plasticity operating point that denial and eviction cannot provide - and is that advantage mediated by meaningful candidate selection rather than by merging itself?",
+      "depends_on": [
+        "modular-consolidation/EXP-003",
+        "plasticity-routing/EXP-001"
+      ],
+      "tests_claims": [
+        "CCS-C13"
+      ],
+      "readout": null,
+      "admissible_as_evidence": true,
+      "gating_note": "Predeclared 2026-09-03 as prospective falsifiable predictions for the real-model pilot, committed before the instrumentation that would record the diagnostics - the same preregistration-before-runner convention used for EXP-003. The pilot itself is BLOCKED on the common substrate export from plasticity-routing (D9), so this node cannot run. It is recorded because writing the predictions before the result is what makes the EXP-003 mechanism falsifiable rather than a story fitted afterwards."
     }
   ]
 }

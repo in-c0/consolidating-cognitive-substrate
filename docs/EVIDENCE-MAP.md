@@ -34,6 +34,7 @@ mapped to it is a claim nobody is testing, and the validator rejects it.
 | `ccs/EXP-I1` | **no repo** | not-designed | CCS-C8, CCS-C1 | n/a |
 | `adaptive-commitment/EXP-A1` | **no** | planned | CCS-C1 | n/a |
 | `ccs/EXP-U1` | **no repo** | not-designed | CCS-C12 | n/a |
+| `modular-consolidation/CANDIDATE-DIVERSITY` | yes | pre-result-scaffold | CCS-C13 | yes |
 
 ### Claims with no runnable test
 
@@ -43,7 +44,7 @@ mapped to it is a claim nobody is testing, and the validator rejects it.
 | **CCS-C8** | no integration repository — deliberately undesigned |
 | **CCS-C12** | no integration repository — deliberately undesigned |
 
-**3 of 12 claims have no runnable test.**
+**3 of 13 claims have no runnable test.**
 
 ### Evidence on file
 
@@ -56,8 +57,9 @@ mapped to it is a claim nobody is testing, and the validator rejects it.
 | CCS-C7 | `lifetime-integrity/experiments/EXP-000-PILOT-RECORD.md` | pilot | **no** | mixed |
 | CCS-C11 | `modular-consolidation/experiments/EXP-002-CEILING-RESULT.md` | pilot | **no** | mixed |
 | CCS-C11 | `modular-consolidation/experiments/EXP-003-CEILING-PHASE-RESULT.md` | pilot | **no** | mixed |
+| CCS-C13 | `modular-consolidation/experiments/EXP-003-CEILING-PHASE-RESULT.md` | pilot | **no** | for |
 
-**7 evidence entries on file. 0 admissible.**
+**8 evidence entries on file. 0 admissible.**
 
 <!-- /GENERATED:evidence -->
 

@@ -51,6 +51,8 @@ graph TD
   class adaptive_commitment_EXP_A1 planned;
   ccs_EXP_U1["ccs<br/>EXP-U1<br/><i>not designed</i>"]
   class ccs_EXP_U1 undesigned;
+  modular_consolidation_CANDIDATE_DIVERSITY["modular-consolidation<br/>CANDIDATE-DIVERSITY<br/><i>pre-result</i>"]
+  class modular_consolidation_CANDIDATE_DIVERSITY active;
 
   state_promotion_EXP_000 --> state_promotion_EXP_001
   state_promotion_EXP_001 --> state_promotion_EXP_002
@@ -73,6 +75,8 @@ graph TD
   lifetime_integrity_EXP_A001 --> ccs_EXP_I1
   state_promotion_EXP_001 --> ccs_EXP_U1
   adaptive_commitment_EXP_A1 --> ccs_EXP_U1
+  modular_consolidation_EXP_003 --> modular_consolidation_CANDIDATE_DIVERSITY
+  plasticity_routing_EXP_001 --> modular_consolidation_CANDIDATE_DIVERSITY
 
   classDef active fill:#1f6feb,stroke:#1f6feb,color:#fff;
   classDef pilot fill:#8b5cf6,stroke:#8b5cf6,color:#fff;
@@ -103,6 +107,7 @@ Solid nodes exist in code. Dashed nodes have no repository. The red node has no 
 | `ccs/EXP-I1` | ALL | not-designed | CCS-C8, CCS-C1 | `state-promotion/EXP-001`, `plasticity-routing/EXP-001`, `adaptive-commitment/EXP-A1`, `modular-consolidation/EXP-100`, `lifetime-integrity/EXP-A001` |
 | `adaptive-commitment/EXP-A1` | COMMIT_EXTERNAL | planned | CCS-C1 | — |
 | `ccs/EXP-U1` | COMMIT_INTERNAL + COMMIT_EXTERNAL | not-designed | CCS-C12 | `state-promotion/EXP-001`, `adaptive-commitment/EXP-A1` |
+| `modular-consolidation/CANDIDATE-DIVERSITY` | COMMIT_INTERNAL | pre-result-scaffold | CCS-C13 | `modular-consolidation/EXP-003`, `plasticity-routing/EXP-001` |
 
 <!-- /GENERATED:dag -->
 
