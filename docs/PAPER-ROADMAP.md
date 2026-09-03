@@ -75,11 +75,39 @@ in progress.
   field's evaluation practice rather than a critique. It is the one paper on this
   roadmap that does not depend on the CCS conjecture being correct.
 
-## P6 — Adaptive commitment paper
+## P6 — External commitment paper
 
 - **Host:** `adaptive-commitment` *(repository not created)*
-- **Requires:** Tier 1, and only worth running if CCS-C2 survives
+- **Requires:** its own literature audit and preregistration first
 - **Status:** not writable, not designed, no repository
+- **May claim:** whether a policy over `WAIT` / `THINK` / `ASK` / `RESPOND` /
+  `ACT` beats fixed or threshold-based release timing, under a stated exchange
+  rate between accuracy, latency, intervention cost and consequence
+- **Scope corrected 2026-09-03:** this paper was previously listed as being about
+  adaptive *consolidation* thresholds. It is not. That idea survives as a
+  `state-promotion` follow-on (CCS-C5) and must not be cited as this track's
+  motivation.
+- **Not gated on P1.** COMMIT_EXTERNAL was deliberately scoped as a separate
+  domain, so unlike P3–P5 this paper does not wait on `state-promotion/EXP-001`.
+  It is the one component paper that could, in principle, be written first.
+- **The hard part is the objective, not the policy.** Trading a wrong answer
+  against a slow one against an unnecessary question requires an exchange rate
+  between quantities borne by different parties. That is open problem OP-1 in
+  [RESOURCE-ENVELOPE.md](RESOURCE-ENVELOPE.md), and it is prior to any result.
+
+## P6b — Unification paper *(conditional, hypothetical)*
+
+- **Host:** none. `ccs/EXP-U1` has no repository and no design.
+- **Requires:** admissible mechanisms in **both** commitment domains, plus a
+  resolved exchange rate between their cost structures
+- **Status:** not writable. CCS-C12 is a `theoretical-conjecture` with zero
+  implementation — no track implements both domains, so no track can test it.
+- **May claim:** that one learned mechanism governs both COMMIT_INTERNAL and
+  COMMIT_EXTERNAL at least as well as two specialised ones
+- **Note:** this paper exists on the roadmap only because the programme's old
+  vocabulary asserted its conclusion for free. Making it a claim made it a paper
+  that has to be earned. It may well be unwritable: if the two cost structures
+  are incommensurable, the comparison cannot be posed at all.
 
 ## P7 — Synthesis paper
 
@@ -91,8 +119,9 @@ in progress.
 - **Status:** **not writable, and not close.** Zero tiers cleared.
 - **May claim:** only what the component papers established, plus a measured
   composition effect
-- **May not claim:** that ACCUMULATE → ALLOCATE → COMMIT is a discovered structure
-  rather than an organising conjecture that survived testing
+- **May not claim:** that ACCUMULATE → ALLOCATE → COMMIT_INTERNAL is a discovered
+  structure rather than an organising conjecture that survived testing; nor that
+  the two commitment domains are unified, unless CCS-C12 was actually tested
 
 **The title is recorded here as an intention. Its Results section does not exist,
 will not be drafted speculatively, and is not a placeholder.** If the programme

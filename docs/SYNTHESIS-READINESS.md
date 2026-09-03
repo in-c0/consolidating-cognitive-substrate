@@ -29,7 +29,7 @@ to be filled in.
 
 ### Tier 3 — the decomposition is real (required, none cleared)
 
-- [ ] At least one experiment establishing ALLOCATE as separable from COMMIT
+- [ ] At least one experiment establishing ALLOCATE as separable from COMMIT_INTERNAL
       (`plasticity-routing/EXP-001` — preregistered, not read out)
 - [ ] At least one long-horizon result on lifetime coherence
       (`lifetime-integrity/EXP-A001` — preregistered, not read out)

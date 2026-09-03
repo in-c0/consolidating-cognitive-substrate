@@ -45,6 +45,20 @@ STAGES = {
 NON_EVIDENTIAL_STAGES = {"development-calibration-complete", "pilot-complete"}
 EXISTENCE = {"exists", "planned", "archived"}
 
+# Operator vocabulary. Bare "COMMIT" was retired on 2026-09-03: it silently meant
+# both "make state durable" and "release an outward response", which presupposed
+# CCS-C12 rather than testing it.
+OPERATORS = {
+    "ACCUMULATE",
+    "ALLOCATE",
+    "COMMIT_INTERNAL",
+    "COMMIT_EXTERNAL",
+    "COMMIT_INTERNAL + COMMIT_EXTERNAL",
+    "cross-operator",
+    "ALL",
+}
+RETIRED_OPERATORS = {"COMMIT"}
+
 errors: list[str] = []
 warnings: list[str] = []
 
@@ -160,6 +174,87 @@ def check_claims(claims_doc: dict, dag_doc: dict, repos_doc: dict) -> None:
             )
 
 
+def check_envelope(env_doc: dict, repos_doc: dict, dag_doc: dict) -> None:
+    """The common integration reporting envelope.
+
+    This does not require every dimension to be mapped -- most tracks legitimately
+    have no such resource. It requires that the gaps are DECLARED, so that
+    "matched total budget" cannot be asserted over an unpopulated schema.
+    """
+    dims = {d["id"] for d in env_doc.get("dimensions", [])}
+    if not dims:
+        err("resource_envelope.json: no dimensions defined")
+        return
+    for dim in env_doc["dimensions"]:
+        if "additive" not in dim:
+            err(f"envelope dimension {dim['id']}: must state whether it is additive")
+        if dim.get("additive") is False and not dim.get("additive_note"):
+            err(
+                f"envelope dimension {dim['id']}: non-additive dimensions must say "
+                f"why, so an integration total cannot quietly sum them"
+            )
+
+    mappings = env_doc.get("track_mappings", {})
+    node_ids = {n["id"] for n in dag_doc.get("nodes", [])}
+
+    for repo in repos_doc.get("repos", []):
+        rid = repo["id"]
+        if rid not in mappings:
+            err(
+                f"{rid}: no resource-envelope mapping. Every programme repository "
+                f"needs one, even if every dimension is unmapped."
+            )
+            continue
+        m = mappings[rid]
+        if "native_unit" not in m:
+            err(f"{rid}: envelope mapping must record the track's native unit")
+        for key in ("mapped", "unmapped", "incommensurable"):
+            if key not in m:
+                err(f"{rid}: envelope mapping missing {key!r}")
+        for d in m.get("mapped", {}):
+            if d not in dims:
+                err(f"{rid}: mapped unknown envelope dimension {d!r}")
+        for d in list(m.get("unmapped", [])) + list(m.get("incommensurable", [])):
+            if d not in dims and d != "ALL":
+                err(f"{rid}: references unknown envelope dimension {d!r}")
+
+        # Every dimension must be classified exactly once. An undeclared
+        # dimension is an unexamined one, and reads as a gap in the table.
+        if "ALL" not in m.get("unmapped", []):
+            declared = (
+                set(m.get("mapped", {}))
+                | set(m.get("unmapped", []))
+                | set(m.get("incommensurable", []))
+            )
+            for d in sorted(dims - declared):
+                err(
+                    f"{rid}: envelope dimension {d!r} is undeclared; classify it as "
+                    f"mapped, unmapped or incommensurable"
+                )
+            for d in sorted(set(m.get("mapped", {})) & set(m.get("unmapped", []))):
+                err(f"{rid}: envelope dimension {d!r} is both mapped and unmapped")
+
+    # An unresolved incommensurability blocks integration. Enforce it rather than
+    # leaving it as prose.
+    blocked = [
+        rid for rid, m in mappings.items() if m.get("incommensurable")
+    ]
+    for nid in ("ccs/EXP-I1", "ccs/EXP-U1"):
+        node = next((n for n in dag_doc.get("nodes", []) if n["id"] == nid), None)
+        if node is None:
+            continue
+        if blocked and node.get("stage") != "not-designed":
+            err(
+                f"{nid}: stage is {node['stage']!r}, but the resource envelope has "
+                f"unresolved incommensurable dimensions in {sorted(blocked)}. "
+                f"'Matched total budget' is undefined until those are resolved."
+            )
+    for op in env_doc.get("open_problems", []):
+        for nid in op.get("blocks", []):
+            if nid not in node_ids:
+                err(f"envelope open problem {op['id']}: blocks unknown node {nid!r}")
+
+
 def check_dag(dag_doc: dict, repos_doc: dict) -> None:
     nodes = dag_doc.get("nodes", [])
     ids = {n["id"] for n in nodes}
@@ -172,6 +267,16 @@ def check_dag(dag_doc: dict, repos_doc: dict) -> None:
         nid = n.get("id", "<no id>")
         if n.get("stage") not in STAGES:
             err(f"{nid}: stage {n.get('stage')!r} not in {sorted(STAGES)}")
+        op = n.get("operator")
+        if op in RETIRED_OPERATORS:
+            err(
+                f"{nid}: operator {op!r} was retired on 2026-09-03. Use "
+                f"COMMIT_INTERNAL (durable state write) or COMMIT_EXTERNAL "
+                f"(outward response/action); they are not assumed to be the same "
+                f"mechanism -- see CCS-C12."
+            )
+        elif op not in OPERATORS:
+            err(f"{nid}: operator {op!r} not in {sorted(OPERATORS)}")
         if n.get("repo") not in repo_ids:
             err(f"{nid}: unknown repo {n.get('repo')!r}")
         if not n.get("question"):
@@ -261,16 +366,55 @@ def check_prose() -> None:
                 )
 
 
+def check_links() -> None:
+    """Internal Markdown links and heading anchors.
+
+    Renaming a heading silently breaks every link into it, and this repository
+    cross-references heavily by design. Folded into the gate on 2026-09-03 after
+    exactly that happened.
+    """
+    def slug(heading: str) -> str:
+        return re.sub(r"[^a-z0-9 -]", "", heading.lower()).replace(" ", "-")
+
+    for md in sorted(ROOT.rglob("*.md")):
+        if ".git" in md.parts:
+            continue
+        text = md.read_text(errors="ignore")
+        for m in re.finditer(r"\[[^\]]*\]\(([^)]+)\)", text):
+            target = m.group(1)
+            if target.startswith(("http://", "https://", "mailto:")):
+                continue
+            path_part, _, anchor = target.partition("#")
+            line = text[: m.start()].count("\n") + 1
+            if not path_part:
+                continue
+            dest = (md.parent / path_part).resolve()
+            rel = md.relative_to(ROOT)
+            if not dest.exists():
+                err(f"{rel}:{line}: broken link {target!r}")
+                continue
+            if anchor and dest.suffix == ".md":
+                heads = {
+                    slug(h)
+                    for h in re.findall(r"^#+ (.+)$", dest.read_text(errors="ignore"), re.M)
+                }
+                if anchor not in heads:
+                    err(f"{rel}:{line}: link {target!r} has no matching heading")
+
+
 def main() -> int:
     claims_doc = load("claims.json")
     repos_doc = load("repos.json")
     dag_doc = load("dag.json")
+    env_doc = load("resource_envelope.json")
 
     if not errors:
         check_repos(repos_doc)
         check_dag(dag_doc, repos_doc)
         check_claims(claims_doc, dag_doc, repos_doc)
+        check_envelope(env_doc, repos_doc, dag_doc)
         check_prose()
+        check_links()
 
     for w in warnings:
         print(f"WARN  {w}")

@@ -46,16 +46,16 @@ def splice(path: pathlib.Path, key: str, body: str) -> None:
 
 def render_claims(claims: dict, dag: dict) -> str:
     rows = [
-        "| Claim | Statement (abbreviated) | Status | Implementation | Tested by |",
-        "|---|---|---|---|---|",
+        "| Claim | Domain | Statement (abbreviated) | Status | Implementation | Tested by |",
+        "|---|---|---|---|---|---|",
     ]
     for c in claims["claims"]:
         stmt = c["statement"]
         stmt = stmt if len(stmt) <= 110 else stmt[:107].rsplit(" ", 1)[0] + "…"
         tests = ", ".join(f"`{s}`" for s in c["supported_by"]) or "—"
         rows.append(
-            f"| **{c['id']}** {c['title']} | {stmt} | `{STATUS_MARK[c['status']]}` "
-            f"| {c['implementation']} | {tests} |"
+            f"| **{c['id']}** {c['title']} | {c.get('domain', '—')} | {stmt} "
+            f"| `{STATUS_MARK[c['status']]}` | {c['implementation']} | {tests} |"
         )
     counts: dict[str, int] = {}
     for c in claims["claims"]:
@@ -186,10 +186,70 @@ def render_evidence(claims: dict, dag: dict, repos: dict) -> str:
     return "\n".join(lines)
 
 
+def render_envelope(env: dict, repos: dict) -> str:
+    """Coverage matrix for the common integration reporting envelope."""
+    dims = env["dimensions"]
+    tracks = [r["id"] for r in repos["repos"]]
+    maps = env["track_mappings"]
+
+    head = "| Dimension | Additive | " + " | ".join(
+        t.replace("-", "&#8209;") for t in tracks
+    ) + " |"
+    lines = [head, "|---|---|" + "---|" * len(tracks)]
+    for d in dims:
+        cells = []
+        for tr in tracks:
+            m = maps.get(tr, {})
+            if d["id"] in m.get("incommensurable", []):
+                cells.append("**INCOMM**")
+            elif d["id"] in m.get("mapped", {}):
+                cells.append("mapped")
+            elif "ALL" in m.get("unmapped", []):
+                cells.append("—")
+            elif d["id"] in m.get("unmapped", []):
+                cells.append("—")
+            else:
+                cells.append("?")
+        lines.append(
+            f"| `{d['id']}` | {'yes' if d['additive'] else '**no**'} | "
+            + " | ".join(cells) + " |"
+        )
+
+    total = len(dims) * len(tracks)
+    mapped = sum(
+        1 for d in dims for tr in tracks if d["id"] in maps.get(tr, {}).get("mapped", {})
+    )
+    incomm = sum(
+        1 for d in dims for tr in tracks
+        if d["id"] in maps.get(tr, {}).get("incommensurable", [])
+    )
+    lines += [
+        "",
+        "`mapped` = expressible in the common unit. `—` = the track has no such "
+        "resource. `**INCOMM**` = the resource exists but has no non-arbitrary "
+        "common unit, which **blocks integration**.",
+        "",
+        f"**{mapped} of {total} track/dimension cells mapped. "
+        f"{incomm} incommensurable.**",
+        "",
+        "### Open problems",
+        "",
+        "| ID | Problem | Blocks |",
+        "|---|---|---|",
+    ]
+    for op in env["open_problems"]:
+        lines.append(
+            f"| **{op['id']}** | {op['title']} | "
+            + ", ".join(f"`{b}`" for b in op["blocks"]) + " |"
+        )
+    return "\n".join(lines)
+
+
 def main() -> int:
     claims = json.loads((LEDGER / "claims.json").read_text())
     dag = json.loads((LEDGER / "dag.json").read_text())
     repos = json.loads((LEDGER / "repos.json").read_text())
+    env = json.loads((LEDGER / "resource_envelope.json").read_text())
     splice(ROOT / "docs" / "CLAIM-LEDGER.md", "claims", render_claims(claims, dag))
     splice(ROOT / "docs" / "DEPENDENCY-DAG.md", "dag", render_dag(dag, repos))
     splice(
@@ -197,8 +257,10 @@ def main() -> int:
         "evidence",
         render_evidence(claims, dag, repos),
     )
+    splice(ROOT / "docs" / "RESOURCE-ENVELOPE.md", "envelope", render_envelope(env, repos))
     print(
-        "rendered docs/CLAIM-LEDGER.md, docs/DEPENDENCY-DAG.md, docs/EVIDENCE-MAP.md"
+        "rendered docs/CLAIM-LEDGER.md, docs/DEPENDENCY-DAG.md, "
+        "docs/EVIDENCE-MAP.md, docs/RESOURCE-ENVELOPE.md"
     )
     return 0
 

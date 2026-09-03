@@ -37,8 +37,8 @@ kept inspectable. The programme does not treat replay as a memory *level* — it
 evidence storage that other components consult.
 
 ### Promotion gate
-Decides whether fast-state learning is committed to slow parameters, using only
-already-observed training and replay evidence. Never held-out labels: this is
+**COMMIT_INTERNAL.** Decides whether fast-state learning is committed to slow
+parameters, using only already-observed training and replay evidence. Never held-out labels: this is
 enforced in `state-promotion` by a machine-checkable
 `heldout_gate_example_count` that must be zero.
 
@@ -97,13 +97,50 @@ without an admissible substrate from `state-promotion`.
 These are named so the DAG can reference them. Naming a component is not
 designing it.
 
-### Commit policy — `adaptive-commitment` *(the only uncreated sibling)*
-Would make the commit threshold a function of observed stream statistics rather
-than a frozen constant. Owns **CCS-C5**.
+### External commitment policy — `adaptive-commitment` *(the only uncreated sibling)*
 
-Constraint inherited from programme methodology: the policy may not consume
-held-out or task-identity signal. An adaptive threshold that peeks is not a
-weaker result, it is an inadmissible one.
+**Role corrected 2026-09-03.** This component was previously described here as an
+adaptive *consolidation threshold* — a refinement of `state-promotion`. That was
+wrong, and it was the umbrella's error rather than the track's: it followed from
+using one word, COMMIT, for two operators.
+
+Would own **COMMIT_EXTERNAL**: deciding when cognition is released outward under
+streaming evidence — `WAIT`, `THINK`, `ASK`, `RESPOND`, `ACT` — trading accuracy
+against latency, compute, intervention cost, uncertainty, and
+consequence/reversibility.
+
+**Owns no CCS claim yet, by owner decision.** A programme claim for behavioural
+commitment timing is to be written only after that track's own literature audit
+and preregistration define its exact falsifiable form. Writing one now would be
+inventing a hypothesis on its behalf, which is the same error in the opposite
+direction.
+
+Two constraints it will inherit and one it will not:
+
+- Inherited: no held-out or task-identity signal in a decision path.
+- Inherited: decision-time compute counted separately — the cost of deciding
+  whether to speak is part of the method, not overhead to be hidden.
+- **Not** inherited: this track is *not* blocked on `state-promotion/EXP-001`. It
+  was deliberately scoped as a separate domain, and the previous dependency edge
+  has been removed.
+
+Its two native costs — latency borne by an interlocutor, and the consequence of an
+irreversible action — have no counterpart in any other track. See
+[RESOURCE-ENVELOPE.md](RESOURCE-ENVELOPE.md).
+
+## Commitment domains
+
+Two components in this file make commitment decisions, and they are **not
+assumed to share a mechanism**:
+
+| Component | Domain | Track | Decides |
+|---|---|---|---|
+| Promotion gate | COMMIT_INTERNAL | `state-promotion` | whether state becomes durable |
+| External commitment policy | COMMIT_EXTERNAL | `adaptive-commitment` | whether cognition is released outward |
+
+Whether one learned mechanism can govern both is
+[CCS-C12](CLAIM-LEDGER.md) — a claim with a low prior and four falsifiers, not a
+naming convention.
 
 ## Ownership rule
 

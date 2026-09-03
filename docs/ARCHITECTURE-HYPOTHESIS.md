@@ -21,10 +21,24 @@ problems that are usually collapsed into one. The conjecture is that they are
               (which store, which module)
                             |
                             v
-                         COMMIT
-        decide WHETHER and WHEN a change becomes
-           durable, and be able to undo it
+                    COMMIT_INTERNAL
+        decide WHETHER and WHEN a change to durable
+        state is made, and be able to undo it
+
+
+        ————— a separate commitment domain —————
+
+                    COMMIT_EXTERNAL
+        decide WHETHER and WHEN cognition is released
+        outward:  WAIT / THINK / ASK / RESPOND / ACT
 ```
+
+**The two commitment domains are drawn apart deliberately.** Until 2026-09-03
+this diagram had one box labelled COMMIT, which quietly asserted that making
+state durable and releasing an utterance are the same decision. They may be —
+that is [CCS-C12](CLAIM-LEDGER.md) — but the programme is not entitled to assume
+it in a diagram. Where COMMIT_EXTERNAL attaches to the state pipeline, or whether
+it runs alongside it, is unresolved.
 
 Each operator runs at its own characteristic timescale, and state persists at
 several timescales simultaneously.
@@ -35,9 +49,9 @@ The diagram above is drawn as a pipeline because pipelines are easy to read. The
 programme does not assume the pipeline is real. Three specific ways it may be
 wrong, each of which a component experiment is meant to expose:
 
-1. **ALLOCATE may not be separable from COMMIT.** If every allocation policy can
-   be reduced to "commit more often" or "commit less often", the decomposition is
-   two operators wearing three hats. This is [CCS-C4](CLAIM-LEDGER.md)'s falsifier,
+1. **ALLOCATE may not be separable from COMMIT_INTERNAL.** If every allocation
+   policy can be reduced to "commit more often" or "commit less often", the
+   decomposition is two operators wearing three hats. This is [CCS-C4](CLAIM-LEDGER.md)'s falsifier,
    and it is the failure mode the programme should expect to find first.
    `plasticity-routing` has built the control that would expose it — a
    budget-matched random allocator with nearly the same action mix — and its
@@ -50,6 +64,12 @@ wrong, each of which a component experiment is meant to expose:
 3. **ACCUMULATE may be doing no work.** If a bounded replay reservoir is enough,
    then "accumulation" is a rebranding of replay, and the operator should be
    dropped rather than defended.
+
+   Worse: ACCUMULATE may not be *one* operator. This repository has read it as
+   "retain candidate experience"; `plasticity-routing` reads it as "continue
+   gathering / thinking", which is behavioural and belongs nearer
+   COMMIT_EXTERNAL. The same split that COMMIT needed may be latent here. It has
+   not been made, because no track has operationalised either reading.
 
 ## State timescales
 

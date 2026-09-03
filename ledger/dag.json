@@ -6,7 +6,8 @@
     "depends on their outcome.",
     "'ccs_claim_gate' is separate: work may proceed, but the named condition must",
     "hold before the node's results can license a CCS-level claim.",
-    "Stages are observed from the sibling repositories, not assigned from here."
+    "Stages are observed from the sibling repositories, not assigned from here.",
+    "'operator' uses COMMIT_INTERNAL / COMMIT_EXTERNAL as of 2026-09-03. Bare COMMIT is no longer a valid operator value."
   ],
   "schema_version": 1,
   "nodes": [
@@ -14,7 +15,7 @@
       "id": "state-promotion/EXP-000",
       "repo": "state-promotion",
       "stage": "pilot-complete",
-      "operator": "COMMIT",
+      "operator": "COMMIT_INTERNAL",
       "question": "Does the harness correctly compute retention matrices, forgetting, rollback and write accounting?",
       "depends_on": [],
       "tests_claims": [],
@@ -25,10 +26,17 @@
       "id": "state-promotion/EXP-001",
       "repo": "state-promotion",
       "stage": "pre-result-scaffold",
-      "operator": "COMMIT",
+      "operator": "COMMIT_INTERNAL",
       "question": "Under matched budgets, does evidence-gated promotion across timescales improve the stability-plasticity trade-off for a frozen 0.5B language model?",
-      "depends_on": ["state-promotion/EXP-000"],
-      "tests_claims": ["CCS-C2", "CCS-C3", "CCS-C9", "CCS-C10"],
+      "depends_on": [
+        "state-promotion/EXP-000"
+      ],
+      "tests_claims": [
+        "CCS-C2",
+        "CCS-C3",
+        "CCS-C9",
+        "CCS-C10"
+      ],
       "readout": null,
       "admissible_as_evidence": true,
       "gating_note": "Still the programme's load-bearing node. main is unchanged at 3495d49 with an empty results/. Off-main branches carry an LM pilot that a sibling records as mechanically valid but scientifically uninterpretable (soft-prefix plastic representation underlearned), plus a predeclared LoRA representation-sufficiency repair and an Amendment F. None of that is merged and none of it is admissible."
@@ -37,10 +45,14 @@
       "id": "state-promotion/EXP-002",
       "repo": "state-promotion",
       "stage": "planned",
-      "operator": "COMMIT",
+      "operator": "COMMIT_INTERNAL",
       "question": "Does the EXP-001 effect survive on established continual-learning benchmarks (CITB / TRACE)?",
-      "depends_on": ["state-promotion/EXP-001"],
-      "tests_claims": ["CCS-C2"],
+      "depends_on": [
+        "state-promotion/EXP-001"
+      ],
+      "tests_claims": [
+        "CCS-C2"
+      ],
       "readout": null,
       "admissible_as_evidence": true,
       "gating_note": "Mandatory before any broad continual-learning claim, per the EXP-001 preregistration."
@@ -49,15 +61,34 @@
       "id": "state-promotion/EXP-003",
       "repo": "state-promotion",
       "stage": "planned",
-      "operator": "COMMIT",
+      "operator": "COMMIT_INTERNAL",
       "question": "Does the strongest preregistered comparison replicate at ~7B?",
-      "depends_on": ["state-promotion/EXP-001"],
-      "tests_claims": ["CCS-C2"],
+      "depends_on": [
+        "state-promotion/EXP-001"
+      ],
+      "tests_claims": [
+        "CCS-C2"
+      ],
       "readout": null,
       "admissible_as_evidence": true,
       "gating_note": "Scale replication only. Does not substitute for small-model ablations."
     },
-
+    {
+      "id": "state-promotion/EXP-F1",
+      "repo": "state-promotion",
+      "stage": "not-designed",
+      "operator": "COMMIT_INTERNAL",
+      "question": "Does a consolidation threshold that adapts to observed stream statistics beat a threshold tuned once on development seeds, without using held-out signal?",
+      "depends_on": [
+        "state-promotion/EXP-001"
+      ],
+      "tests_claims": [
+        "CCS-C5"
+      ],
+      "readout": null,
+      "admissible_as_evidence": null,
+      "gating_note": "UMBRELLA-SIDE CANDIDATE, NOT THAT TRACK'S ROADMAP. state-promotion has not adopted an adaptive-threshold follow-on into its plan of record, and this node must not be read as though it had. It exists so that CCS-C5 - re-scoped on 2026-09-03 from adaptive-commitment to a COMMIT_INTERNAL follow-on - retains a mapped experiment rather than floating untestable. If that track declines it, the correct action is to retire CCS-C5, not to reassign it again."
+    },
     {
       "id": "plasticity-routing/EXP-000",
       "repo": "plasticity-routing",
@@ -75,8 +106,14 @@
       "stage": "pre-result-scaffold",
       "operator": "ALLOCATE",
       "question": "Can a policy learn from delayed future task utility, under a unified resource budget, to allocate experience across substrates of differing persistence - and is any gain attributable to routing rather than capacity, compute, or privileged task identity?",
-      "depends_on": ["plasticity-routing/EXP-000"],
-      "tests_claims": ["CCS-C4", "CCS-C1", "CCS-C9"],
+      "depends_on": [
+        "plasticity-routing/EXP-000"
+      ],
+      "tests_claims": [
+        "CCS-C4",
+        "CCS-C1",
+        "CCS-C9"
+      ],
       "readout": null,
       "admissible_as_evidence": true,
       "gating_note": "Confirmatory synthetic on five held-out seeds. Not blocked by state-promotion because it is synthetic. The track sets a deliberately low prior on the learned router beating the calibrated fixed heuristic, and a negative replication of Yoon (2026) is a preregistered publishable outcome."
@@ -87,18 +124,22 @@
       "stage": "planned",
       "operator": "ALLOCATE",
       "question": "Does the allocation result transfer to a language model?",
-      "depends_on": ["plasticity-routing/EXP-001", "state-promotion/EXP-001"],
-      "tests_claims": ["CCS-C4"],
+      "depends_on": [
+        "plasticity-routing/EXP-001",
+        "state-promotion/EXP-001"
+      ],
+      "tests_claims": [
+        "CCS-C4"
+      ],
       "readout": null,
       "admissible_as_evidence": true,
       "gating_note": "Declared BLOCKED by that track until the first mechanically valid state-promotion engineering pilot has been reviewed, so that shared two-timescale defects are not baked in."
     },
-
     {
       "id": "modular-consolidation/EXP-000",
       "repo": "modular-consolidation",
       "stage": "development-calibration-complete",
-      "operator": "COMMIT",
+      "operator": "COMMIT_INTERNAL",
       "question": "Does a full module lifecycle beat a fixed bank of its own final size at identical capacity?",
       "depends_on": [],
       "tests_claims": [],
@@ -109,10 +150,14 @@
       "id": "modular-consolidation/EXP-001",
       "repo": "modular-consolidation",
       "stage": "development-calibration-complete",
-      "operator": "COMMIT",
+      "operator": "COMMIT_INTERNAL",
       "question": "Is there an interior optimum in retention versus module capacity?",
-      "depends_on": ["modular-consolidation/EXP-000"],
-      "tests_claims": ["CCS-C6"],
+      "depends_on": [
+        "modular-consolidation/EXP-000"
+      ],
+      "tests_claims": [
+        "CCS-C6"
+      ],
       "readout": "Development simulator on a closed-form ridge learner. Retention versus capacity is monotone non-decreasing under any competent routing, across three independent mechanisms. Consequence drawn by that track: in the unbounded regime at matched capacity, consolidation has nothing to fix, and its only possible benefit is compression rather than forgetting. Not evidence about real models.",
       "admissible_as_evidence": false
     },
@@ -120,10 +165,14 @@
       "id": "modular-consolidation/EXP-002",
       "repo": "modular-consolidation",
       "stage": "development-calibration-complete",
-      "operator": "COMMIT",
+      "operator": "COMMIT_INTERNAL",
       "question": "Under a hard capacity ceiling below the number of distinct skills, does freeing a slot by pooling retain more than freeing it by destroying or by refusing to admit?",
-      "depends_on": ["modular-consolidation/EXP-001"],
-      "tests_claims": ["CCS-C11"],
+      "depends_on": [
+        "modular-consolidation/EXP-001"
+      ],
+      "tests_claims": [
+        "CCS-C11"
+      ],
       "readout": "Development simulator, ceiling 3 with K*=6, 8 paired seeds at identical live-module count, parameters and storage. merge - evict = +0.204 retention, CI [+0.125,+0.296]. merge - deny = -0.017, CI spans zero, concealing plasticity +0.023 and forgetting +0.039 with CIs excluding zero. merge - random-merge = +0.009, CI spans zero. Not evidence about real models.",
       "admissible_as_evidence": false
     },
@@ -131,10 +180,14 @@
       "id": "modular-consolidation/EXP-003",
       "repo": "modular-consolidation",
       "stage": "planned",
-      "operator": "COMMIT",
+      "operator": "COMMIT_INTERNAL",
       "question": "Does the binding-ceiling effect hold across ceiling phases under a frozen protocol?",
-      "depends_on": ["modular-consolidation/EXP-002"],
-      "tests_claims": ["CCS-C11"],
+      "depends_on": [
+        "modular-consolidation/EXP-002"
+      ],
+      "tests_claims": [
+        "CCS-C11"
+      ],
       "readout": null,
       "admissible_as_evidence": true,
       "gating_note": "Preregistration exists in that repository. Still a synthetic simulator; would not by itself license a real-model claim."
@@ -143,15 +196,20 @@
       "id": "modular-consolidation/EXP-100",
       "repo": "modular-consolidation",
       "stage": "planned",
-      "operator": "COMMIT",
+      "operator": "COMMIT_INTERNAL",
       "question": "Do published modular continual-learning gains survive a budget-matched six-factor attribution lattice on real models?",
-      "depends_on": ["modular-consolidation/EXP-003", "plasticity-routing/EXP-001"],
-      "tests_claims": ["CCS-C6", "CCS-C11"],
+      "depends_on": [
+        "modular-consolidation/EXP-003",
+        "plasticity-routing/EXP-001"
+      ],
+      "tests_claims": [
+        "CCS-C6",
+        "CCS-C11"
+      ],
       "readout": null,
       "admissible_as_evidence": true,
       "gating_note": "Preregistration is an explicit DRAFT and NOT FROZEN. Blocked until plasticity-routing freezes or exports the shared LM backbone, adapter family/rank, training budget and routing substrate. That track states the removal of its own upstream blocker is not equivalent to that substrate having been selected."
     },
-
     {
       "id": "lifetime-integrity/EXP-000",
       "repo": "lifetime-integrity",
@@ -169,8 +227,12 @@
       "stage": "pre-result-scaffold",
       "operator": "ACCUMULATE",
       "question": "Does persistent state gradually depart from the evidence supposed to support it, and what does re-grounding cost at a matched ceiling?",
-      "depends_on": ["lifetime-integrity/EXP-000"],
-      "tests_claims": ["CCS-C7"],
+      "depends_on": [
+        "lifetime-integrity/EXP-000"
+      ],
+      "tests_claims": [
+        "CCS-C7"
+      ],
       "readout": null,
       "admissible_as_evidence": true,
       "ccs_claim_gate": "state-promotion must establish an admissible substrate before any result here can license a CCS latent-architecture claim. That track declares itself architecture-agnostic and forbids such use of its results.",
@@ -182,37 +244,73 @@
       "stage": "pre-result-scaffold",
       "operator": "ACCUMULATE",
       "question": "When a late failure indicates one of several beliefs was wrong without saying which, can offline consolidation repair the culprit without corrupting the others?",
-      "depends_on": ["lifetime-integrity/EXP-000"],
-      "tests_claims": ["CCS-C7"],
+      "depends_on": [
+        "lifetime-integrity/EXP-000"
+      ],
+      "tests_claims": [
+        "CCS-C7"
+      ],
       "readout": null,
       "admissible_as_evidence": true,
       "ccs_claim_gate": "Same substrate gate as EXP-A001.",
       "gating_note": "Five credit-assignment rules share one belief substrate so the rule is the only variable."
     },
-
     {
       "id": "ccs/EXP-I1",
       "repo": "ccs",
       "stage": "not-designed",
       "operator": "ALL",
       "question": "Does an integrated ACCUMULATE + ALLOCATE + COMMIT system beat the best single component under matched total budget?",
-      "depends_on": ["state-promotion/EXP-001", "plasticity-routing/EXP-001", "adaptive-commitment/EXP-A1", "modular-consolidation/EXP-100", "lifetime-integrity/EXP-A001"],
-      "tests_claims": ["CCS-C8", "CCS-C1"],
+      "depends_on": [
+        "state-promotion/EXP-001",
+        "plasticity-routing/EXP-001",
+        "adaptive-commitment/EXP-A1",
+        "modular-consolidation/EXP-100",
+        "lifetime-integrity/EXP-A001"
+      ],
+      "tests_claims": [
+        "CCS-C8",
+        "CCS-C1"
+      ],
       "readout": null,
       "admissible_as_evidence": null,
-      "gating_note": "Deliberately left unresolved and undesigned. No host repository, and none is to be created yet: a dedicated integration repository becomes justified only once enough component mechanisms have admissible evidence to specify a non-arbitrary composition test. Designing it now would bake unsupported component choices into the synthesis programme. Its edges point at the confirmatory nodes it would need, not at the development calibrations that currently exist."
+      "gating_note": "Deliberately left unresolved and undesigned. No host repository, and none is to be created yet: a dedicated integration repository becomes justified only once enough component mechanisms have admissible evidence to specify a non-arbitrary composition test. Designing it now would bake unsupported component choices into the synthesis programme. Its edges point at the confirmatory nodes it would need, not at the development calibrations that currently exist. As of 2026-09-03 cross-track budget harmonisation is an EXPLICIT PRECONDITION rather than an observation: 'matched total budget' is undefined until the resource envelope is populated, so the primary comparison cannot be stated, let alone run.",
+      "preconditions": [
+        "ledger/resource_envelope.json maps every participating track's native accounting onto the common envelope, with no dimension left unmapped or marked incommensurable.",
+        "At least three component tracks hold admissible confirmatory evidence.",
+        "Integration gates I0-I2 in docs/INTEGRATION-CRITERIA.md are cleared."
+      ]
     },
     {
       "id": "adaptive-commitment/EXP-A1",
       "repo": "adaptive-commitment",
       "stage": "planned",
-      "operator": "COMMIT",
-      "question": "Does a commit threshold that adapts to stream statistics beat a threshold tuned once on development seeds?",
-      "depends_on": ["state-promotion/EXP-001"],
-      "tests_claims": ["CCS-C5", "CCS-C1"],
+      "operator": "COMMIT_EXTERNAL",
+      "question": "Under streaming evidence, when should an agent choose among WAIT, THINK, ASK, RESPOND and ACT - trading accuracy against latency, compute, intervention cost, uncertainty, and consequence/reversibility?",
+      "depends_on": [],
+      "tests_claims": [
+        "CCS-C1"
+      ],
       "readout": null,
       "admissible_as_evidence": null,
-      "gating_note": "Repository still does not exist. Only worth building if EXP-001 shows the gate matters at all."
+      "gating_note": "Repository still does not exist. Rewritten 2026-09-03: this track was previously recorded, incorrectly, as a refinement of state-promotion's memory-consolidation threshold. It is the outward/behavioural commitment track and was deliberately scoped separately from state-promotion. It is therefore NOT blocked on state-promotion/EXP-001. No CCS claim for behavioural commitment timing has been added yet, by owner decision: that claim is to be written only after this track's own literature audit and preregistration define its exact falsifiable form. Until then this node tests only CCS-C1, and adding a placeholder claim would be inventing a hypothesis on the track's behalf."
+    },
+    {
+      "id": "ccs/EXP-U1",
+      "repo": "ccs",
+      "stage": "not-designed",
+      "operator": "COMMIT_INTERNAL + COMMIT_EXTERNAL",
+      "question": "Can one learned commitment mechanism govern both when state is made durable and when an outward response is released, at least as well as two domain-specific mechanisms at matched total budget?",
+      "depends_on": [
+        "state-promotion/EXP-001",
+        "adaptive-commitment/EXP-A1"
+      ],
+      "tests_claims": [
+        "CCS-C12"
+      ],
+      "readout": null,
+      "admissible_as_evidence": null,
+      "gating_note": "No host repository and no design, like EXP-I1, and for the same reason: it cannot be specified until both domains have admissible mechanisms to unify. It is listed so that CCS-C12 has a mapped test and so the unification hypothesis stays visible as a claim rather than dissolving back into vocabulary. Note that it needs the resource envelope for the same reason EXP-I1 does: an internal write costs parameters and interference, an external action costs latency and consequence, and comparing them at 'matched total budget' presupposes an exchange rate that does not yet exist."
     }
   ]
 }

@@ -38,9 +38,14 @@ system is described:
       [COMPONENTS.md](COMPONENTS.md), or documented differences.
 - [ ] **Shared evaluation.** At least one benchmark on which both were measured
       under the same protocol version.
-- [ ] **Shared budget accounting.** The same write-unit definition and the same
-      decision-compute accounting. Two components using different write units
-      cannot have their budgets added.
+- [ ] **Shared budget accounting — now a formal precondition.**
+      [`ledger/resource_envelope.json`](../ledger/resource_envelope.json) must map
+      every participating track's native accounting onto the common envelope,
+      with no dimension left undeclared and none left `incommensurable`. Native
+      units stay authoritative; the envelope is a reporting layer, not a
+      replacement. `tools/validate_ledger.py` enforces the block: while any
+      incommensurable dimension is open, `ccs/EXP-I1` and `ccs/EXP-U1` may not
+      leave `not-designed`. See [RESOURCE-ENVELOPE.md](RESOURCE-ENVELOPE.md).
 - [ ] **No overlapping ownership.** Two components must not both implement the
       same operator; see the ownership rule in COMPONENTS.md.
 - [ ] **Interaction hazards named in advance.** Written down before the combined
@@ -72,7 +77,8 @@ manifests, negative results published rather than buried — and none satisfies 
 box that matters, which is having an admissible result at all.
 
 Gate **I2** has acquired a concrete obstacle that did not exist at the first
-survey. Two of the four tracks do not currently share a budget-accounting scheme:
+survey, and as of 2026-09-03 it is a formal, machine-enforced precondition rather
+than an observation. The tracks do not share a budget-accounting scheme:
 
 - `state-promotion` accounts in **write units** (parameter elements in the fast
   subset) with decision-time inference compute reported separately.
@@ -84,9 +90,19 @@ survey. Two of the four tracks do not currently share a budget-accounting scheme
 - `lifetime-integrity` accounts in **evidence reads** against a capped log.
 
 These are not interchangeable, and I2 requires that budgets be addable before any
-integrated total is meaningful. Reconciling them is a real piece of work that
-nobody currently owns, and it is a prerequisite for EXP-I1 rather than a detail of
-it.
+integrated total is meaningful. **18 of 60 track/dimension cells are currently
+mapped, and two are incommensurable** —
+[RESOURCE-ENVELOPE.md](RESOURCE-ENVELOPE.md) has the matrix and the three open
+problems.
+
+The split of COMMIT into COMMIT_INTERNAL and COMMIT_EXTERNAL made this worse in a
+useful way: it exposed that `adaptive-commitment`'s costs — latency borne by an
+interlocutor, consequence of an irreversible action — have no counterpart in any
+other track and no non-arbitrary exchange rate with a parameter write. That is
+OP-1, and it is simultaneously a falsifier of CCS-C12.
+
+Reconciling the envelope is real work that nobody owns (OP-3), and it is a
+prerequisite for EXP-I1 rather than a detail of it.
 
 Gate **I3** remains unreachable. `ccs/EXP-I1` has no repository and no design, and
 per the 2026-09-02 reconciliation instruction none is to be created yet.

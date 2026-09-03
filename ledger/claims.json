@@ -10,7 +10,7 @@
     "tools/validate_ledger.py enforces rules 3 and 4 mechanically."
   ],
   "schema_version": 1,
-  "last_reviewed": "2026-09-02",
+  "last_reviewed": "2026-09-03",
   "status_vocabulary": [
     "theoretical-conjecture",
     "implemented",
@@ -23,7 +23,7 @@
     {
       "id": "CCS-C1",
       "title": "Three-operator decomposition",
-      "statement": "Continual-agent competence over a lifetime decomposes usefully into ACCUMULATE (retain candidate experience), ALLOCATE (decide where capacity is assigned), and COMMIT (decide whether and when a change becomes durable), with state maintained at multiple timescales.",
+      "statement": "Continual-agent competence over a lifetime decomposes usefully into ACCUMULATE (retain candidate experience), ALLOCATE (decide where capacity is assigned), and COMMIT_INTERNAL (decide whether and when a change to durable state is made), with state maintained at multiple timescales. COMMIT_EXTERNAL - releasing an outward response or action - is a distinct commitment domain whose relation to this pipeline is unresolved.",
       "kind": "architectural-framing",
       "status": "theoretical-conjecture",
       "implementation": "partial",
@@ -36,10 +36,12 @@
       ],
       "falsified_by": [
         "A single-operator or two-operator system matching the full decomposition's performance under identical budgets across every programme benchmark.",
-        "Demonstration that ALLOCATE and COMMIT are not separable, i.e. no experiment can vary one while holding the other fixed."
+        "Demonstration that ALLOCATE and COMMIT_INTERNAL are not separable, i.e. no experiment can vary one while holding the other fixed.",
+        "Demonstration that ACCUMULATE as 'retain candidate experience' and ACCUMULATE as 'continue gathering or thinking' are not the same operator, which would mean the decomposition has been describing two different pipelines under one set of names."
       ],
-      "notes": "Still a research framing, not a finding. Repository creation is not evidence. modular-consolidation's contamination rules name the decomposition as a conjecture and forbid citing that track as support for it; plasticity-routing scopes itself to ALLOCATE only and refuses to be broadened into a CCS demonstration; lifetime-integrity is architecture-agnostic by construction. The programme's own component tracks are therefore the strictest constraint on this claim.",
-      "review_by": "state-promotion/EXP-001 confirmatory readout"
+      "notes": "Still a research framing, not a finding. Repository creation is not evidence. Revised 2026-09-03: COMMIT was overloaded, covering both a durable state write and an outward behavioural release. The decomposition above is now explicitly the STATE pipeline and terminates in COMMIT_INTERNAL. Whether COMMIT_EXTERNAL belongs in the same pipeline, runs alongside it, or is governed by a shared principle is tracked as CCS-C12 and is not assumed here. A second, unresolved ambiguity in the same family: this repository has read ACCUMULATE as 'retain candidate experience', while plasticity-routing reads it as 'continue gathering / thinking'. Those are not obviously the same operator, and the second reading is closer to COMMIT_EXTERNAL's WAIT/THINK actions than to state retention. ACCUMULATE has NOT been split, because no track has yet operationalised either reading. modular-consolidation's contamination rules name the decomposition as a conjecture and forbid citing that track as support for it; plasticity-routing scopes itself to ALLOCATE only; lifetime-integrity is architecture-agnostic by construction.",
+      "review_by": "state-promotion/EXP-001 confirmatory readout",
+      "domain": "cross-operator"
     },
     {
       "id": "CCS-C2",
@@ -70,7 +72,8 @@
         "Any observed advantage being attributable to unequal parameter writes, task-identity leakage, or ceiling effects."
       ],
       "notes": "Status is 'unresolved' rather than 'pilot-supported': the only pilot returned a null result and its fixed-consolidation arm was degenerate by construction. As of 2026-09-02 main is unchanged at 3495d49 with an empty results/. A sibling records that an off-main small-LM engineering pilot was run and reviewed and was scientifically uninterpretable because the tested soft-prefix plastic representation underlearned, with an architecture-matched LoRA representation-sufficiency repair predeclared. That work is not merged, not on main, and not admissible.",
-      "review_by": "state-promotion/EXP-001 confirmatory readout"
+      "review_by": "state-promotion/EXP-001 confirmatory readout",
+      "domain": "COMMIT_INTERNAL"
     },
     {
       "id": "CCS-C3",
@@ -89,7 +92,8 @@
         "Any latent-state gain being accompanied by a materially different parameter-write count, which would make it a budget artefact."
       ],
       "notes": "This is state-promotion H2. EXP-001 Amendment D architecture-matched latent state across B3/B4/B5 so that the routing comparison is not confounded with latent-state access; that makes the H2 ablation the only clean test of this claim. As of 2026-09-02 main is unchanged at 3495d49 with an empty results/. A sibling records that an off-main small-LM engineering pilot was run and reviewed and was scientifically uninterpretable because the tested soft-prefix plastic representation underlearned, with an architecture-matched LoRA representation-sufficiency repair predeclared. That work is not merged, not on main, and not admissible.",
-      "review_by": "state-promotion/EXP-001 confirmatory readout"
+      "review_by": "state-promotion/EXP-001 confirmatory readout",
+      "domain": "COMMIT_INTERNAL"
     },
     {
       "id": "CCS-C4",
@@ -118,26 +122,28 @@
         "Allocation effects being fully explained by the number of commits they induce, which would collapse ALLOCATE into COMMIT."
       ],
       "notes": "Status moved from theoretical-conjecture to unresolved because the claim is now implemented and under inconclusive development calibration. This is NOT an evidence promotion: both statuses assert zero empirical support, and the move was not made because a repository appeared. The K1/K2 split matters for how the claim should eventually be read: a learned allocator failing to beat a calibrated fixed rule would not by itself falsify CCS-C4, because CCS-C4 is about allocation being a separable lever, not about the policy being learned. That distinction must be preserved when EXP-001 reads out.",
-      "review_by": "plasticity-routing/EXP-001 confirmatory readout"
+      "review_by": "plasticity-routing/EXP-001 confirmatory readout",
+      "domain": "ALLOCATE"
     },
     {
       "id": "CCS-C5",
-      "title": "Adaptive commitment thresholds beat fixed thresholds",
-      "statement": "A commitment criterion that adapts to observed stream statistics outperforms a well-tuned constant threshold under matched budgets, and does so without requiring held-out evaluation signal.",
+      "title": "Adaptive consolidation thresholds beat fixed thresholds",
+      "statement": "For COMMIT_INTERNAL, a consolidation criterion that adapts to observed stream statistics outperforms a well-tuned constant threshold under matched budgets, and does so without requiring held-out evaluation signal.",
       "kind": "empirical",
       "status": "theoretical-conjecture",
       "implementation": "none",
-      "implementation_note": "adaptive-commitment is now the only uncreated sibling. state-promotion deliberately uses a frozen, preregistered threshold.",
+      "implementation_note": "No implementation. state-promotion deliberately uses a frozen, preregistered threshold, and has not adopted an adaptive-threshold follow-on into its plan of record.",
       "evidence": [],
       "supported_by": [
-        "adaptive-commitment/EXP-A1"
+        "state-promotion/EXP-F1"
       ],
       "falsified_by": [
         "A threshold tuned once on development seeds matching or beating the adaptive policy on confirmatory seeds.",
         "The adaptive policy requiring any held-out or task-identity signal to work, which would make it inadmissible under programme methodology."
       ],
-      "notes": "This claim is only worth testing if CCS-C2 survives. A threshold that adapts is a refinement of a mechanism that must first be shown to matter at all.",
-      "review_by": "state-promotion/EXP-001 confirmatory readout"
+      "notes": "Re-scoped 2026-09-03. This claim was previously attached to adaptive-commitment, which was a mischaracterisation: that track is about outward/behavioural commitment timing, not about memory-consolidation thresholds. The claim is retained here as a State Promotion FOLLOW-ON and is now explicitly a COMMIT_INTERNAL claim. It is not owned by adaptive-commitment and must not be cited as that track's motivation. state-promotion has not committed to running it; state-promotion/EXP-F1 is an umbrella-side candidate node, not that track's roadmap. Still only worth testing if CCS-C2 survives: a threshold that adapts is a refinement of a mechanism that must first be shown to matter at all.",
+      "review_by": "state-promotion/EXP-001 confirmatory readout",
+      "domain": "COMMIT_INTERNAL"
     },
     {
       "id": "CCS-C6",
@@ -174,7 +180,8 @@
         "A fixed bank matched to the dynamic method's own final module count matching or beating it at equal compute."
       ],
       "notes": "Held at unresolved rather than falsified, deliberately. The owning track records the unbounded-regime form as falsified in its OWN ledger, but that finding is a development simulator on a closed-form ridge learner, and that track's contamination rule states its results are not evidence for any claim in another track. Promoting a CCS-level status on it would violate both repositories' rules. The claim is NOT rewritten to dodge the negative signal: the unbounded form is kept here with the against-direction evidence attached, and the live constrained question is tracked separately as CCS-C11. Anyone reading CCS-C6 should expect it to end at falsified.",
-      "review_by": "modular-consolidation/EXP-100 readout, or an admissible real-model test of the unbounded regime"
+      "review_by": "modular-consolidation/EXP-100 readout, or an admissible real-model test of the unbounded regime",
+      "domain": "COMMIT_INTERNAL"
     },
     {
       "id": "CCS-C7",
@@ -203,7 +210,8 @@
         "Coherence being maintainable only by periodic full resets, which would concede that the substrate does not accumulate."
       ],
       "notes": "Status moved to unresolved because a harness and preregistrations now exist, not because anything was shown. A hard external constraint now applies: lifetime-integrity declares itself architecture-agnostic and states that no result from it may be used to claim a CCS latent architecture is validated without an admissible substrate from state-promotion and subsequent routing work. CCS-C7 therefore cannot reach an empirical-support status from that track alone, however strong its results, until state-promotion/EXP-001 reads out admissibly. The pilot's lifetime-length signal, if it replicates, would also mean any short-horizon result in this programme is uninformative about mechanism choice.",
-      "review_by": "lifetime-integrity/EXP-A001 readout AND an admissible state-promotion substrate"
+      "review_by": "lifetime-integrity/EXP-A001 readout AND an admissible state-promotion substrate",
+      "domain": "ACCUMULATE"
     },
     {
       "id": "CCS-C8",
@@ -223,7 +231,8 @@
         "The combined gain being fully accounted for by one component's contribution."
       ],
       "notes": "This is the claim a synthesis paper would exist to make. Four of five component tracks now exist and three have development results, but ccs/EXP-I1 remains undesigned by decision, not by oversight: a non-arbitrary composition test cannot be specified until enough component mechanisms have admissible evidence, and designing it now would bake unsupported component choices into the synthesis programme.",
-      "review_by": "synthesis readiness review"
+      "review_by": "synthesis readiness review",
+      "domain": "cross-operator"
     },
     {
       "id": "CCS-C9",
@@ -243,7 +252,8 @@
         "Multi-timescale gains disappearing once decision-time routing compute is added to the total-compute accounting (see CCS-C10)."
       ],
       "notes": "The programme's own related work already places multi-timescale learning in prior art. This claim is about necessity under matched budgets, which is the only version that is still open. plasticity-routing's development calibration shows every single-depth arm well below its routed arms (best single depth ALL_FAST at 0.230 against LEARNED 0.386), and its K4 criterion would have invalidated the benchmark had a single depth matched. That is a development signal on a synthetic world, not evidence.",
-      "review_by": "state-promotion/EXP-001 confirmatory readout"
+      "review_by": "state-promotion/EXP-001 confirmatory readout",
+      "domain": "cross-operator"
     },
     {
       "id": "CCS-C10",
@@ -262,7 +272,8 @@
         "The performance-vs-total-compute curve showing no region where the promotion arm dominates."
       ],
       "notes": "state-promotion Amendment E locked this before results and forbids describing B5 as compute-matched without qualification. This is a genuine falsifier for the practical version of CCS-C2, not a caveat. As of 2026-09-02 main is unchanged at 3495d49 with an empty results/. A sibling records that an off-main small-LM engineering pilot was run and reviewed and was scientifically uninterpretable because the tested soft-prefix plastic representation underlearned, with an architecture-matched LoRA representation-sufficiency repair predeclared. That work is not merged, not on main, and not admissible.",
-      "review_by": "state-promotion/EXP-001 confirmatory readout"
+      "review_by": "state-promotion/EXP-001 confirmatory readout",
+      "domain": "COMMIT_INTERNAL"
     },
     {
       "id": "CCS-C11",
@@ -292,7 +303,30 @@
         "The advantage over a random-merge control failing to exclude zero, which would mean the rate mattered and the criterion did not."
       ],
       "notes": "Added at the 2026-09-02 reconciliation to keep the live question separate from the unbounded-regime form in CCS-C6, rather than rewriting CCS-C6 to follow the evidence. Two cautions carried from the owning track: 'deny' is a strong and usually-missing baseline that currently leads on retention, and the merge-versus-deny null conceals a significant two-way trade, so a single retention headline would misreport it.",
-      "review_by": "modular-consolidation/EXP-003 readout under a frozen protocol"
+      "review_by": "modular-consolidation/EXP-003 readout under a frozen protocol",
+      "domain": "COMMIT_INTERNAL"
+    },
+    {
+      "id": "CCS-C12",
+      "title": "Internal and external commitment share one mechanism",
+      "statement": "COMMIT_INTERNAL and COMMIT_EXTERNAL are instances of a single commitment principle: one learned mechanism, given the appropriate evidence and cost structure, can govern both when state is made durable and when an outward response is released, and does so at least as well as two domain-specific mechanisms at matched total budget.",
+      "kind": "empirical",
+      "status": "theoretical-conjecture",
+      "domain": "COMMIT_INTERNAL + COMMIT_EXTERNAL",
+      "implementation": "none",
+      "implementation_note": "Nothing implements this. state-promotion implements COMMIT_INTERNAL only; adaptive-commitment, which would implement COMMIT_EXTERNAL, does not exist. No track implements both, so no track can currently test unification.",
+      "evidence": [],
+      "supported_by": [
+        "ccs/EXP-U1"
+      ],
+      "falsified_by": [
+        "The two decisions depending on disjoint evidence, such that no shared policy input space matches domain-specific policies at matched budget.",
+        "A shared mechanism underperforming two separate mechanisms at matched total budget in either domain.",
+        "Optimal commitment timing in one domain being uncorrelated with the other across streams, which would make the shared principle vacuous even if a shared implementation were possible.",
+        "The cost structures proving incommensurable - an internal write costs parameters and interference, an external action costs latency and consequence - such that no single objective expresses both without an arbitrary exchange rate."
+      ],
+      "notes": "Added 2026-09-03 as the explicit, falsifiable home for a unification that the programme's earlier vocabulary asserted by accident. Until 2026-09-03 the umbrella used one word, COMMIT, for both domains, which presupposed this claim rather than testing it. Separating the vocabulary is what makes the claim statable. It is NOT to be treated as a terminology question or as a tidy-up: it is a research hypothesis with a low prior, since the two domains differ in reversibility, cost structure, and who bears the consequence. The last falsifier is the one to watch, because it can hold even if a shared mechanism is buildable.",
+      "review_by": "adaptive-commitment preregistration, and state-promotion/EXP-001 confirmatory readout"
     }
   ]
 }

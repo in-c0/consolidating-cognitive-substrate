@@ -19,6 +19,7 @@ mapped to it is a claim nobody is testing, and the validator rejects it.
 | `state-promotion/EXP-001` | yes | pre-result-scaffold | CCS-C2, CCS-C3, CCS-C9, CCS-C10 | yes |
 | `state-promotion/EXP-002` | yes | planned | CCS-C2 | yes |
 | `state-promotion/EXP-003` | yes | planned | CCS-C2 | yes |
+| `state-promotion/EXP-F1` | yes | not-designed | CCS-C5 | n/a |
 | `plasticity-routing/EXP-000` | yes | development-calibration-complete | — | **no** |
 | `plasticity-routing/EXP-001` | yes | pre-result-scaffold | CCS-C4, CCS-C1, CCS-C9 | yes |
 | `plasticity-routing/EXP-002` | yes | planned | CCS-C4 | yes |
@@ -31,16 +32,18 @@ mapped to it is a claim nobody is testing, and the validator rejects it.
 | `lifetime-integrity/EXP-A001` | yes | pre-result-scaffold | CCS-C7 | yes |
 | `lifetime-integrity/EXP-B001` | yes | pre-result-scaffold | CCS-C7 | yes |
 | `ccs/EXP-I1` | **no repo** | not-designed | CCS-C8, CCS-C1 | n/a |
-| `adaptive-commitment/EXP-A1` | **no** | planned | CCS-C5, CCS-C1 | n/a |
+| `adaptive-commitment/EXP-A1` | **no** | planned | CCS-C1 | n/a |
+| `ccs/EXP-U1` | **no repo** | not-designed | CCS-C12 | n/a |
 
 ### Claims with no runnable test
 
 | Claim | Blocked on |
 |---|---|
-| **CCS-C5** | `adaptive-commitment` does not exist |
+| **CCS-C5** | `state-promotion/EXP-F1` is not-designed |
 | **CCS-C8** | no integration repository — deliberately undesigned |
+| **CCS-C12** | no integration repository — deliberately undesigned |
 
-**2 of 11 claims have no runnable test.**
+**3 of 12 claims have no runnable test.**
 
 ### Evidence on file
 

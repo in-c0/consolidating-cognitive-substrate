@@ -22,6 +22,7 @@ A thin coordination layer. It maintains:
 - the [architecture hypothesis](docs/ARCHITECTURE-HYPOTHESIS.md) — explicitly a conjecture
 - [component definitions](docs/COMPONENTS.md) and [terminology](docs/TERMINOLOGY.md)
 - the [claim ledger](docs/CLAIM-LEDGER.md) — every claim, its evidence status, its falsifier
+- the [resource envelope](docs/RESOURCE-ENVELOPE.md) — the common accounting the integration experiment needs before it can be stated
 - the [evidence map](docs/EVIDENCE-MAP.md) — claim ↔ experiment, in both directions
 - the [experiment dependency DAG](docs/DEPENDENCY-DAG.md)
 - the [paper roadmap](docs/PAPER-ROADMAP.md), [novelty boundaries](docs/NOVELTY-BOUNDARIES.md),
@@ -41,30 +42,43 @@ A thin coordination layer. It maintains:
 ## The conjecture under investigation
 
 ```text
-ACCUMULATE  ──▶  ALLOCATE  ──▶  COMMIT
- retain          decide          decide whether
- candidate       where           and when a change
- experience      capacity        becomes durable
+ACCUMULATE  ──▶  ALLOCATE  ──▶  COMMIT_INTERNAL
+ retain          decide          decide whether and when
+ candidate       where           a change to durable
+ experience      capacity        state is made
                  is assigned
+
+        ————— a separate commitment domain —————
+
+                 COMMIT_EXTERNAL
+                 decide whether and when cognition is
+                 released outward: WAIT / THINK / ASK
+                 / RESPOND / ACT
 ```
 
 …with state maintained at multiple timescales: ephemeral, latent, fast
 parametric, slow parametric, over a frozen foundation.
 
 **This is an organising conjecture, not a finding.** It is written down so it can
-be attacked. Three specific ways it may be wrong — including the live possibility
-that ALLOCATE is not separable from COMMIT — are in
+be attacked. Four specific ways it may be wrong — including the live possibility
+that ALLOCATE is not separable from COMMIT_INTERNAL — are in
 [ARCHITECTURE-HYPOTHESIS.md](docs/ARCHITECTURE-HYPOTHESIS.md).
+
+**COMMIT was split on 2026-09-03.** One word had been covering two decisions —
+making state durable, and releasing an utterance — which presupposed that a single
+mechanism governs both. That is now an explicit claim with four falsifiers
+([CCS-C12](docs/CLAIM-LEDGER.md)), not a naming convention. Whether
+COMMIT_EXTERNAL belongs in the pipeline above is unresolved.
 
 ## Programme repositories
 
 | Repository | Operator | Exists | Owns claims | Best result on file |
 |---|---|---|---|---|
-| [`in-c0/state-promotion`](https://github.com/in-c0/state-promotion) | COMMIT | ✅ | CCS-C2, C3, C10 | engineering pilot, null on the mechanism |
+| [`in-c0/state-promotion`](https://github.com/in-c0/state-promotion) | COMMIT_INTERNAL | ✅ | CCS-C2, C3, C5, C10 | engineering pilot, null on the mechanism |
 | [`in-c0/plasticity-routing`](https://github.com/in-c0/plasticity-routing) | ALLOCATE | ✅ | CCS-C4 | development calibration, `DEV_CALIBRATION` |
-| [`in-c0/modular-consolidation`](https://github.com/in-c0/modular-consolidation) | slow-state structure | ✅ | CCS-C6, C11 | development simulator, synthetic |
+| [`in-c0/modular-consolidation`](https://github.com/in-c0/modular-consolidation) | COMMIT_INTERNAL target structure | ✅ | CCS-C6, C11 | development simulator, synthetic |
 | [`in-c0/lifetime-integrity`](https://github.com/in-c0/lifetime-integrity) | ACCUMULATE / long horizon | ✅ | CCS-C7 | single-seed pilot, non-evidential |
-| `in-c0/adaptive-commitment` | COMMIT policy | ❌ planned | CCS-C5 | — |
+| `in-c0/adaptive-commitment` | COMMIT_EXTERNAL | ❌ planned | *(none yet)* | — |
 
 Each existing track declares its own results non-evidential and declares that
 they do not travel to other tracks. The umbrella honours those declarations: see
@@ -74,15 +88,15 @@ they do not travel to other tracks. The umbrella honours those declarations: see
 
 | Status | Count |
 |---|---:|
-| `theoretical-conjecture` | 3 |
+| `theoretical-conjecture` | 4 |
 | `unresolved` | 8 |
 | `pilot-supported` | 0 |
 | `confirmatory-supported` | **0** |
 | `falsified` | 0 |
 
-Six evidence entries are on file and **none is admissible**. Two of eleven claims
-have no runnable test: CCS-C5 (`adaptive-commitment` does not exist) and CCS-C8
-(no integration repository, deliberately). Full table:
+Six evidence entries are on file and **none is admissible**. Three of twelve
+claims have no runnable test: CCS-C5, CCS-C8 and CCS-C12 — the last two because
+their experiments have no host repository, deliberately. Full table:
 [docs/CLAIM-LEDGER.md](docs/CLAIM-LEDGER.md).
 
 Two claims are worth reading before the rest. **CCS-C6** carries two
@@ -124,6 +138,7 @@ Machine-readable, under [`ledger/`](ledger/):
 - [`claims.json`](ledger/claims.json) — the claim ledger
 - [`repos.json`](ledger/repos.json) — sibling registry and observed state
 - [`dag.json`](ledger/dag.json) — experiment dependency graph
+- [`resource_envelope.json`](ledger/resource_envelope.json) — cross-track resource accounting
 
 Markdown tables in `docs/` are generated from these. Edit the JSON, then
 `make render`.

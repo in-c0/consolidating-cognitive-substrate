@@ -1,0 +1,224 @@
+{
+  "_comment": [
+    "Common integration reporting envelope for cross-track resource comparison.",
+    "PURPOSE: make total resources comparable and additive across tracks WITHOUT",
+    "replacing any track's internal accounting. Native units stay authoritative;",
+    "this is a reporting layer, not a mandate.",
+    "STATUS: schema defined 2026-09-03, mappings incomplete. Populating it is an",
+    "explicit precondition for ccs/EXP-I1 and ccs/EXP-U1.",
+    "A dimension marked 'unmapped' is not a gap in a track's rigour - it usually",
+    "means that track has no such resource. 'incommensurable' is the serious case:",
+    "the quantity exists but cannot be expressed in the common unit without an",
+    "arbitrary exchange rate, and it BLOCKS integration until resolved.",
+    "Every track must declare EVERY dimension as exactly one of mapped, unmapped or incommensurable. An undeclared dimension is an unexamined one, and the validator rejects it."
+  ],
+  "schema_version": 1,
+  "last_reviewed": "2026-09-03",
+  "dimensions": [
+    {
+      "id": "param_capacity_stored",
+      "unit": "parameters",
+      "definition": "Total parameters held, including cold storage for retired or inactive state.",
+      "additive": true
+    },
+    {
+      "id": "param_capacity_active",
+      "unit": "parameters",
+      "definition": "Parameters that can influence a forward pass at a given moment.",
+      "additive": false,
+      "additive_note": "Peak and mean must be reported separately; summing across tracks is meaningless without a shared notion of simultaneity."
+    },
+    {
+      "id": "write_ops",
+      "unit": "parameter elements written",
+      "definition": "Parameter elements exposed to optimizer writes over the run.",
+      "additive": true
+    },
+    {
+      "id": "compute_training",
+      "unit": "FLOPs (proxy permitted, method stated)",
+      "definition": "Compute spent on adaptation or training updates.",
+      "additive": true
+    },
+    {
+      "id": "compute_inference",
+      "unit": "FLOPs (proxy permitted, method stated)",
+      "definition": "Compute spent producing task outputs.",
+      "additive": true
+    },
+    {
+      "id": "compute_decision",
+      "unit": "FLOPs (proxy permitted, method stated)",
+      "definition": "Compute whose output can change a routing, promotion, rollback or release decision. Never folded into post-hoc evaluation cost.",
+      "additive": true
+    },
+    {
+      "id": "compute_consolidation",
+      "unit": "FLOPs (proxy permitted, method stated)",
+      "definition": "Compute spent moving state between timescales, including merges and offline replay.",
+      "additive": true
+    },
+    {
+      "id": "store_bytes",
+      "unit": "bytes",
+      "definition": "Episodic, replay or evidence storage held, including cold storage.",
+      "additive": true
+    },
+    {
+      "id": "store_reads",
+      "unit": "records",
+      "definition": "Evidence, replay or log records read, charged per record scanned.",
+      "additive": true
+    },
+    {
+      "id": "wall_runtime",
+      "unit": "seconds",
+      "definition": "Measured runtime, reported where hardware is comparable.",
+      "additive": false,
+      "additive_note": "Reported, never used as a primary matched budget across tracks on different hardware."
+    },
+    {
+      "id": "latency_to_response",
+      "unit": "stream steps or seconds",
+      "definition": "Delay between evidence availability and outward release. COMMIT_EXTERNAL only.",
+      "additive": false,
+      "additive_note": "A cost borne by an interlocutor, not by the system. See the open problem below."
+    },
+    {
+      "id": "intervention_cost",
+      "unit": "track-defined",
+      "definition": "Cost of an outward action, including asking a question or taking an irreversible step. COMMIT_EXTERNAL only.",
+      "additive": false,
+      "additive_note": "No track has defined this yet. Recorded so it is not forgotten when adaptive-commitment is scaffolded."
+    }
+  ],
+  "track_mappings": {
+    "state-promotion": {
+      "native_unit": "write unit = number of elements in the fast-state parameter subset",
+      "authoritative": true,
+      "mapped": {
+        "write_ops": "write units x fast-subset element count; hard ceiling nominally 2T for T online events",
+        "compute_training": "predeclared adaptation-token training envelope",
+        "compute_decision": "decision_forward_calls, decision_tokens_processed, estimated_decision_flops_frozen_backbone",
+        "param_capacity_active": "total plastic capacity, matched within 2%",
+        "store_bytes": "replay reservoir capacity in bytes/examples",
+        "wall_runtime": "measured training wall time"
+      },
+      "unmapped": [
+        "param_capacity_stored",
+        "compute_inference",
+        "compute_consolidation",
+        "store_reads",
+        "latency_to_response",
+        "intervention_cost"
+      ],
+      "incommensurable": []
+    },
+    "plasticity-routing": {
+      "native_unit": "unified cost table with one hard write ceiling shared by every arm",
+      "authoritative": true,
+      "mapped": {
+        "write_ops": "writes, ceiling-enforced per arm",
+        "compute_decision": "router decision compute, reported separately (3.91% of total for LEARNED, 0.19% for HEURISTIC in dev calibration)",
+        "store_bytes": "episodic substrate footprint, which grows with entries",
+        "store_reads": "episodic retrieval charged per entry scanned"
+      },
+      "unmapped": [
+        "param_capacity_stored",
+        "param_capacity_active",
+        "compute_training",
+        "compute_inference",
+        "compute_consolidation",
+        "wall_runtime",
+        "latency_to_response",
+        "intervention_cost"
+      ],
+      "incommensurable": [],
+      "note": "This track already folds storage, write and compute into ONE scalar objective via lambda weights. That is a solved version of the envelope problem inside one track, and the exchange rates it chose are a candidate starting point - but they were calibrated for SDW-1 and are not automatically transferable."
+    },
+    "modular-consolidation": {
+      "native_unit": "capacity accounting: param_total, param_active, param_peak, storage_total, total_algorithmic_flops",
+      "authoritative": true,
+      "mapped": {
+        "param_capacity_stored": "param_total and storage_total, including cold storage for retired modules",
+        "param_capacity_active": "param_active and param_peak",
+        "compute_decision": "routing decision compute, included in total_algorithmic_flops",
+        "compute_consolidation": "merge and retirement operation cost",
+        "store_bytes": "storage_total including cold storage"
+      },
+      "unmapped": [
+        "write_ops",
+        "compute_training",
+        "compute_inference",
+        "store_reads",
+        "wall_runtime",
+        "latency_to_response",
+        "intervention_cost"
+      ],
+      "incommensurable": []
+    },
+    "lifetime-integrity": {
+      "native_unit": "evidence reads against a capped log, plus maintenance ops",
+      "authoritative": true,
+      "mapped": {
+        "store_reads": "evidence reads, charged per record scanned against a shared ceiling",
+        "store_bytes": "state_bytes, reported per mechanism",
+        "compute_consolidation": "maintenance operations against a ceiling"
+      },
+      "unmapped": [
+        "param_capacity_stored",
+        "param_capacity_active",
+        "write_ops",
+        "compute_training",
+        "compute_inference",
+        "compute_decision",
+        "wall_runtime",
+        "latency_to_response",
+        "intervention_cost"
+      ],
+      "incommensurable": [],
+      "note": "Architecture-agnostic by design, so parameter-denominated dimensions may remain permanently unmapped for this track. That is a property of the benchmark, not a defect."
+    },
+    "adaptive-commitment": {
+      "native_unit": "not yet defined - repository does not exist",
+      "authoritative": false,
+      "mapped": {},
+      "unmapped": [
+        "ALL"
+      ],
+      "incommensurable": [
+        "latency_to_response",
+        "intervention_cost"
+      ],
+      "note": "Recorded before the repository exists so that it is scaffolded with the envelope in view. Its two native costs have no counterpart in any other track."
+    }
+  },
+  "open_problems": [
+    {
+      "id": "OP-1",
+      "title": "No shared exchange rate between internal and external commitment costs",
+      "detail": "COMMIT_INTERNAL costs parameters, writes and interference. COMMIT_EXTERNAL costs latency, intervention and consequence. Comparing them at 'matched total budget' requires an exchange rate that no track has defined and that may not exist non-arbitrarily. This is recorded as the fourth falsifier of CCS-C12: if the cost structures are genuinely incommensurable, the unification claim fails on measurement grounds even if a shared mechanism is buildable.",
+      "blocks": [
+        "ccs/EXP-U1",
+        "ccs/EXP-I1"
+      ]
+    },
+    {
+      "id": "OP-2",
+      "title": "param_capacity_active is not additive across tracks",
+      "detail": "Two tracks each holding N active parameters do not constitute a 2N-active-parameter system unless they are active simultaneously. Peak and mean must be reported separately and an integration total must state its simultaneity assumption explicitly.",
+      "blocks": [
+        "ccs/EXP-I1"
+      ]
+    },
+    {
+      "id": "OP-3",
+      "title": "Nobody owns the envelope",
+      "detail": "Each track's native accounting is authoritative and correct for its own purposes. Populating and maintaining the mapping is umbrella work, but reconciling a disagreement about what a dimension means would require agreement across tracks, and the umbrella cannot direct that. Unowned as of 2026-09-03.",
+      "blocks": [
+        "ccs/EXP-I1",
+        "ccs/EXP-U1"
+      ]
+    }
+  ]
+}

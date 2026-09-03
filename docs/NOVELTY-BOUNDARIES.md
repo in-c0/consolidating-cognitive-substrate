@@ -62,8 +62,11 @@ The architecture is an arrangement of known parts.
    it is a result on it.
 4. Any claim of scale generality from a 0.5B model, or of small-model generality
    from a 7B replication.
-5. Any framing that presents ACCUMULATE → ALLOCATE → COMMIT as a discovered
-   structure rather than an organising conjecture.
+5. Any framing that presents ACCUMULATE → ALLOCATE → COMMIT_INTERNAL as a
+   discovered structure rather than an organising conjecture.
+6. Any framing that treats COMMIT_INTERNAL and COMMIT_EXTERNAL as the same
+   mechanism. Their unification is CCS-C12, a claim with four falsifiers and no
+   implementation, not a background assumption.
 
 ## Boundary review
 

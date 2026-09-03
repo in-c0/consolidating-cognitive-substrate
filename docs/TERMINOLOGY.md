@@ -8,9 +8,44 @@ rather than imposed by editing that repository.
 
 | Term | Definition | Not to be confused with |
 |---|---|---|
-| **ACCUMULATE** | Retaining candidate experience without committing to it. | Replay (a mechanism inside accumulation), or memorisation (an outcome). |
+| **ACCUMULATE** | Retaining candidate experience without committing to it. | Replay (a mechanism inside accumulation), or memorisation (an outcome). See the open ambiguity below. |
 | **ALLOCATE** | Deciding *where* capacity is assigned for an experience. | Routing in the MoE sense, which is per-token inference routing, not lifetime capacity assignment. |
-| **COMMIT** | Deciding *whether and when* a change becomes durable. | Consolidation, which is the mechanism a commit decision invokes. |
+| **COMMIT_INTERNAL** | Deciding *whether and when* information or state becomes durable in the substrate — a memory or parameter write. | Consolidation, which is the mechanism a commit decision invokes. And **not** COMMIT_EXTERNAL. |
+| **COMMIT_EXTERNAL** | Deciding *whether and when* cognition is released outward as a response or action — `WAIT`, `THINK`, `ASK`, `RESPOND`, `ACT`. | COMMIT_INTERNAL. Also not "inference", which is producing an output, not deciding to release one. |
+
+### Why COMMIT was split — 2026-09-03
+
+Until 2026-09-03 this programme used one word, **COMMIT**, for both. That was not
+a shorthand; it was an unexamined assumption. Writing state durably and releasing
+an utterance are different decisions with different costs, different
+reversibility, and different parties bearing the consequence.
+
+Using one word for both **presupposed** that a single mechanism governs them. That
+is a research hypothesis with a low prior, and it now has an explicit, falsifiable
+home as [CCS-C12](CLAIM-LEDGER.md) — including a falsifier the vocabulary was
+hiding: the two cost structures may be genuinely incommensurable, in which case
+unification fails on measurement grounds however elegant the mechanism.
+
+`tools/validate_ledger.py` rejects bare `COMMIT` as a DAG operator, so the
+distinction cannot erode back by habit.
+
+**Domain ownership:** COMMIT_INTERNAL is `state-promotion`'s domain (with
+`modular-consolidation` owning the structure of its target). COMMIT_EXTERNAL is
+`adaptive-commitment`'s domain, and that repository does not exist yet.
+
+### Open ambiguity — ACCUMULATE has the same problem, unresolved
+
+This repository has read ACCUMULATE as *"retain candidate experience"* — a
+statement about memory. `plasticity-routing` reads it as *"continue gathering /
+thinking"* — a statement about behaviour, much closer to COMMIT_EXTERNAL's `WAIT`
+and `THINK` than to state retention.
+
+Those are not obviously the same operator, and the same internal/external split
+may be latent here too. **ACCUMULATE has deliberately not been split**, because no
+track has operationalised either reading and splitting it now would be inventing
+structure ahead of evidence. It is recorded as a falsifier of
+[CCS-C1](CLAIM-LEDGER.md): if the two readings turn out to be different operators,
+the decomposition has been describing two pipelines under one set of names.
 
 ## State levels
 
@@ -28,7 +63,8 @@ rather than imposed by editing that repository.
 | Term | Definition |
 |---|---|
 | **Candidate** | A proposed change to durable state that has not been committed. |
-| **Promotion gate** | The decision procedure that admits or declines a candidate. |
+| **Promotion gate** | The decision procedure that admits or declines a candidate. COMMIT_INTERNAL. |
+| **Release** | Emitting an outward response or action. The COMMIT_EXTERNAL analogue of a commit, and deliberately given a different word. |
 | **Retention gate** | The check that rejects a candidate which regresses protected probes. |
 | **Rollback** | Restoration of prior durable state after a rejected candidate. |
 | **Write unit** | The number of parameter elements in the fast-state subset. The programme's unit of write-budget accounting. |
@@ -68,40 +104,39 @@ this reason.
 
 | Programme term | Track term | Note |
 |---|---|---|
-| COMMIT operator | `state-promotion`: "promotion" / "state promotion" | The repository predates the operator vocabulary. Not a conflict. |
+| COMMIT_INTERNAL operator | `state-promotion`: "promotion" / "state promotion" | The repository predates the operator vocabulary. Not a conflict. |
 | Slow parametric state | `state-promotion`: "slow adapter bank" | Same thing. |
 | Write unit | `state-promotion`: "write unit" | Identical; defined in EXP-001 Amendment A. |
 | Decision-time compute | `state-promotion`: "decision-time inference compute" | Identical; defined in EXP-001 Amendment E. |
 | ALLOCATE operator | `plasticity-routing`: "allocation" / "routing" | Identical. |
+| COMMIT_INTERNAL | `plasticity-routing`: the `SLOW` action | A durable internal write, reached by an allocation decision. |
+| COMMIT_EXTERNAL | `plasticity-routing`: "commitment in the CCS sense" | That track explicitly models none of it. |
 | Slow parametric state | `plasticity-routing`: `SLOW` action | One destination among four, not a level the track owns. |
 | Slow-state structure | `modular-consolidation`: "module lifecycle" | Same thing. |
 | Latent state | `lifetime-integrity`: "belief store" / "persistent state" | Deliberately substrate-neutral there; not a claim about a CCS latent architecture. |
 
-## Outstanding divergence — COMMIT
+## Resolved divergence — COMMIT
 
-**Recorded 2026-09-02. Not resolved, and not to be resolved by editing a sibling.**
+**Raised 2026-09-02, resolved 2026-09-03 by splitting the term.**
 
-`plasticity-routing` reads COMMIT as an *outward-facing* commitment — an external
-action, a tool call, something irreversible in the world — and states that its
-durable `SLOW` write is therefore "not a commitment in the CCS sense".
+`plasticity-routing` read COMMIT as an *outward-facing* commitment and stated that
+its durable `SLOW` write was therefore "not a commitment in the CCS sense". The
+umbrella read COMMIT as the decision that a change becomes durable, which includes
+an internal write.
 
-This umbrella defines COMMIT as the decision that a change becomes **durable**,
-which does include a purely internal durable write.
+Both were right about their own referent. The fault was the umbrella's: one word
+covering two operators. Under the split, that track's `SLOW` write is a
+**COMMIT_INTERNAL** action reached by an ALLOCATE decision, and the "commitment in
+the CCS sense" it correctly declines to model is **COMMIT_EXTERNAL**. No sibling
+needed to change anything, and none was asked to.
 
-Both readings are coherent; they are not the same operator. The divergence
-matters because CCS-C1 asserts that ALLOCATE and COMMIT are separable, and under
-the narrower reading `plasticity-routing`'s `SLOW` action is an allocation
-decision that the umbrella would class as a commitment. Whether that is a
-terminological gap or a genuine sign that the two operators are not cleanly
-separable is exactly what CCS-C4 is meant to settle.
+What this does *not* resolve: whether ALLOCATE and COMMIT_INTERNAL are cleanly
+separable. That was the substantive question underneath the vocabulary clash, it
+is untouched by renaming, and it remains [CCS-C4](CLAIM-LEDGER.md)'s to settle.
 
-The umbrella records the disagreement rather than harmonising the vocabulary,
-because harmonising it now would decide by definition a question that is supposed
-to be decided by experiment.
-
-A second, smaller divergence: `plasticity-routing` describes `state-promotion` as
-sitting at the ALLOCATE-to-COMMIT boundary, whereas this registry assigns it the
-COMMIT operator. Recorded; no action.
+A second, smaller divergence stands unresolved: `plasticity-routing` describes
+`state-promotion` as sitting at the ALLOCATE-to-COMMIT boundary, whereas this
+registry assigns it COMMIT_INTERNAL. Recorded; no action.
 
 New repositories should adopt the programme terms directly, and declare any
 departure in their own documentation.

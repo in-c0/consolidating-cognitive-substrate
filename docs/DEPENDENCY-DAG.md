@@ -21,6 +21,8 @@ graph TD
   class state_promotion_EXP_002 planned;
   state_promotion_EXP_003["state-promotion<br/>EXP-003<br/><i>planned</i>"]
   class state_promotion_EXP_003 planned;
+  state_promotion_EXP_F1["state-promotion<br/>EXP-F1<br/><i>not designed</i>"]
+  class state_promotion_EXP_F1 undesigned;
   plasticity_routing_EXP_000["plasticity-routing<br/>EXP-000<br/><i>development-calibration-complete</i>"]
   class plasticity_routing_EXP_000 planned;
   plasticity_routing_EXP_001["plasticity-routing<br/>EXP-001<br/><i>pre-result</i>"]
@@ -47,10 +49,13 @@ graph TD
   class ccs_EXP_I1 undesigned;
   adaptive_commitment_EXP_A1["adaptive-commitment<br/>EXP-A1<br/><i>repo not created</i>"]
   class adaptive_commitment_EXP_A1 planned;
+  ccs_EXP_U1["ccs<br/>EXP-U1<br/><i>not designed</i>"]
+  class ccs_EXP_U1 undesigned;
 
   state_promotion_EXP_000 --> state_promotion_EXP_001
   state_promotion_EXP_001 --> state_promotion_EXP_002
   state_promotion_EXP_001 --> state_promotion_EXP_003
+  state_promotion_EXP_001 --> state_promotion_EXP_F1
   plasticity_routing_EXP_000 --> plasticity_routing_EXP_001
   plasticity_routing_EXP_001 --> plasticity_routing_EXP_002
   state_promotion_EXP_001 --> plasticity_routing_EXP_002
@@ -66,7 +71,8 @@ graph TD
   adaptive_commitment_EXP_A1 --> ccs_EXP_I1
   modular_consolidation_EXP_100 --> ccs_EXP_I1
   lifetime_integrity_EXP_A001 --> ccs_EXP_I1
-  state_promotion_EXP_001 --> adaptive_commitment_EXP_A1
+  state_promotion_EXP_001 --> ccs_EXP_U1
+  adaptive_commitment_EXP_A1 --> ccs_EXP_U1
 
   classDef active fill:#1f6feb,stroke:#1f6feb,color:#fff;
   classDef pilot fill:#8b5cf6,stroke:#8b5cf6,color:#fff;
@@ -78,23 +84,25 @@ Solid nodes exist in code. Dashed nodes have no repository. The red node has no 
 
 | Node | Operator | Stage | Tests | Depends on |
 |---|---|---|---|---|
-| `state-promotion/EXP-000` | COMMIT | pilot-complete | — | — |
-| `state-promotion/EXP-001` | COMMIT | pre-result-scaffold | CCS-C2, CCS-C3, CCS-C9, CCS-C10 | `state-promotion/EXP-000` |
-| `state-promotion/EXP-002` | COMMIT | planned | CCS-C2 | `state-promotion/EXP-001` |
-| `state-promotion/EXP-003` | COMMIT | planned | CCS-C2 | `state-promotion/EXP-001` |
+| `state-promotion/EXP-000` | COMMIT_INTERNAL | pilot-complete | — | — |
+| `state-promotion/EXP-001` | COMMIT_INTERNAL | pre-result-scaffold | CCS-C2, CCS-C3, CCS-C9, CCS-C10 | `state-promotion/EXP-000` |
+| `state-promotion/EXP-002` | COMMIT_INTERNAL | planned | CCS-C2 | `state-promotion/EXP-001` |
+| `state-promotion/EXP-003` | COMMIT_INTERNAL | planned | CCS-C2 | `state-promotion/EXP-001` |
+| `state-promotion/EXP-F1` | COMMIT_INTERNAL | not-designed | CCS-C5 | `state-promotion/EXP-001` |
 | `plasticity-routing/EXP-000` | ALLOCATE | development-calibration-complete | — | — |
 | `plasticity-routing/EXP-001` | ALLOCATE | pre-result-scaffold | CCS-C4, CCS-C1, CCS-C9 | `plasticity-routing/EXP-000` |
 | `plasticity-routing/EXP-002` | ALLOCATE | planned | CCS-C4 | `plasticity-routing/EXP-001`, `state-promotion/EXP-001` |
-| `modular-consolidation/EXP-000` | COMMIT | development-calibration-complete | — | — |
-| `modular-consolidation/EXP-001` | COMMIT | development-calibration-complete | CCS-C6 | `modular-consolidation/EXP-000` |
-| `modular-consolidation/EXP-002` | COMMIT | development-calibration-complete | CCS-C11 | `modular-consolidation/EXP-001` |
-| `modular-consolidation/EXP-003` | COMMIT | planned | CCS-C11 | `modular-consolidation/EXP-002` |
-| `modular-consolidation/EXP-100` | COMMIT | planned | CCS-C6, CCS-C11 | `modular-consolidation/EXP-003`, `plasticity-routing/EXP-001` |
+| `modular-consolidation/EXP-000` | COMMIT_INTERNAL | development-calibration-complete | — | — |
+| `modular-consolidation/EXP-001` | COMMIT_INTERNAL | development-calibration-complete | CCS-C6 | `modular-consolidation/EXP-000` |
+| `modular-consolidation/EXP-002` | COMMIT_INTERNAL | development-calibration-complete | CCS-C11 | `modular-consolidation/EXP-001` |
+| `modular-consolidation/EXP-003` | COMMIT_INTERNAL | planned | CCS-C11 | `modular-consolidation/EXP-002` |
+| `modular-consolidation/EXP-100` | COMMIT_INTERNAL | planned | CCS-C6, CCS-C11 | `modular-consolidation/EXP-003`, `plasticity-routing/EXP-001` |
 | `lifetime-integrity/EXP-000` | ACCUMULATE | pilot-complete | — | — |
 | `lifetime-integrity/EXP-A001` | ACCUMULATE | pre-result-scaffold | CCS-C7 | `lifetime-integrity/EXP-000` |
 | `lifetime-integrity/EXP-B001` | ACCUMULATE | pre-result-scaffold | CCS-C7 | `lifetime-integrity/EXP-000` |
 | `ccs/EXP-I1` | ALL | not-designed | CCS-C8, CCS-C1 | `state-promotion/EXP-001`, `plasticity-routing/EXP-001`, `adaptive-commitment/EXP-A1`, `modular-consolidation/EXP-100`, `lifetime-integrity/EXP-A001` |
-| `adaptive-commitment/EXP-A1` | COMMIT | planned | CCS-C5, CCS-C1 | `state-promotion/EXP-001` |
+| `adaptive-commitment/EXP-A1` | COMMIT_EXTERNAL | planned | CCS-C1 | — |
+| `ccs/EXP-U1` | COMMIT_INTERNAL + COMMIT_EXTERNAL | not-designed | CCS-C12 | `state-promotion/EXP-001`, `adaptive-commitment/EXP-A1` |
 
 <!-- /GENERATED:dag -->
 
@@ -118,6 +126,13 @@ between them:
 waits on it to *run*, but because almost nothing can be *interpreted* as CCS
 evidence without it.
 
+**One exception, as of 2026-09-03:** `adaptive-commitment` is not downstream of it
+at all. COMMIT_EXTERNAL was deliberately scoped as a separate domain, so that
+track could in principle produce the programme's first admissible result without
+`state-promotion` reading out. Both `ccs` nodes additionally require the
+[resource envelope](RESOURCE-ENVELOPE.md) to be populated before their primary
+comparison can even be stated.
+
 ### Parallelism did not remove the risk
 
 Three tracks ran ahead of the node they depend on. That was reasonable — each
@@ -136,8 +151,21 @@ classes. The edge is gone.
 
 ## Planned and undesigned nodes
 
-`adaptive-commitment/EXP-A1` is the only node whose repository does not exist. It
-carries a question and a hazard and nothing else.
+`adaptive-commitment/EXP-A1` is the only node whose repository does not exist. Its
+question was **rewritten on 2026-09-03**: it is the COMMIT_EXTERNAL track, not a
+refinement of `state-promotion`'s consolidation threshold. Its dependency on
+`state-promotion/EXP-001` was removed at the same time — that track was
+deliberately scoped as a separate domain and is not gated on the state pipeline.
+
+`state-promotion/EXP-F1` is an **umbrella-side candidate**, not that track's
+roadmap. It exists so the re-scoped CCS-C5 retains a mapped experiment rather than
+floating untestable. If `state-promotion` declines it, the correct action is to
+retire CCS-C5, not to reassign it a second time.
+
+`ccs/EXP-U1` — the unification test for CCS-C12 — has no host repository and no
+design, for the structural reason that no track implements both commitment
+domains. It is listed so the unification hypothesis stays visible as a claim
+rather than dissolving back into vocabulary.
 
 `ccs/EXP-I1` — the integration experiment the synthesis paper would rest on — has
 no host repository and no design, **by decision**. A dedicated integration

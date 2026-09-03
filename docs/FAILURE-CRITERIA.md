@@ -13,8 +13,10 @@ The CCS framing should be **abandoned or fundamentally revised** if:
 **F1 — The central mechanism does not work.**
 `state-promotion/EXP-001` H1 is falsified under valid, budget-matched conditions:
 evidence-gated promotion fails to beat sequential adaptation and fixed-schedule
-consolidation. The COMMIT operator is the programme's most developed idea. If it
-fails cleanly, the rest is unmotivated in this framing.
+consolidation. COMMIT_INTERNAL is the programme's most developed idea. If it
+fails cleanly, the rest is unmotivated in this framing — with one exception:
+`adaptive-commitment` (COMMIT_EXTERNAL) is a separate domain and would survive
+F1 intact.
 
 **F2 — Gains are artefacts.**
 Any apparent advantage is explained by unequal parameter writes, leaked task
@@ -29,8 +31,8 @@ matters, while leaving multi-timescale structure intact — a partial failure th
 would demand a narrower programme, not a broader one.
 
 **F4 — The decomposition does not decompose.**
-ALLOCATE cannot be varied independently of COMMIT, or allocation effects reduce
-entirely to commit frequency. The three-operator framing collapses to two, and
+ALLOCATE cannot be varied independently of COMMIT_INTERNAL, or allocation effects
+reduce entirely to commit frequency. The three-operator framing collapses to two, and
 [ARCHITECTURE-HYPOTHESIS.md](ARCHITECTURE-HYPOTHESIS.md) must be rewritten rather
 than annotated.
 
@@ -56,7 +58,7 @@ A single component failing is normal and publishable. The distinction:
 | Outcome | Programme response |
 |---|---|
 | One component falsified, others hold | Record `falsified` in the ledger, publish it, narrow the synthesis scope |
-| Central COMMIT claim falsified (F1) | Programme framing abandoned or fundamentally revised |
+| Central COMMIT_INTERNAL claim falsified (F1) | State-pipeline framing abandoned or fundamentally revised; COMMIT_EXTERNAL unaffected |
 | Controls failed (F2) | Halt readouts, fix controls, re-run. **Do not report.** |
 | Component works but does not compose (I3) | Report components separately. No synthesis paper. |
 
@@ -84,13 +86,28 @@ Two criteria have development-level signals pointing at them. Neither has fired,
 because neither has admissible evidence behind it, and recording them here is not
 the same as conceding them.
 
-**F4 (the decomposition does not decompose)** — `plasticity-routing` reads COMMIT
-as outward-facing action and therefore classes its own durable `SLOW` write as an
-*allocation* decision, not a commitment. Under the umbrella's definition that
-write is a commitment. Whether this is a vocabulary mismatch or the first sign
-that ALLOCATE and COMMIT are not cleanly separable is unresolved, and it is
-exactly what CCS-C4 exists to settle. See
-[TERMINOLOGY.md](TERMINOLOGY.md#outstanding-divergence--commit).
+**F4 (the decomposition does not decompose)** — the vocabulary half of this was
+resolved on 2026-09-03 by splitting COMMIT_INTERNAL from COMMIT_EXTERNAL:
+`plasticity-routing`'s `SLOW` write is a COMMIT_INTERNAL action reached by an
+ALLOCATE decision, and the "commitment in the CCS sense" it declines to model is
+COMMIT_EXTERNAL. See [TERMINOLOGY.md](TERMINOLOGY.md#resolved-divergence--commit).
+
+The substantive half is untouched. Renaming does not make ALLOCATE and
+COMMIT_INTERNAL separable, and CCS-C4 still has to settle it. A second instance of
+the same hazard is now visible and unresolved: ACCUMULATE is read as "retain
+candidate experience" here and as "continue gathering / thinking" by
+`plasticity-routing`, which are plausibly different operators. It has not been
+split, because no track has operationalised either reading.
+
+**F8 — the operators cannot be compared at all.** New as of 2026-09-03, and
+distinct from F1–F7 because it is a measurement failure rather than a hypothesis
+failure. If internal and external commitment costs have no non-arbitrary exchange
+rate, then CCS-C12 and CCS-C8 cannot be *posed*, regardless of how well any
+individual mechanism works. A programme can fail by being wrong; it can also fail
+by asking a question that has no measurable form. Tracked as OP-1 in
+[RESOURCE-ENVELOPE.md](RESOURCE-ENVELOPE.md) and machine-enforced: while any
+incommensurable dimension is open, both `ccs` nodes are pinned at
+`not-designed`.
 
 **An unanticipated failure mode — consolidation may have nothing to fix.**
 `modular-consolidation`'s development simulator finds retention versus capacity

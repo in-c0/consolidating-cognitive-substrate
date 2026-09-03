@@ -7,7 +7,7 @@
     "dag.json, not here, so that 'observed' stays purely machine-fetched."
   ],
   "schema_version": 1,
-  "last_reconciled": "2026-09-02",
+  "last_reconciled": "2026-09-03",
   "repos": [
     {
       "id": "state-promotion",
@@ -26,6 +26,7 @@
       "owns_claims": [
         "CCS-C2",
         "CCS-C3",
+        "CCS-C5",
         "CCS-C10"
       ],
       "contributes_claims": [
@@ -37,7 +38,8 @@
         "main is unchanged at 3495d49 since the first survey; results/ on main holds only .gitkeep.",
         "Off-main branches carry LM pilot work not merged to main: exp001r/lora-representation-gate (EXP-001R, adds Amendment F) and exp001/dynamic-input-and-snapshot-pin.",
         "in-c0/modular-consolidation records that a mechanically valid small-LM engineering pilot has been run and reviewed, and that it was scientifically uninterpretable because the tested soft-prefix plastic representation underlearned; an architecture-matched LoRA representation-sufficiency repair is predeclared. None of that is on main and none of it is admissible CCS evidence.",
-        "plasticity-routing describes this track as sitting at the ALLOCATE-to-COMMIT boundary rather than owning COMMIT outright. Recorded as a framing divergence, not corrected from here."
+        "plasticity-routing describes this track as sitting at the ALLOCATE-to-COMMIT boundary rather than owning COMMIT outright. Recorded as a framing divergence, not corrected from here.",
+        "CCS-C5 (adaptive consolidation thresholds) was reassigned here on 2026-09-03 as a COMMIT_INTERNAL follow-on. This track has NOT adopted it into its plan of record and state-promotion/EXP-F1 is an umbrella-side candidate node only."
       ],
       "observed": {
         "default_branch": "main",
@@ -51,22 +53,22 @@
       "id": "adaptive-commitment",
       "slug": "in-c0/adaptive-commitment",
       "existence": "planned",
-      "existence_note": "Repository still does not exist as of 2026-09-02. The only remaining uncreated sibling.",
-      "role": "Would own the commitment-threshold policy: whether the commit criterion should itself adapt to stream statistics rather than remaining a frozen preregistered constant.",
+      "existence_note": "Repository still does not exist as of 2026-09-03. The only uncreated sibling. This entry was corrected before the repository is scaffolded, so that it is not created under the wrong programme contract.",
+      "role": "Owns COMMIT_EXTERNAL: outward/behavioural commitment timing under streaming evidence - when an agent should WAIT, THINK, ASK, RESPOND or ACT, trading accuracy against latency, compute, intervention cost, uncertainty, and consequence/reversibility.",
       "owns_components": [
-        "commit-policy"
+        "external-commitment-policy"
       ],
-      "owns_claims": [
-        "CCS-C5"
-      ],
+      "owns_claims": [],
       "contributes_claims": [
-        "CCS-C1"
+        "CCS-C1",
+        "CCS-C12"
       ],
-      "blocked_by": [
-        "state-promotion/EXP-001"
-      ],
+      "blocked_by": [],
       "notes": [
-        "modular-consolidation records no dependency on this track and explicitly does not assume an accessible repository."
+        "ROLE CORRECTED 2026-09-03. This track was previously recorded as a refinement of state-promotion's memory-consolidation threshold. That was a mischaracterisation produced by the umbrella's own overloaded use of the word COMMIT; it was never this track's intent.",
+        "It owns NO CCS claim yet, by owner decision. A programme claim for behavioural commitment timing is to be written only after this track's literature audit and preregistration define its exact falsifiable form. Writing one now would be inventing a hypothesis on its behalf.",
+        "NOT blocked by state-promotion. It was deliberately scoped as a separate domain, so the previous blocked_by edge has been removed.",
+        "CCS-C5 (adaptive consolidation thresholds) has been re-scoped away from this track and retained as a state-promotion COMMIT_INTERNAL follow-on. It must not be cited as this track's motivation."
       ],
       "observed": null
     },
