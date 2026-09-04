@@ -35,6 +35,7 @@ mapped to it is a claim nobody is testing, and the validator rejects it.
 | `adaptive-commitment/EXP-A1` | **no** | planned | CCS-C1 | n/a |
 | `ccs/EXP-U1` | **no repo** | not-designed | CCS-C12 | n/a |
 | `modular-consolidation/CANDIDATE-DIVERSITY` | yes | pre-result-scaffold | CCS-C13 | yes |
+| `plasticity-routing/EXP-003` | yes | not-designed | CCS-C4, CCS-C1 | n/a |
 
 ### Claims with no runnable test
 

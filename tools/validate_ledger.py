@@ -64,6 +64,11 @@ OPERATORS = {
     "COMMIT_INTERNAL",
     "COMMIT_EXTERNAL",
     "COMMIT_INTERNAL + COMMIT_EXTERNAL",
+    # A factorial node that crosses two operators. Named as a pair rather than
+    # flattened to "cross-operator" so the DAG shows which two are crossed --
+    # the programme has both margins in separate tracks and, until EXP-003, no
+    # experiment that crosses any pair.
+    "ALLOCATE + COMMIT_INTERNAL",
     "cross-operator",
     "ALL",
 }

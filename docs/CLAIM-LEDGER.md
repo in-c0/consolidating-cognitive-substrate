@@ -30,10 +30,10 @@ Two things this vocabulary deliberately refuses to allow:
 
 | Claim | Domain | Statement (abbreviated) | Status | Implementation | Tested by |
 |---|---|---|---|---|---|
-| **CCS-C1** Three-operator decomposition | cross-operator | Continual-agent competence over a lifetime decomposes usefully into ACCUMULATE (retain candidate… | `conjecture` | partial | `state-promotion/EXP-001`, `plasticity-routing/EXP-001`, `adaptive-commitment/EXP-A1` |
+| **CCS-C1** Three-operator decomposition | cross-operator | Continual-agent competence over a lifetime decomposes usefully into ACCUMULATE (retain candidate… | `conjecture` | partial | `state-promotion/EXP-001`, `plasticity-routing/EXP-001`, `plasticity-routing/EXP-003`, `adaptive-commitment/EXP-A1` |
 | **CCS-C2** Evidence-gated commitment beats scheduled commitment | COMMIT_INTERNAL | Under matched trainable-parameter capacity, replay budget, online-token budget and parameter-write… | `unresolved` | implemented | `state-promotion/EXP-001`, `state-promotion/EXP-002`, `state-promotion/EXP-003` |
 | **CCS-C3** Persistent latent state carries context-dependent exceptions | COMMIT_INTERNAL | A bounded persistent latent state carried across stream items contributes specifically to handling… | `unresolved` | implemented | `state-promotion/EXP-001` |
-| **CCS-C4** Allocation is a separable lever from commitment | ALLOCATE | Where an experience is routed within the substrate affects the stability-plasticity trade-off… | `unresolved` | implemented | `plasticity-routing/EXP-001`, `plasticity-routing/EXP-002` |
+| **CCS-C4** Allocation is a separable lever from commitment | ALLOCATE | Where an experience is routed within the substrate affects the stability-plasticity trade-off… | `unresolved` | implemented | `plasticity-routing/EXP-001`, `plasticity-routing/EXP-002`, `plasticity-routing/EXP-003` |
 | **CCS-C5** Adaptive consolidation thresholds beat fixed thresholds | COMMIT_INTERNAL | For COMMIT_INTERNAL, a consolidation criterion that adapts to observed stream statistics outperforms a… | `conjecture` | none | `state-promotion/EXP-F1` |
 | **CCS-C6** Modular slow state reduces interference | COMMIT_INTERNAL | In an unbounded-capacity regime, consolidating durable knowledge into separable modules produces less… | `unresolved` | implemented | `modular-consolidation/EXP-100` |
 | **CCS-C7** Lifetime coherence is maintainable | ACCUMULATE | A multi-timescale substrate can be operated over lifetimes far longer than any single experiment stream… | `unresolved` | implemented | `lifetime-integrity/EXP-A001`, `lifetime-integrity/EXP-B001` |
@@ -75,6 +75,11 @@ experiment establishes that allocation *content* matters under matched budgets,
 and contains no independently manipulable COMMIT_INTERNAL policy, so it cannot
 settle the separability statement CCS-C4 actually makes. The claim was **not
 narrowed post hoc** to match what arrived.
+
+CCS-C4 now has a **designed but unadopted settlement path** —
+`plasticity-routing/EXP-003` — and a third falsifier drawn from it. That changes
+no status: a design is not evidence, and the umbrella records it as a settlement
+path rather than as progress.
 
 Five entries deserve attention before the rest:
 

@@ -33,8 +33,13 @@ to be filled in.
       **Still unchecked after `plasticity-routing/EXP-001` read out confirmatory.**
       That result is admissible and supports H1, but it establishes that allocation
       *content* matters; it holds no COMMIT_INTERNAL policy fixed as an independent
-      control, so it is the wrong shape to settle separability. This box needs an
-      experiment nobody currently runs.
+      control, so it is the wrong shape to settle separability. As of 2026-09-04
+      an experiment of the right shape has been **designed but not adopted** —
+      `plasticity-routing/EXP-003`, a factorial crossing allocation against a
+      schedule-only commitment operator. A design is not a result and this box
+      stays unchecked. Note also that even a fully successful EXP-003 would
+      settle separability from commitment *timing* only, so this box may need
+      two experiments rather than one.
 - [ ] At least one long-horizon result on lifetime coherence
       (`lifetime-integrity/EXP-A001` — preregistered, not read out)
 - [ ] An admissible substrate established by `state-promotion`, without which

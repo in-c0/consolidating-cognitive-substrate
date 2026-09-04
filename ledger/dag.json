@@ -352,6 +352,31 @@
       "readout": null,
       "admissible_as_evidence": true,
       "gating_note": "Predeclared 2026-09-03 as prospective falsifiable predictions for the real-model pilot, committed before the instrumentation that would record the diagnostics - the same preregistration-before-runner convention used for EXP-003. The pilot itself is BLOCKED on the common substrate export from plasticity-routing (D9), so this node cannot run. It is recorded because writing the predictions before the result is what makes the EXP-003 mechanism falsifiable rather than a story fitted afterwards."
+    },
+    {
+      "id": "plasticity-routing/EXP-003",
+      "repo": "plasticity-routing",
+      "stage": "not-designed",
+      "operator": "ALLOCATE + COMMIT_INTERNAL",
+      "question": "Under matched write, storage, compute AND realized commit counts, does allocation CONTENT change outcomes when the internal commitment schedule is held identical - and does that effect replicate across predeclared commitment regimes?",
+      "depends_on": [
+        "plasticity-routing/EXP-001"
+      ],
+      "tests_claims": [
+        "CCS-C4",
+        "CCS-C1"
+      ],
+      "readout": null,
+      "admissible_as_evidence": null,
+      "gating_note": "DESIGN ONLY, NOT ADOPTED BY THE OWNING TRACK. Stage is 'not-designed' because that track has not adopted or preregistered it; a design document existing is not a design decision. Drafted 2026-09-04 on branch design/exp003-allocation-commitment-factorial in that repository, deliberately not on main so adoption stays an explicit act by that track. The umbrella did not modify any sibling protocol. RECORDED AS A SETTLEMENT PATH FOR CCS-C4, NOT AS PROGRESS OR EVIDENCE. Synthesis readiness is unchanged and no claim status moved.",
+      "settlement_path_for": {
+        "claim": "CCS-C4",
+        "closes": "The experimental-shape gap the umbrella recorded on 2026-09-04: EXP-001 has no independently manipulable COMMIT_INTERNAL policy, because bank.apply(SLOW, ...) writes durably in one act and no FAST-to-SLOW promotion exists. EXP-003 removes SLOW from the allocation action space so durability is reachable only through a separate schedule-only commitment operator, making the two factors structurally distinct.",
+        "primary_criterion": "LEARNED minus ACTION_MATCHED_RANDOM greater than zero, CI excluding zero, in BOTH commitment regimes, at matched realized commit counts. The matched-random control is load-bearing: it equalises the action mix and therefore the commit volume, so the contrast isolates which item was placed where.",
+        "predeclared_failure": "F-C4: if that CI includes zero in either regime after commit-count and budget matching, the apparent allocation advantage is fully explained by commitment timing or count, CCS-C4 is not settled, and EXP-001's partial support does not extend.",
+        "scope_limit": "Commitment is operationalised as a SCHEDULE, not an evidence gate, because importing an unvalidated State Promotion mechanism is forbidden. A result would therefore settle separability from commitment TIMING only. CCS-C4 as written does not restrict the commit family, so even a fully successful EXP-003 leaves an evidence-gated residue and would itself be partial-scope evidence.",
+        "identifiability_caveat": "The factors are not fully orthogonal: allocation determines the SUPPLY of commit candidates. This is handled for the primary contrast by construction, but only partly for the interaction term, where arms differ in commit supply as well as allocation content. Recorded before execution rather than discovered after."
+      }
     }
   ]
 }

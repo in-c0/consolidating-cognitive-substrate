@@ -53,6 +53,8 @@ graph TD
   class ccs_EXP_U1 undesigned;
   modular_consolidation_CANDIDATE_DIVERSITY["modular-consolidation<br/>CANDIDATE-DIVERSITY<br/><i>pre-result</i>"]
   class modular_consolidation_CANDIDATE_DIVERSITY active;
+  plasticity_routing_EXP_003["plasticity-routing<br/>EXP-003<br/><i>not designed</i>"]
+  class plasticity_routing_EXP_003 undesigned;
 
   state_promotion_EXP_000 --> state_promotion_EXP_001
   state_promotion_EXP_001 --> state_promotion_EXP_002
@@ -77,6 +79,7 @@ graph TD
   adaptive_commitment_EXP_A1 --> ccs_EXP_U1
   modular_consolidation_EXP_003 --> modular_consolidation_CANDIDATE_DIVERSITY
   plasticity_routing_EXP_001 --> modular_consolidation_CANDIDATE_DIVERSITY
+  plasticity_routing_EXP_001 --> plasticity_routing_EXP_003
 
   classDef active fill:#1f6feb,stroke:#1f6feb,color:#fff;
   classDef pilot fill:#8b5cf6,stroke:#8b5cf6,color:#fff;
@@ -108,6 +111,7 @@ Solid nodes exist in code. Dashed nodes have no repository. The red node has no 
 | `adaptive-commitment/EXP-A1` | COMMIT_EXTERNAL | planned | CCS-C1 | — |
 | `ccs/EXP-U1` | COMMIT_INTERNAL + COMMIT_EXTERNAL | not-designed | CCS-C12 | `state-promotion/EXP-001`, `adaptive-commitment/EXP-A1` |
 | `modular-consolidation/CANDIDATE-DIVERSITY` | COMMIT_INTERNAL | pre-result-scaffold | CCS-C13 | `modular-consolidation/EXP-003`, `plasticity-routing/EXP-001` |
+| `plasticity-routing/EXP-003` | ALLOCATE + COMMIT_INTERNAL | not-designed | CCS-C4, CCS-C1 | `plasticity-routing/EXP-001` |
 
 <!-- /GENERATED:dag -->
 
@@ -149,6 +153,25 @@ A freeze is a statement about *what may be run*, not a result, so it moved no
 claim and recorded no evidence. The stage exists precisely so that a freeze can
 never be mistaken for a readout — the validator refuses to let a `protocol-frozen`
 node carry one.
+
+### The programme has both margins and no interaction
+
+Until 2026-09-04 no experiment anywhere in the programme crossed two operators:
+
+| | allocation | commitment |
+|---|---|---|
+| `state-promotion` B3/B4/B5 | fixed | **varied** |
+| `plasticity-routing` EXP-001 | **varied** | conflated with allocation |
+| `plasticity-routing` EXP-003 *(designed, not adopted)* | **varied** | **varied** |
+
+Each existing track holds constant the thing the other varies, and EXP-001
+cannot even hold commitment constant because it has no separate commitment: in
+its substrate, choosing `SLOW` *is* committing. That is why CCS-C4 has been stuck
+at `unresolved` while carrying admissible evidence.
+
+`plasticity-routing/EXP-003` is the first design that crosses a pair. It is
+recorded at stage `not-designed` because the owning track has not adopted it —
+a design document existing is not a design decision.
 
 ### Parallelism did not remove the risk
 
