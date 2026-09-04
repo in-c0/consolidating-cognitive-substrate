@@ -46,12 +46,12 @@
       "observed": {
         "default_branch": "main",
         "visibility": "public",
-        "pushed_at": "2026-09-03T11:09:18Z",
+        "pushed_at": "2026-09-04T03:51:14Z",
         "head": "3495d49",
         "results_dir_populated": false,
         "open_issue_count": 3,
         "open_issue_titles": [
-          "#6 EXP-001 v2: consolidation-sufficiency repair on fresh development seeds",
+          "#7 EXP-001 v3: repair latent state in embedding space before any further routing test",
           "#4 EXP-001R: restore input-conditional plasticity before development seeds",
           "#1 EXP-001: Run and validate small-LM State Promotion experiment"
         ]
@@ -104,13 +104,14 @@
         "Its EXP-002 (language model) is blocked on review of the first mechanically valid state-promotion engineering pilot. Its EXP-001 is synthetic and not blocked by that gate.",
         "modular-consolidation treats this track as a blocking substrate dependency: it must freeze or export the shared LM backbone, adapter family/rank, training budget and routing substrate before that track's real-model panel and EXP-100 can proceed.",
         "2026-09-03: PROTOCOL v1.0 FROZEN at commit 61c4935, blockers none, five confirmatory seeds held out and NOT executed. L5a retained as permanently failed and non-gating; predeclared L5b cross-world attribution gate PASSED on spent one-shot audit seeds. A validity and protocol milestone, not empirical support: no CCS status changed and no evidence entry was recorded. The freeze covers the SYNTHETIC SDW-1 protocol only - no common LM/adaptation/routing substrate has been exported, and that track's own EXP-002 language-model experiment remains BLOCKED.",
-        "2026-09-04: EXP-001 CONFIRMATORY completed at a767a66 under protocol v1.2 on the five held-out seeds. H1 SUPPORTED; all gates passed; 65 manifests re-validated against the frozen lock. This is the programme's FIRST ADMISSIBLE CONFIRMATORY ARTEFACT. It supports CCS-C4 only partially - allocation content matters under matched budgets - and does not establish separability from COMMIT_INTERNAL, so CCS-C4 was not promoted. Comparator lineage verified: HEURISTIC_EXT was preregistered as the primary H1 comparator before the v1.0 freeze and is the stronger of the two, so the sign flip against the earlier development record reflects a pre-freeze trainer replacement, not a post-hoc comparator swap. Still no LM substrate export; EXP-002 remains BLOCKED."
+        "2026-09-04: EXP-001 CONFIRMATORY completed at a767a66 under protocol v1.2 on the five held-out seeds. H1 SUPPORTED; all gates passed; 65 manifests re-validated against the frozen lock. This is the programme's FIRST ADMISSIBLE CONFIRMATORY ARTEFACT. It supports CCS-C4 only partially - allocation content matters under matched budgets - and does not establish separability from COMMIT_INTERNAL, so CCS-C4 was not promoted. Comparator lineage verified: HEURISTIC_EXT was preregistered as the primary H1 comparator before the v1.0 freeze and is the stronger of the two, so the sign flip against the earlier development record reflects a pre-freeze trainer replacement, not a post-hoc comparator swap. Still no LM substrate export; EXP-002 remains BLOCKED.",
+        "2026-09-04 (later): advanced to 9c2ddc3 with Amendment N and an EXP-002 substrate-sufficiency preregistration, design only. Does NOT touch substrates.py or the allocation action space, so the EXP-003 design on branch design/exp003-allocation-commitment-factorial remains valid against it. Still no LM substrate export; EXP-100's blocker stands."
       ],
       "observed": {
         "default_branch": "main",
         "visibility": "public",
-        "pushed_at": "2026-09-04T02:51:03Z",
-        "head": "6ade08b",
+        "pushed_at": "2026-09-04T03:54:50Z",
+        "head": "9c2ddc3",
         "results_dir_populated": true,
         "open_issue_count": 2,
         "open_issue_titles": [
@@ -181,14 +182,15 @@
         "Self-declared status: pre-results / experiment scaffold. Its single-seed EXP-000 pilot is explicitly not evidence.",
         "HARD CONSTRAINT declared by that track: no result from it may be used to claim that a CCS latent architecture is validated. That requires an admissible substrate established by state-promotion and subsequent routing work. The benchmark is built to remain useful if the CCS programme goes nowhere.",
         "Consequence for the umbrella: CCS-C7 cannot reach an empirical-support status from lifetime-integrity results alone, however strong, until an admissible substrate exists.",
-        "2026-09-03: main unchanged at eb8547c and results/ still holds only .gitkeep. The push activity since the last reconciliation is a new branch, phase2-matched-controls (7632378), which is branch-only and non-admissible. No evidence or status change."
+        "2026-09-03: main unchanged at eb8547c and results/ still holds only .gitkeep. The push activity since the last reconciliation is a new branch, phase2-matched-controls (7632378), which is branch-only and non-admissible. No evidence or status change.",
+        "2026-09-04 - UNASSESSED READOUT. main advanced eb8547c -> 1693119 with 'Phase 3: confirmatory results, 12 seeds x 5 horizons, executed once', preceded by a Phase 3 confirmatory freeze and a merged Phase 2 PR. This is potentially the programme's SECOND admissible confirmatory artefact and it has NOT been assessed - it was discovered at the end of a pass scoped to the EXP-003 design, and assessing it properly requires the full evidence-aware procedure. CCS-C7 is unchanged pending that assessment. Note the standing constraint: that track declares itself architecture-agnostic and forbids its results licensing a CCS latent-architecture claim without an admissible substrate from state-promotion, so even a clean confirmatory result there may not promote CCS-C7 at CCS level. NEXT RECONCILIATION MUST START HERE."
       ],
       "observed": {
         "default_branch": "main",
         "visibility": "public",
-        "pushed_at": "2026-09-03T04:17:20Z",
-        "head": "eb8547c",
-        "results_dir_populated": false,
+        "pushed_at": "2026-09-04T03:30:15Z",
+        "head": "1693119",
+        "results_dir_populated": true,
         "open_issue_count": 1,
         "open_issue_titles": [
           "#1 Lifetime Integrity: track charter, phase gates, and novelty boundary"
