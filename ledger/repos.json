@@ -145,13 +145,14 @@
         "Declares no dependency in either direction with lifetime-integrity. The umbrella's earlier DAG edge from modular-consolidation to lifetime-integrity was an umbrella-side assumption and has been removed.",
         "2026-09-03: EXP-003 EXECUTED and interpreted (commits 4fc469e, 7dca358), landing after the reconciliation brief was written. This is a readout, not the schema/reporting completion the brief anticipated. Preregistered frozen grid, 600 rows, 2619 merge events, construction VALID - but development seeds 900-907 only, so non-admissible. Recorded against CCS-C11 with direction 'mixed'. That track reports two readings of its own predeclared Pareto rule, notes that the strict reading is unsatisfiable by construction, and explicitly defers the choice to its owner; the umbrella does not resolve it.",
         "2026-09-03 (later same day): owner decisions D7/D8/D9 landed while this reconciliation was running. D7 adopts the standard nondominated-frontier reading; D8 verdict SIMULATOR FRONTIER CONDITION SATISFIED; D9 keeps the architecture-paper gate CLOSED pending a real-model result. Candidate-diversity predictions predeclared for that pilot, which stays blocked on the plasticity-routing substrate export. No admissibility change: still development seeds.",
-        "2026-09-04: advanced to 417a63c, instrumentation only - C1-C6 candidate-diversity diagnostics in scripts/policies plus tests, no results, no DEPENDENCIES change. Recorded as implementation/provenance metadata; no evidence or status change."
+        "2026-09-04: advanced to 417a63c, instrumentation only - C1-C6 candidate-diversity diagnostics in scripts/policies plus tests, no results, no DEPENDENCIES change. Recorded as implementation/provenance metadata; no evidence or status change.",
+        "2026-09-04 (later): advanced again to 81b1f6f with methods-track documentation only - a Layer-B native-fidelity ledger, an M4 paper-versus-code contract, and an M3 note recording that the final MoCL-P source recovery attempt was UNSUCCESSFUL and that blocker stands. No experiment run, no results, no dependency change. Provenance metadata only."
       ],
       "observed": {
         "default_branch": "main",
         "visibility": "public",
-        "pushed_at": "2026-09-03T04:17:54Z",
-        "head": "417a63c",
+        "pushed_at": "2026-09-04T02:56:53Z",
+        "head": "81b1f6f",
         "results_dir_populated": true,
         "open_issue_count": 1,
         "open_issue_titles": [
