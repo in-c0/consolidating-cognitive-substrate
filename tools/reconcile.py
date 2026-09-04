@@ -25,6 +25,12 @@ REPOS = ROOT / "ledger" / "repos.json"
 # Every command this tool is permitted to run. Anything mutating is absent.
 READ_ONLY_ENDPOINTS = ("repos/",)
 
+# A sibling may publish findings in its ISSUE TRACKER rather than in its files.
+# state-promotion did exactly that, and three consecutive reconciliations reported
+# "no results" for a track that had completed an engineering pilot. Issue titles
+# are surfaced so that a readout held outside the tree cannot be missed again.
+ISSUE_SCAN_LIMIT = 20
+
 
 def gh_api(path: str) -> tuple[bool, object]:
     """GET a GitHub API path via the gh CLI. Refuses non-read-only paths."""
@@ -60,6 +66,17 @@ def observe(slug: str) -> dict | None:
     if ok and isinstance(contents, list):
         real = [c for c in contents if c["name"] not in (".gitkeep", ".gitignore")]
         obs["results_dir_populated"] = bool(real)
+
+    # Findings may live in issues rather than in files.
+    ok, issues = gh_api(
+        f"repos/{slug}/issues?state=open&per_page={ISSUE_SCAN_LIMIT}"
+    )
+    if ok and isinstance(issues, list):
+        real_issues = [i for i in issues if "pull_request" not in i]
+        obs["open_issue_count"] = len(real_issues)
+        obs["open_issue_titles"] = [
+            f"#{i['number']} {i['title']}" for i in real_issues
+        ]
     return obs
 
 
@@ -105,6 +122,17 @@ def main() -> int:
                 drift.append(
                     f"{slug}: {field} changed {prev[field]!r} -> {live[field]!r}"
                 )
+
+        prev_titles = set(prev.get("open_issue_titles") or [])
+        new_titles = [
+            t for t in (live.get("open_issue_titles") or []) if t not in prev_titles
+        ]
+        if new_titles:
+            drift.append(
+                f"{slug}: new open issue(s) - a sibling may publish findings here "
+                f"rather than in files, so read before concluding 'no results': "
+                + "; ".join(new_titles)
+            )
 
         if live.get("results_dir_populated") and not prev.get("results_dir_populated"):
             drift.append(

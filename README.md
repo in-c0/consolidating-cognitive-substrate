@@ -6,14 +6,18 @@ evidence status.
 
 > ## Status: no claim in this programme has empirical support.
 >
-> Reconciled 2026-09-03 against live GitHub state. **Four of five** sibling
-> repositories exist, one has a **frozen confirmatory protocol** and another has a
-> **preregistered frozen-grid result** — and **0 of 12 claims** have admissible
-> evidence, because every result on file is on development seeds and every track
-> says so about its own output. **0 of 4 synthesis-readiness tiers are cleared.**
+> Reconciled 2026-09-04. **The programme has its first admissible confirmatory
+> result**: `plasticity-routing/EXP-001` passed every preregistered gate on five
+> held-out seeds. It supports CCS-C4 **partially** — allocation *content* matters
+> under matched budgets — and does not establish CCS-C4's separability statement,
+> because the experiment contains no independently manipulable COMMIT_INTERNAL
+> policy to hold fixed.
 >
-> Repositories existing is not progress toward a claim. This repository exists to
-> keep that distinction visible.
+> **CCS-C4 stays `unresolved`, and was not narrowed to fit the result.** No claim
+> has empirical support. **0 of 4 synthesis-readiness tiers are cleared.**
+>
+> A component result is not evidence that the decomposition composes. This
+> repository exists to keep that distinction visible.
 
 ## What this repository is
 
@@ -75,7 +79,7 @@ COMMIT_EXTERNAL belongs in the pipeline above is unresolved.
 | Repository | Operator | Exists | Owns claims | Best result on file |
 |---|---|---|---|---|
 | [`in-c0/state-promotion`](https://github.com/in-c0/state-promotion) | COMMIT_INTERNAL | ✅ | CCS-C2, C3, C5, C10 | engineering pilot, null on the mechanism |
-| [`in-c0/plasticity-routing`](https://github.com/in-c0/plasticity-routing) | ALLOCATE | ✅ | CCS-C4 | **protocol v1.0 frozen**, confirmatory seeds unspent |
+| [`in-c0/plasticity-routing`](https://github.com/in-c0/plasticity-routing) | ALLOCATE | ✅ | CCS-C4 | **confirmatory complete, H1 supported** — partial support only |
 | [`in-c0/modular-consolidation`](https://github.com/in-c0/modular-consolidation) | COMMIT_INTERNAL target structure | ✅ | CCS-C6, C11 | preregistered frozen grid, development seeds |
 | [`in-c0/lifetime-integrity`](https://github.com/in-c0/lifetime-integrity) | ACCUMULATE / long horizon | ✅ | CCS-C7 | single-seed pilot, non-evidential |
 | `in-c0/adaptive-commitment` | COMMIT_EXTERNAL | ❌ planned | *(none yet)* | — |
@@ -94,9 +98,15 @@ they do not travel to other tracks. The umbrella honours those declarations: see
 | `confirmatory-supported` | **0** |
 | `falsified` | 0 |
 
-Eight evidence entries are on file and **none is admissible**. Three of thirteen
-claims have no runnable test: CCS-C5, CCS-C8 and CCS-C12 — the last two because
-their experiments have no host repository, deliberately. Full table:
+Ten evidence entries are on file; **one is admissible, and it is partial-scope**.
+Three of thirteen claims have no runnable test: CCS-C5, CCS-C8 and CCS-C12 — the
+last two because their experiments have no host repository, deliberately.
+
+The ledger distinguishes **full** from **partial** evidence scope. A partial entry
+records what it establishes *and* what it leaves open, so an admissible component
+result can be logged without narrowing the claim to fit it. The validator refuses
+a full-scope supporting admissible entry on an unpromoted claim, and requires a
+`held_back_reason` whenever admissible evidence does not promote. Full table:
 [docs/CLAIM-LEDGER.md](docs/CLAIM-LEDGER.md).
 
 Two claims are worth reading before the rest. **CCS-C6** carries two

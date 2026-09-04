@@ -68,7 +68,15 @@ COMMIT_INTERNAL follow-on. CCS-C12 was **added** as the falsifiable home for a
 unification the old vocabulary asserted for free. No status moved in either
 direction, and CCS-C4, CCS-C6 and CCS-C11 are untouched.
 
-Four entries deserve attention before the rest:
+Updated 2026-09-04. **The programme has its first admissible confirmatory
+evidence** — `plasticity-routing/EXP-001`, recorded against CCS-C4 with scope
+`partial`. CCS-C4 remains `unresolved` and carries a `held_back_reason`: the
+experiment establishes that allocation *content* matters under matched budgets,
+and contains no independently manipulable COMMIT_INTERNAL policy, so it cannot
+settle the separability statement CCS-C4 actually makes. The claim was **not
+narrowed post hoc** to match what arrived.
+
+Five entries deserve attention before the rest:
 
 - **CCS-C6** carries two against-direction development results. Its owning track
   records the equivalent track-local claim as falsified. It is held at
@@ -78,6 +86,10 @@ Four entries deserve attention before the rest:
 - **CCS-C11** was *added* rather than substituted for CCS-C6, so that narrowing
   the question to the regime where it survives cannot be mistaken for the
   original claim having held.
+- **CCS-C10** now has the quantification it was waiting for, and it is
+  unfavourable: `state-promotion`'s engineering pilot measured B5 decision compute
+  at **72.4% of total algorithmic compute** — roughly 2.6× more spent deciding
+  than adapting. That raises the bar the claim must clear rather than settling it.
 - **CCS-C12** has a low prior and is the only claim whose falsifiers include a
   *measurement* failure: if the cost structures of internal and external
   commitment are incommensurable, unification fails even if a shared mechanism is

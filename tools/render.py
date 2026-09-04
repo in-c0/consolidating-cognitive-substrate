@@ -172,17 +172,33 @@ def render_evidence(claims: dict, dag: dict, repos: dict) -> str:
 
     # Evidence actually on file.
     lines += ["", "### Evidence on file", "",
-              "| Claim | Artefact | Class | Admissible | Direction |", "|---|---|---|---|---|"]
+              "| Claim | Artefact | Class | Admissible | Scope | Direction |",
+              "|---|---|---|---|---|---|"]
     rows = 0
     for c in claims["claims"]:
         for e in c["evidence"]:
+            scope = e.get("scope", "—")
             lines.append(
                 f"| {c['id']} | `{e['repo']}/{e['artefact']}` | {e['class']} "
-                f"| {'yes' if e['admissible'] else '**no**'} | {e.get('direction', '—')} |"
+                f"| {'**yes**' if e['admissible'] else 'no'} "
+                f"| {'**partial**' if scope == 'partial' else scope} "
+                f"| {e.get('direction', '—')} |"
             )
             rows += 1
-    adm = sum(1 for c in claims["claims"] for e in c["evidence"] if e["admissible"])
-    lines += ["", f"**{rows} evidence entries on file. {adm} admissible.**"]
+    adm = [e for c in claims["claims"] for e in c["evidence"] if e["admissible"]]
+    full = [e for e in adm if e.get("scope") == "full"]
+    lines += [
+        "",
+        f"**{rows} evidence entries on file. {len(adm)} admissible "
+        f"({len(full)} full-scope, {len(adm) - len(full)} partial).**",
+        "",
+        "A `partial` entry is admissible evidence that addresses only part of the "
+        "claim it hangs on. It records what it establishes *and* what it leaves "
+        "open, so a component result can be logged without narrowing the claim to "
+        "fit it. A claim carrying admissible evidence that is not promoted must "
+        "state a `held_back_reason`, and the validator refuses a full-scope "
+        "supporting admissible entry on an unpromoted claim.",
+    ]
     return "\n".join(lines)
 
 

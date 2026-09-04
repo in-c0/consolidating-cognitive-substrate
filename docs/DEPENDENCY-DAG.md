@@ -25,7 +25,7 @@ graph TD
   class state_promotion_EXP_F1 undesigned;
   plasticity_routing_EXP_000["plasticity-routing<br/>EXP-000<br/><i>development-calibration-complete</i>"]
   class plasticity_routing_EXP_000 planned;
-  plasticity_routing_EXP_001["plasticity-routing<br/>EXP-001<br/><i>protocol-frozen</i>"]
+  plasticity_routing_EXP_001["plasticity-routing<br/>EXP-001<br/><i>confirmatory-complete</i>"]
   class plasticity_routing_EXP_001 planned;
   plasticity_routing_EXP_002["plasticity-routing<br/>EXP-002<br/><i>planned</i>"]
   class plasticity_routing_EXP_002 planned;
@@ -94,7 +94,7 @@ Solid nodes exist in code. Dashed nodes have no repository. The red node has no 
 | `state-promotion/EXP-003` | COMMIT_INTERNAL | planned | CCS-C2 | `state-promotion/EXP-001` |
 | `state-promotion/EXP-F1` | COMMIT_INTERNAL | not-designed | CCS-C5 | `state-promotion/EXP-001` |
 | `plasticity-routing/EXP-000` | ALLOCATE | development-calibration-complete | — | — |
-| `plasticity-routing/EXP-001` | ALLOCATE | protocol-frozen | CCS-C4, CCS-C1, CCS-C9 | `plasticity-routing/EXP-000` |
+| `plasticity-routing/EXP-001` | ALLOCATE | confirmatory-complete | CCS-C4, CCS-C1, CCS-C9 | `plasticity-routing/EXP-000` |
 | `plasticity-routing/EXP-002` | ALLOCATE | planned | CCS-C4 | `plasticity-routing/EXP-001`, `state-promotion/EXP-001` |
 | `modular-consolidation/EXP-000` | COMMIT_INTERNAL | development-calibration-complete | — | — |
 | `modular-consolidation/EXP-001` | COMMIT_INTERNAL | development-calibration-complete | CCS-C6 | `modular-consolidation/EXP-000` |

@@ -29,8 +29,12 @@ to be filled in.
 
 ### Tier 3 — the decomposition is real (required, none cleared)
 
-- [ ] At least one experiment establishing ALLOCATE as separable from COMMIT_INTERNAL
-      (`plasticity-routing/EXP-001` — preregistered, not read out)
+- [ ] At least one experiment establishing ALLOCATE as separable from COMMIT_INTERNAL.
+      **Still unchecked after `plasticity-routing/EXP-001` read out confirmatory.**
+      That result is admissible and supports H1, but it establishes that allocation
+      *content* matters; it holds no COMMIT_INTERNAL policy fixed as an independent
+      control, so it is the wrong shape to settle separability. This box needs an
+      experiment nobody currently runs.
 - [ ] At least one long-horizon result on lifetime coherence
       (`lifetime-integrity/EXP-A001` — preregistered, not read out)
 - [ ] An admissible substrate established by `state-promotion`, without which
@@ -61,7 +65,7 @@ honestly publishable, as each tier clears:
 The gap between row 4 and row 5 is the entire difference between "we built several
 things" and "these things constitute a substrate". Only Tier 4 evidence closes it.
 
-## Where the programme actually stands — reconciled 2026-09-03
+## Where the programme actually stands — reconciled 2026-09-04
 
 **Zero of four tiers cleared. Zero checkboxes cleared.**
 
@@ -69,10 +73,15 @@ The programme grew substantially between the first survey and this
 reconciliation, and cleared nothing:
 
 - Four repositories of five now exist; `adaptive-commitment` is the last gap.
-- **Seven evidence entries are on file and none is admissible.** Every one is on
-  development seeds, and every track classifies its own output that way.
-- `plasticity-routing` has a **frozen confirmatory protocol** with unspent seeds —
-  the closest the programme has come to admissible evidence, and still not it.
+- **Ten evidence entries; one is admissible.** `plasticity-routing/EXP-001`
+  completed its one-shot confirmatory run on five held-out seeds with every gate
+  passed. It is the programme's first admissible artefact.
+- **It cleared no tier.** Tier 3 asks for ALLOCATE to be shown separable from
+  COMMIT_INTERNAL; EXP-001 shows allocation content matters, which is a different
+  statement and is recorded as partial-scope evidence.
+- That track has itself preregistered EXP-001R, a replication on 32 untouched
+  seeds, on the explicit grounds that five seeds and 20,000 bootstrap resamples do
+  not make an effect broadly established.
 - `modular-consolidation` executed a **preregistered frozen grid** (EXP-003, 600
   rows, 2 619 merge events, construction valid) on development seeds only.
 - `state-promotion` main is unchanged with an empty `results/`. An off-main
@@ -89,6 +98,18 @@ The correct description of this programme today is: **four well-controlled
 scaffolds, several preregistrations, and no admissible evidence.** That is a
 respectable place to be after one day of parallel work. It is not a substrate,
 and it is not a paper.
+
+### Why one admissible result advanced nothing
+
+This is the first moment the programme could have quietly inflated. A real
+confirmatory result arrived, on a track that has been scrupulous about its own
+limits, and the temptation is to let it stand for more than it covers.
+
+It advanced no tier for a structural reason rather than a cautious one: the
+experiment has no COMMIT_INTERNAL control, so no run of it — however many seeds,
+however tight the intervals — could settle the separability question Tier 3 asks
+about. The correct response to evidence of the wrong shape is to record its scope
+precisely, not to reword the question it fails to answer.
 
 ### The specific trap this page exists to block
 

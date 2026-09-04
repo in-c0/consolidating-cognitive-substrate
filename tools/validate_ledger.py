@@ -31,6 +31,12 @@ STATUSES = [
 EVIDENCE_BEARING = {"pilot-supported", "confirmatory-supported", "falsified"}
 IMPLEMENTATION_LEVELS = {"none", "partial", "implemented"}
 EVIDENCE_CLASSES = {"pilot", "confirmatory"}
+# Scope of an evidence entry RELATIVE TO THE CLAIM IT IS ATTACHED TO.
+#   full    -- addresses the claim as stated
+#   partial -- addresses only part of it; must say which part, and which part
+#              it leaves open, so that admissible evidence for a component can
+#              be recorded without silently narrowing the claim to fit it.
+EVIDENCE_SCOPES = {"full", "partial"}
 STAGES = {
     "not-designed",
     "planned",
@@ -167,6 +173,44 @@ def check_claims(claims_doc: dict, dag_doc: dict, repos_doc: dict) -> None:
                 err(f"{cid}: evidence entry has no artefact path")
             if "admissible" not in e:
                 err(f"{cid}: evidence entry must state admissibility explicitly")
+
+            scope = e.get("scope")
+            if scope not in EVIDENCE_SCOPES:
+                err(
+                    f"{cid}: evidence entry scope {scope!r} must be one of "
+                    f"{sorted(EVIDENCE_SCOPES)}"
+                )
+            elif scope == "partial":
+                # Partial evidence is only honest if it says what it leaves open.
+                for field in ("establishes", "does_not_establish"):
+                    if not e.get(field):
+                        err(
+                            f"{cid}: evidence entry has scope 'partial' but no "
+                            f"{field!r}; partial support must state which part of "
+                            f"the claim it covers and which part stays open"
+                        )
+
+        # INVARIANT 8 -- admissible evidence on a claim that is not promoted must
+        # carry an explicit reason. This is the anti-drift rule in the other
+        # direction: the umbrella must not sit on evidence without saying why.
+        admissible = [e for e in evidence if e.get("admissible")]
+        if admissible and status not in EVIDENCE_BEARING:
+            if not c.get("held_back_reason"):
+                err(
+                    f"{cid}: carries admissible evidence but status is {status!r}; "
+                    f"add 'held_back_reason' stating why this does not promote "
+                    f"the claim"
+                )
+            # A full-scope, supporting, admissible result that does not promote
+            # is a contradiction rather than caution.
+            for e in admissible:
+                if e.get("scope") == "full" and e.get("direction") == "for":
+                    err(
+                        f"{cid}: admissible FULL-scope supporting evidence "
+                        f"({e['artefact']}) cannot leave the claim at {status!r}. "
+                        f"Either promote the claim, or record the entry as "
+                        f"scope 'partial' with what it does not establish."
+                    )
 
         # INVARIANT 7 -- a conjecture must not carry admissible evidence unnoticed.
         if status == "theoretical-conjecture" and any(
@@ -458,9 +502,16 @@ def main() -> int:
         supported = sum(
             counts.get(s, 0) for s in ("pilot-supported", "confirmatory-supported")
         )
+        ev = [e for c in claims for e in c["evidence"]]
+        adm = [e for e in ev if e.get("admissible")]
+        adm_full = [e for e in adm if e.get("scope") == "full"]
         print(
             f"      claims with empirical support: {supported}"
-            + ("" if supported else "  <- nothing in this programme is established yet")
+            + ("" if supported else "  <- no claim is established yet")
+        )
+        print(
+            f"      evidence entries: {len(ev)}, admissible: {len(adm)} "
+            f"({len(adm_full)} full-scope, {len(adm) - len(adm_full)} partial)"
         )
     return 1 if errors else 0
 

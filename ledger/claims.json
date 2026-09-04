@@ -7,10 +7,11 @@
     "        pointing at a committed artefact in a sibling repository.",
     "RULE 4: Every claim must name at least one experiment able to FALSIFY it.",
     "RULE 5: Nothing in this file may be restated as a result anywhere in this repo.",
-    "tools/validate_ledger.py enforces rules 3 and 4 mechanically."
+    "tools/validate_ledger.py enforces rules 3 and 4 mechanically.",
+    "Evidence entries carry a 'scope' relative to the claim they are attached to. 'partial' entries must state what they establish and what they leave open, so that admissible component evidence can be recorded WITHOUT narrowing the claim post hoc to fit it. A claim carrying admissible evidence that is not promoted must carry 'held_back_reason'."
   ],
   "schema_version": 1,
-  "last_reviewed": "2026-09-03",
+  "last_reviewed": "2026-09-04",
   "status_vocabulary": [
     "theoretical-conjecture",
     "implemented",
@@ -58,7 +59,8 @@
           "class": "pilot",
           "admissible": false,
           "direction": "null",
-          "summary": "Toy classifier pilot. Promotion tied with replay within variance (0.457 vs 0.459 final average). The repository states explicitly that this is engineering validation and not evidence for the hypothesis. The fixed-consolidation arm was algebraically identical to replay, so the pilot could not adjudicate the claim at all."
+          "summary": "Toy classifier pilot. Promotion tied with replay within variance (0.457 vs 0.459 final average). The repository states explicitly that this is engineering validation and not evidence for the hypothesis. The fixed-consolidation arm was algebraically identical to replay, so the pilot could not adjudicate the claim at all.",
+          "scope": "full"
         }
       ],
       "supported_by": [
@@ -71,7 +73,7 @@
         "The promotion arm's advantage disappearing when commit count is matched by the B4 random-routing control (EXP-001 kill criterion 5).",
         "Any observed advantage being attributable to unequal parameter writes, task-identity leakage, or ceiling effects."
       ],
-      "notes": "Status is 'unresolved' rather than 'pilot-supported': the only pilot returned a null result and its fixed-consolidation arm was degenerate by construction. As of 2026-09-02 main is unchanged at 3495d49 with an empty results/. A sibling records that an off-main small-LM engineering pilot was run and reviewed and was scientifically uninterpretable because the tested soft-prefix plastic representation underlearned, with an architecture-matched LoRA representation-sufficiency repair predeclared. That work is not merged, not on main, and not admissible.",
+      "notes": "Status is 'unresolved' rather than 'pilot-supported': the only pilot returned a null result and its fixed-consolidation arm was degenerate by construction. As of 2026-09-02 main is unchanged at 3495d49 with an empty results/. A sibling records that an off-main small-LM engineering pilot was run and reviewed and was scientifically uninterpretable because the tested soft-prefix plastic representation underlearned, with an architecture-matched LoRA representation-sufficiency repair predeclared. That work is not merged, not on main, and not admissible. 2026-09-04: ENGINEERING_PILOT-01 exposed a live budget-matching defect - adaptation-token exposure spans 2x across arms (10,080 sequential/random, ~20,200 replay/fixed, 13,447 promotion), and that track's validator does not currently enforce the envelope even though Amendment A names it a primary matched resource. Any B5-versus-replay/fixed comparison is confounded by token exposure until this is equalised or reported as an efficiency curve. This is inherited admissibility rule 2 failing in practice, caught by that track's own pilot before any comparative score was inspected.",
       "review_by": "state-promotion/EXP-001 confirmatory readout",
       "domain": "COMMIT_INTERNAL"
     },
@@ -110,7 +112,22 @@
           "class": "pilot",
           "admissible": false,
           "direction": "mixed",
-          "summary": "DEV_CALIBRATION, trained and evaluated on development seeds {11,12,13}; that track classifies it as not evidence. Two signals point in opposite directions. Kill criterion K1 fired AGAINST learned routing: LEARNED - HEURISTIC = -0.0189, CI [-0.0235,-0.0104], replicating Yoon (2026) in a new setting. K2 did not fire: LEARNED - RANDOM_MATCHED = +0.1108, CI [+0.0927,+0.1264], with a budget-matched control of almost the same action mix, which bears on whether allocation content matters at all. Neither licenses a CCS claim."
+          "summary": "DEV_CALIBRATION, trained and evaluated on development seeds {11,12,13}; that track classifies it as not evidence. Two signals point in opposite directions. Kill criterion K1 fired AGAINST learned routing: LEARNED - HEURISTIC = -0.0189, CI [-0.0235,-0.0104], replicating Yoon (2026) in a new setting. K2 did not fire: LEARNED - RANDOM_MATCHED = +0.1108, CI [+0.0927,+0.1264], with a budget-matched control of almost the same action mix, which bears on whether allocation content matters at all. Neither licenses a CCS claim.",
+          "scope": "partial",
+          "establishes": "That a budget-matched random allocator with nearly the same action mix scores materially lower, i.e. that allocation content is not reducible to write volume.",
+          "does_not_establish": "Anything about separability from a COMMIT_INTERNAL policy, and anything admissible: the run trained and evaluated on the same development seeds."
+        },
+        {
+          "repo": "plasticity-routing",
+          "artefact": "experiments/EXP-001-RESULT.md",
+          "class": "confirmatory",
+          "admissible": true,
+          "scope": "partial",
+          "direction": "for",
+          "summary": "FIRST ADMISSIBLE CONFIRMATORY EVIDENCE IN THE PROGRAMME. One-shot execution under protocol v1.2 on the five held-out seeds {20260902..20260906}; 65 manifests independently re-validated against the frozen lock, VALIDATION PASSED. All preregistered gates passed in order, with comparative metrics withheld until they did. K1 LEARNED - HEURISTIC_EXT = +0.0907 CI [+0.0798,+0.1016], positive on 5/5 seeds; K2 vs SHUFFLE_TRAINED = +0.4893 CI [+0.4553,+0.5232]; K7 vs CAPACITY_MATCHED = +0.2577 CI [+0.2430,+0.2753]; K9 privileged task ID explains nothing (-0.0003); L5b cross-world attribution passed. H1 SUPPORTED. Scoped by that track to synthetic SDW-1 with linear associative substrates; it makes no language-model claim and EXP-002 remains blocked.",
+          "establishes": "That write-depth allocation CONTENT matters under matched write, storage and compute budgets: a policy trained only on decision-time-legal features beats the best fixed rule found under an equal search budget, and the gain survives capacity matching (K7), privileged task identity (K9), budget-matched random allocation, and cross-world attribution (L5b). On SDW-1 only.",
+          "does_not_establish": "The separability statement CCS-C4 actually makes. EXP-001 does not instantiate a separately manipulable COMMIT_INTERNAL timing policy, so it cannot show that allocation can be varied while a distinct commit policy is held fixed. Every arm shares one commitment regime; what varies is where writes go, not when durability is decided. Establishing CCS-C4 requires an experiment that holds a COMMIT_INTERNAL policy fixed as an independent control while allocation varies - which no track currently runs.",
+          "provenance_note": "Comparator lineage checked because the sign of K1 flips against the earlier development record. HEURISTIC_EXT was preregistered as the primary H1 comparator BEFORE the v1.0 freeze (EXP-001-PREREG.md, dev 0.4390 against 0.4046 for the three-parameter grid), and is the STRONGER of the two comparators. The earlier -0.0189 the umbrella recorded was LEARNED against the weaker three-parameter HEURISTIC, before that track replaced a trainer that could not see most of its objective. Both changes are pre-freeze. Protocol v1.2 is certified equivalent to v1.0 on every scientific field, and one aborted attempt is retained, having stopped at gate 2 before any comparative metric was computed."
         }
       ],
       "supported_by": [
@@ -121,9 +138,10 @@
         "Allocation policies producing no measurable difference at fixed commit policy and matched budgets.",
         "Allocation effects being fully explained by the number of commits they induce, which would collapse ALLOCATE into COMMIT."
       ],
-      "notes": "Status moved from theoretical-conjecture to unresolved because the claim is now implemented and under inconclusive development calibration. This is NOT an evidence promotion: both statuses assert zero empirical support, and the move was not made because a repository appeared. The K1/K2 split matters for how the claim should eventually be read: a learned allocator failing to beat a calibrated fixed rule would not by itself falsify CCS-C4, because CCS-C4 is about allocation being a separable lever, not about the policy being learned. That distinction must be preserved when EXP-001 reads out. Updated 2026-09-03: plasticity-routing froze Protocol v1.0 with no blockers, a pinned commit and source-tree hash, and five held-out confirmatory seeds that have NOT been executed. Its L5a leakage control is retained as permanently failed and non-gating, and the predeclared L5b cross-world attribution gate passed on spent one-shot audit seeds. This is a validity and protocol milestone and adds NO evidence entry here: a frozen protocol is a statement about what may be run, not a result. The claim's status is unchanged and no evidence was recorded.",
+      "notes": "Status moved from theoretical-conjecture to unresolved because the claim is now implemented and under inconclusive development calibration. This is NOT an evidence promotion: both statuses assert zero empirical support, and the move was not made because a repository appeared. The K1/K2 split matters for how the claim should eventually be read: a learned allocator failing to beat a calibrated fixed rule would not by itself falsify CCS-C4, because CCS-C4 is about allocation being a separable lever, not about the policy being learned. That distinction must be preserved when EXP-001 reads out. Updated 2026-09-03: plasticity-routing froze Protocol v1.0 with no blockers, a pinned commit and source-tree hash, and five held-out confirmatory seeds that have NOT been executed. Its L5a leakage control is retained as permanently failed and non-gating, and the predeclared L5b cross-world attribution gate passed on spent one-shot audit seeds. This is a validity and protocol milestone and adds NO evidence entry here: a frozen protocol is a statement about what may be run, not a result. The claim's status is unchanged and no evidence was recorded. Updated 2026-09-04. plasticity-routing/EXP-001 read out and is the programme's first admissible confirmatory artefact. CCS-C4 is NOT promoted, for a structural reason rather than a cautious one: the experiment has no COMMIT_INTERNAL control to hold fixed, so it is the wrong shape to settle a separability claim however strong its numbers. The prediction recorded here on 2026-09-02 - that K1 firing against a learned router would not falsify CCS-C4, because C4 is about allocation being a separable lever rather than about the policy being learned - now holds in the mirror image: K1 firing FOR the learned router does not confirm it either. The same distinction cuts both ways, which is some evidence the distinction was real.",
       "review_by": "plasticity-routing/EXP-001 confirmatory readout",
-      "domain": "ALLOCATE"
+      "domain": "ALLOCATE",
+      "held_back_reason": "The admissible confirmatory result is scoped 'partial'. It establishes that allocation content matters under matched budgets; CCS-C4 claims that allocation is SEPARABLE from COMMIT_INTERNAL - that one can be varied while the other is held fixed. EXP-001 contains no independently manipulable COMMIT_INTERNAL policy, so no run of it could settle that. The claim is deliberately NOT narrowed post hoc to match the evidence: narrowing it would convert an unanswered question into an answered one by editing the question. It stays 'unresolved' until an experiment holds a commit policy fixed as an independent control."
     },
     {
       "id": "CCS-C5",
@@ -160,7 +178,8 @@
           "class": "pilot",
           "admissible": false,
           "direction": "against",
-          "summary": "Development toy: a fixed bank of the lifecycle's own final size beat the full lifecycle by 7.8 points at identical capacity. Capacity explained the outcome."
+          "summary": "Development toy: a fixed bank of the lifecycle's own final size beat the full lifecycle by 7.8 points at identical capacity. Capacity explained the outcome.",
+          "scope": "full"
         },
         {
           "repo": "modular-consolidation",
@@ -168,7 +187,8 @@
           "class": "pilot",
           "admissible": false,
           "direction": "against",
-          "summary": "Development simulator on a closed-form ridge learner: retention versus capacity is monotone non-decreasing under any competent routing, replicated across three independent mechanisms, so no interior optimum exists. That track draws the consequence that in the unbounded regime at matched capacity consolidation has nothing to fix, and records its own track-local claim 'consolidation beats a capacity-matched fixed bank (unbounded regime)' as falsified. Explicitly not evidence about real models."
+          "summary": "Development simulator on a closed-form ridge learner: retention versus capacity is monotone non-decreasing under any competent routing, replicated across three independent mechanisms, so no interior optimum exists. That track draws the consequence that in the unbounded regime at matched capacity consolidation has nothing to fix, and records its own track-local claim 'consolidation beats a capacity-matched fixed bank (unbounded regime)' as falsified. Explicitly not evidence about real models.",
+          "scope": "full"
         }
       ],
       "supported_by": [
@@ -198,7 +218,10 @@
           "class": "pilot",
           "admissible": false,
           "direction": "mixed",
-          "summary": "Single seed, no replication, no confidence intervals, generator still under construction; declared NOT EVIDENCE by that track. Engineering objectives confirmed: budgets bind, audit separation holds, every metric can move, benchmark between floor and ceiling. Provisional orderings recorded against the track's own framing: last-write-wins is hard to beat, and provenance-regrounding does not dominate on integrity despite winning on accuracy. The pilot also suggests mechanisms are near-indistinguishable at 8 epochs and separate by more than 0.25 absolute integrity-violation rate at 128."
+          "summary": "Single seed, no replication, no confidence intervals, generator still under construction; declared NOT EVIDENCE by that track. Engineering objectives confirmed: budgets bind, audit separation holds, every metric can move, benchmark between floor and ceiling. Provisional orderings recorded against the track's own framing: last-write-wins is hard to beat, and provenance-regrounding does not dominate on integrity despite winning on accuracy. The pilot also suggests mechanisms are near-indistinguishable at 8 epochs and separate by more than 0.25 absolute integrity-violation rate at 128.",
+          "scope": "partial",
+          "establishes": "That the harness runs, budgets bind, audit separation holds and the benchmark sits between floor and ceiling.",
+          "does_not_establish": "Any coherence result. Single seed, no replication, no CIs, generator still under construction, and that track forbids its results licensing a CCS latent-architecture claim without an admissible substrate."
         }
       ],
       "supported_by": [
@@ -263,7 +286,19 @@
       "status": "unresolved",
       "implementation": "implemented",
       "implementation_note": "state-promotion records decision_forward_calls, decision_tokens_processed and an estimated frozen-backbone decision FLOP proxy separately from adaptation compute.",
-      "evidence": [],
+      "evidence": [
+        {
+          "repo": "state-promotion",
+          "artefact": "issues/1#ENGINEERING_PILOT-01 (findings held in the issue tracker, not in files)",
+          "class": "pilot",
+          "admissible": false,
+          "scope": "partial",
+          "direction": "against",
+          "summary": "ENGINEERING_PILOT-01, retention stream, seed 20260901, six arms, validator valid_for_confirmatory_interpretation true with zero invalidations - and declared by that track as MECHANICALLY VALID BUT SCIENTIFICALLY UNINTERPRETABLE, because the soft-prefix plastic representation underlearned. B5 decision compute is 72.4% of its total algorithmic compute: 1008 routing forwards and 35340 decision tokens against 13447 training tokens, 3.49e13 vs 2.66e13 estimated frozen-backbone FLOPs. B5 spends roughly 2.6x more compute deciding than adapting.",
+          "establishes": "The quantification Amendment E required before protocol v1.0 could be frozen: gating overhead is MATERIAL, not incidental. Under that amendment this triggers the requirement for a performance-versus-total-compute curve or a stronger compute-augmented baseline at confirmatory time.",
+          "does_not_establish": "Whether the overhead erases the gain, because no interpretable gain exists yet: the underlying comparison is uninterpretable and no LoRA B5-vs-baseline comparative score has been inspected. It sets the size of the bar, not whether the method clears it."
+        }
+      ],
       "supported_by": [
         "state-promotion/EXP-001"
       ],
@@ -271,7 +306,7 @@
         "Gating overhead being large enough that a compute-augmented baseline, given the same total budget, matches the promotion arm.",
         "The performance-vs-total-compute curve showing no region where the promotion arm dominates."
       ],
-      "notes": "state-promotion Amendment E locked this before results and forbids describing B5 as compute-matched without qualification. This is a genuine falsifier for the practical version of CCS-C2, not a caveat. As of 2026-09-02 main is unchanged at 3495d49 with an empty results/. A sibling records that an off-main small-LM engineering pilot was run and reviewed and was scientifically uninterpretable because the tested soft-prefix plastic representation underlearned, with an architecture-matched LoRA representation-sufficiency repair predeclared. That work is not merged, not on main, and not admissible.",
+      "notes": "state-promotion Amendment E locked this before results and forbids describing B5 as compute-matched without qualification. This is a genuine falsifier for the practical version of CCS-C2, not a caveat. As of 2026-09-02 main is unchanged at 3495d49 with an empty results/. A sibling records that an off-main small-LM engineering pilot was run and reviewed and was scientifically uninterpretable because the tested soft-prefix plastic representation underlearned, with an architecture-matched LoRA representation-sufficiency repair predeclared. That work is not merged, not on main, and not admissible. Updated 2026-09-04. The long-carried question of whether B5 routing overhead had been quantified is now ANSWERED, and unfavourably: 72.4% of total algorithmic compute, about 2.6x more spent deciding than adapting. This raises the bar CCS-C10 has to clear rather than settling it - a method that must be 2.6x cheaper per unit of adaptation to break even on total compute is a much stronger claim than the adaptation-matched version. The finding lives in that track's ISSUE TRACKER rather than its files, which is why earlier reconciliations recorded state-promotion as having produced nothing.",
       "review_by": "state-promotion/EXP-001 confirmatory readout",
       "domain": "COMMIT_INTERNAL"
     },
@@ -290,7 +325,8 @@
           "class": "pilot",
           "admissible": false,
           "direction": "mixed",
-          "summary": "Development simulator, ceiling 3 with K*=6, 8 paired seeds at identical live-module count, 576 parameters and 33408 bytes of storage per arm. merge - evict = +0.204 retention, CI [+0.125,+0.296]. merge - deny = -0.017 retention with the CI spanning zero, concealing plasticity +0.023 and forgetting +0.039 with CIs excluding zero, i.e. stability converted into plasticity at roughly par. merge - random-merge = +0.009, CI spanning zero, so the pair-selection criterion did not survive to the aggregate. Not evidence about real models."
+          "summary": "Development simulator, ceiling 3 with K*=6, 8 paired seeds at identical live-module count, 576 parameters and 33408 bytes of storage per arm. merge - evict = +0.204 retention, CI [+0.125,+0.296]. merge - deny = -0.017 retention with the CI spanning zero, concealing plasticity +0.023 and forgetting +0.039 with CIs excluding zero, i.e. stability converted into plasticity at roughly par. merge - random-merge = +0.009, CI spanning zero, so the pair-selection criterion did not survive to the aggregate. Not evidence about real models.",
+          "scope": "full"
         },
         {
           "repo": "modular-consolidation",
@@ -298,7 +334,8 @@
           "class": "pilot",
           "admissible": false,
           "direction": "mixed",
-          "summary": "Preregistered frozen-grid development run (prereg committed before the runner), K* in {6,12,24} x ceiling/K* in {1/6..5/6}, 8 development seeds, 600 rows, 2619 merge events, capacity identical across arms per cell. Construction VALID. SUPPORTS the merge-over-evict half decisively: +0.16 to +0.29 retention with CI excluding zero in every non-degenerate cell. CONTRADICTS the claim's motivating framing on the deny half: merge - deny changes sign with absolute K* rather than with pressure (negative at every non-degenerate ratio for K*=6, positive from ratio 1/3 up for K*>=12), AND within a K* merge's advantage grows as the ceiling LOOSENS, with deny winning at the tightest ratio. Also weakens the third falsifier: the merge criterion separates cleanly from random pairing at K*>=12 (precision 0.45-0.81 vs 0.07-0.19), so EXP-002's weak-coupling observation does not generalise beyond the small-K*, tight-ceiling regime. DEVELOPMENT SEEDS ONLY; no confirmatory seed set drawn; closed-form ridge learner. Owner verdict D8 (2026-09-03): SIMULATOR FRONTIER CONDITION SATISFIED under the standard nondominated-frontier reading adopted in D7; D9 keeps the architecture-paper gate CLOSED pending a real-model result. Classification unchanged: DEVELOPMENT_SIMULATOR, development seeds, non-admissible."
+          "summary": "Preregistered frozen-grid development run (prereg committed before the runner), K* in {6,12,24} x ceiling/K* in {1/6..5/6}, 8 development seeds, 600 rows, 2619 merge events, capacity identical across arms per cell. Construction VALID. SUPPORTS the merge-over-evict half decisively: +0.16 to +0.29 retention with CI excluding zero in every non-degenerate cell. CONTRADICTS the claim's motivating framing on the deny half: merge - deny changes sign with absolute K* rather than with pressure (negative at every non-degenerate ratio for K*=6, positive from ratio 1/3 up for K*>=12), AND within a K* merge's advantage grows as the ceiling LOOSENS, with deny winning at the tightest ratio. Also weakens the third falsifier: the merge criterion separates cleanly from random pairing at K*>=12 (precision 0.45-0.81 vs 0.07-0.19), so EXP-002's weak-coupling observation does not generalise beyond the small-K*, tight-ceiling regime. DEVELOPMENT SEEDS ONLY; no confirmatory seed set drawn; closed-form ridge learner. Owner verdict D8 (2026-09-03): SIMULATOR FRONTIER CONDITION SATISFIED under the standard nondominated-frontier reading adopted in D7; D9 keeps the architecture-paper gate CLOSED pending a real-model result. Classification unchanged: DEVELOPMENT_SIMULATOR, development seeds, non-admissible.",
+          "scope": "full"
         }
       ],
       "supported_by": [
@@ -353,7 +390,10 @@
           "class": "pilot",
           "admissible": false,
           "direction": "for",
-          "summary": "Development simulator. At ceiling 2 only one candidate pair exists, so merging is forced and blind: precision 0.11-0.13, per-event loss about 0.079, and B-MERGE collapses onto B-MERGE-RAND by construction. As the ceiling loosens the criterion gains real choice: precision rises to 0.81 and per-event loss falls roughly 40-fold. This is the mechanism behind CCS-C11's regime dependence rather than a separate observation. Development seeds only; closed-form ridge learner where merging is near-lossless, so mechanism loss is expected to be understated relative to gradient-trained adapters."
+          "summary": "Development simulator. At ceiling 2 only one candidate pair exists, so merging is forced and blind: precision 0.11-0.13, per-event loss about 0.079, and B-MERGE collapses onto B-MERGE-RAND by construction. As the ceiling loosens the criterion gains real choice: precision rises to 0.81 and per-event loss falls roughly 40-fold. This is the mechanism behind CCS-C11's regime dependence rather than a separate observation. Development seeds only; closed-form ridge learner where merging is near-lossless, so mechanism loss is expected to be understated relative to gradient-trained adapters.",
+          "scope": "partial",
+          "establishes": "The mechanism: at zero candidate slack the merge criterion collapses onto random pairing (precision 0.11-0.13), and with slack it separates cleanly (up to 0.81).",
+          "does_not_establish": "That the mechanism holds on gradient-trained adapters, where the merge operator is expected to carry far more of the damage than in a closed-form learner. Development seeds only."
         }
       ],
       "supported_by": [

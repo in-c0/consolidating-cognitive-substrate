@@ -39,7 +39,7 @@
       ],
       "readout": null,
       "admissible_as_evidence": true,
-      "gating_note": "Still the programme's load-bearing node. main is unchanged at 3495d49 with an empty results/. Off-main branches carry an LM pilot that a sibling records as mechanically valid but scientifically uninterpretable (soft-prefix plastic representation underlearned), plus a predeclared LoRA representation-sufficiency repair and an Amendment F. None of that is merged and none of it is admissible."
+      "gating_note": "Still the load-bearing node for the state pipeline; main remains 3495d49 with an empty results/. UPDATED 2026-09-04: that track's findings are published in its ISSUE TRACKER, not in its files, which is why earlier reconciliations recorded it as having produced nothing. ENGINEERING_PILOT-01 is mechanically valid (validator valid_for_confirmatory_interpretation true, zero invalidations, six arms) but declared SCIENTIFICALLY UNINTERPRETABLE because the soft-prefix plastic representation underlearned. It quantified B5 decision compute at 72.4% of total algorithmic compute and exposed an unmatched 2x adaptation-token envelope. EXP-001R has since cleared representation sufficiency (additive LoRA rank 2 at online LR 3e-3) and the Phase-B pause is lifted, but NO LoRA B5-versus-baseline comparative score has been inspected. Nothing admissible."
     },
     {
       "id": "state-promotion/EXP-002",
@@ -103,7 +103,7 @@
     {
       "id": "plasticity-routing/EXP-001",
       "repo": "plasticity-routing",
-      "stage": "protocol-frozen",
+      "stage": "confirmatory-complete",
       "operator": "ALLOCATE",
       "question": "Can a policy learn from delayed future task utility, under a unified resource budget, to allocate experience across substrates of differing persistence - and is any gain attributable to routing rather than capacity, compute, or privileged task identity?",
       "depends_on": [
@@ -114,9 +114,9 @@
         "CCS-C1",
         "CCS-C9"
       ],
-      "readout": null,
+      "readout": "CONFIRMATORY, one shot, protocol v1.2, five held-out seeds {20260902..20260906}. All preregistered gates passed in order with comparative metrics withheld until they did; manifest validation against the frozen lock PASSED with no invalidation reasons. K1 LEARNED - HEURISTIC_EXT = +0.0907 CI [+0.0798,+0.1016], positive 5/5 seeds; K2 = +0.4893; K7 = +0.2577; K9 privileged task ID explains nothing; L5b passed; L5a retained failed and non-gating. H1 SUPPORTED. One aborted attempt retained, stopped at gate 2 before any comparative metric was computed. Scoped by that track to synthetic SDW-1: no language-model claim, EXP-002 still blocked.",
       "admissible_as_evidence": true,
-      "gating_note": "PROTOCOL v1.0 FROZEN 2026-09-03; blockers none; confirmatory seeds held out and NOT executed. That track's validator refuses to certify a confirmatory run whose commit, source-tree hash, config hash or seed does not match the lock, and any edit to src/, scripts/ or the frozen configuration invalidates it. 105 tests pass and the gating leakage suite passes; L5a is retained as permanently failed and non-gating, with the predeclared L5b cross-world attribution gate passing on one-shot audit seeds (Delta_real 0.4929 CI [0.4822, 0.5032]). THIS IS A VALIDITY AND PROTOCOL MILESTONE, NOT EMPIRICAL SUPPORT FOR CCS-C4. No confirmatory number exists. The track retains its deliberately low prior on the learned router beating the calibrated fixed heuristic. This synthetic freeze does NOT satisfy modular-consolidation's separate dependency, which requires an explicitly frozen or exported common LM/adaptation/routing substrate; verified 2026-09-03 that no such export exists and that EXP-002 remains BLOCKED.",
+      "gating_note": "PROGRAMME'S FIRST ADMISSIBLE CONFIRMATORY ARTEFACT. It supports CCS-C4 only PARTIALLY: it establishes that write-depth allocation content matters under matched budgets, but contains no independently manipulable COMMIT_INTERNAL policy and therefore cannot settle CCS-C4's separability statement. CCS-C4 remains unresolved with an explicit held_back_reason; the claim was NOT narrowed post hoc to fit the result. This synthetic result is NOT the LM-substrate export that modular-consolidation/EXP-100 waits on; re-verified 2026-09-04 that no such export exists and EXP-002 remains BLOCKED.",
       "protocol_lock": {
         "frozen_at": "2026-09-03",
         "commit": "61c493549e741bebe9becaba599b01e4c8e0a7f9",
@@ -135,8 +135,10 @@
           20260905,
           20260906
         ],
-        "confirmatory_seeds_executed": false,
-        "blockers": "none"
+        "confirmatory_seeds_executed": true,
+        "blockers": "none",
+        "protocol_version": "v1.2, certified equivalent to v1.0 on every scientific field",
+        "executed": "2026-09-03, one shot, 65 manifests re-validated against the frozen lock"
       }
     },
     {
@@ -154,7 +156,7 @@
       ],
       "readout": null,
       "admissible_as_evidence": true,
-      "gating_note": "Declared BLOCKED by that track until the first mechanically valid state-promotion engineering pilot has been reviewed, so that shared two-timescale defects are not baked in."
+      "gating_note": "Declared BLOCKED by that track until the first mechanically valid state-promotion engineering pilot has been reviewed, so that shared two-timescale defects are not baked in. Re-verified 2026-09-04: still BLOCKED. EXP-001's confirmatory success does not lift this gate, and that track makes no language-model claim."
     },
     {
       "id": "modular-consolidation/EXP-000",
@@ -230,7 +232,7 @@
       ],
       "readout": null,
       "admissible_as_evidence": true,
-      "gating_note": "Preregistration is an explicit DRAFT and NOT FROZEN. Blocked until plasticity-routing freezes or exports the shared LM backbone, adapter family/rank, training budget and routing substrate. RE-VERIFIED 2026-09-03: plasticity-routing's Protocol v1.0 freeze covers its SYNTHETIC SDW-1 EXP-001 only; no LM substrate has been exported and its own EXP-002 language-model experiment remains BLOCKED. The blocker therefore stands. That track states explicitly that EXP-003 does not re-open EXP-100 by itself: D4 additionally requires a real-model result surviving capacity, storage and decision-compute accounting."
+      "gating_note": "Preregistration is an explicit DRAFT and NOT FROZEN. Blocked until plasticity-routing freezes or exports the shared LM backbone, adapter family/rank, training budget and routing substrate. RE-VERIFIED 2026-09-03: plasticity-routing's Protocol v1.0 freeze covers its SYNTHETIC SDW-1 EXP-001 only; no LM substrate has been exported and its own EXP-002 language-model experiment remains BLOCKED. The blocker therefore stands. That track states explicitly that EXP-003 does not re-open EXP-100 by itself: D4 additionally requires a real-model result surviving capacity, storage and decision-compute accounting. RE-VERIFIED 2026-09-04 after plasticity-routing's EXP-001 confirmatory readout: that result is a synthetic SDW-1 outcome, not a common LM/adaptation/routing substrate export. No substrate document exists in that repository and its own EXP-002 remains BLOCKED. The blocker stands."
     },
     {
       "id": "lifetime-integrity/EXP-000",

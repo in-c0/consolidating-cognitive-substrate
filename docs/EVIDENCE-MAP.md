@@ -21,7 +21,7 @@ mapped to it is a claim nobody is testing, and the validator rejects it.
 | `state-promotion/EXP-003` | yes | planned | CCS-C2 | yes |
 | `state-promotion/EXP-F1` | yes | not-designed | CCS-C5 | n/a |
 | `plasticity-routing/EXP-000` | yes | development-calibration-complete | — | **no** |
-| `plasticity-routing/EXP-001` | yes | protocol-frozen | CCS-C4, CCS-C1, CCS-C9 | yes |
+| `plasticity-routing/EXP-001` | yes | confirmatory-complete | CCS-C4, CCS-C1, CCS-C9 | yes |
 | `plasticity-routing/EXP-002` | yes | planned | CCS-C4 | yes |
 | `modular-consolidation/EXP-000` | yes | development-calibration-complete | — | **no** |
 | `modular-consolidation/EXP-001` | yes | development-calibration-complete | CCS-C6 | **no** |
@@ -48,18 +48,22 @@ mapped to it is a claim nobody is testing, and the validator rejects it.
 
 ### Evidence on file
 
-| Claim | Artefact | Class | Admissible | Direction |
-|---|---|---|---|---|
-| CCS-C2 | `state-promotion/experiments/EXP-000-RESULT.md` | pilot | **no** | null |
-| CCS-C4 | `plasticity-routing/experiments/EXP-000-RESULT.md` | pilot | **no** | mixed |
-| CCS-C6 | `modular-consolidation/experiments/EXP-000-TOY-RESULT.md` | pilot | **no** | against |
-| CCS-C6 | `modular-consolidation/experiments/EXP-001-INTERFERENCE-RESULT.md` | pilot | **no** | against |
-| CCS-C7 | `lifetime-integrity/experiments/EXP-000-PILOT-RECORD.md` | pilot | **no** | mixed |
-| CCS-C11 | `modular-consolidation/experiments/EXP-002-CEILING-RESULT.md` | pilot | **no** | mixed |
-| CCS-C11 | `modular-consolidation/experiments/EXP-003-CEILING-PHASE-RESULT.md` | pilot | **no** | mixed |
-| CCS-C13 | `modular-consolidation/experiments/EXP-003-CEILING-PHASE-RESULT.md` | pilot | **no** | for |
+| Claim | Artefact | Class | Admissible | Scope | Direction |
+|---|---|---|---|---|---|
+| CCS-C2 | `state-promotion/experiments/EXP-000-RESULT.md` | pilot | no | full | null |
+| CCS-C4 | `plasticity-routing/experiments/EXP-000-RESULT.md` | pilot | no | **partial** | mixed |
+| CCS-C4 | `plasticity-routing/experiments/EXP-001-RESULT.md` | confirmatory | **yes** | **partial** | for |
+| CCS-C6 | `modular-consolidation/experiments/EXP-000-TOY-RESULT.md` | pilot | no | full | against |
+| CCS-C6 | `modular-consolidation/experiments/EXP-001-INTERFERENCE-RESULT.md` | pilot | no | full | against |
+| CCS-C7 | `lifetime-integrity/experiments/EXP-000-PILOT-RECORD.md` | pilot | no | **partial** | mixed |
+| CCS-C10 | `state-promotion/issues/1#ENGINEERING_PILOT-01 (findings held in the issue tracker, not in files)` | pilot | no | **partial** | against |
+| CCS-C11 | `modular-consolidation/experiments/EXP-002-CEILING-RESULT.md` | pilot | no | full | mixed |
+| CCS-C11 | `modular-consolidation/experiments/EXP-003-CEILING-PHASE-RESULT.md` | pilot | no | full | mixed |
+| CCS-C13 | `modular-consolidation/experiments/EXP-003-CEILING-PHASE-RESULT.md` | pilot | no | **partial** | for |
 
-**8 evidence entries on file. 0 admissible.**
+**10 evidence entries on file. 1 admissible (0 full-scope, 1 partial).**
+
+A `partial` entry is admissible evidence that addresses only part of the claim it hangs on. It records what it establishes *and* what it leaves open, so a component result can be logged without narrowing the claim to fit it. A claim carrying admissible evidence that is not promoted must state a `held_back_reason`, and the validator refuses a full-scope supporting admissible entry on an unpromoted claim.
 
 <!-- /GENERATED:evidence -->
 
@@ -134,6 +138,25 @@ The newer tracks brought controls strong enough to be worth generalising:
 12. **Lock the corruption/difficulty process and hash it into every manifest**
     (from `lifetime-integrity`). Rates may not be retuned after seeing which arm
     won.
+
+### Added 2026-09-04
+
+15. **A sibling may publish findings in its issue tracker rather than its files.**
+    `state-promotion`'s `main` has been unchanged with an empty `results/` for
+    three reconciliations, while its issues carried a completed engineering pilot,
+    a representation-sufficiency repair and a Phase-B baseline freeze. Three
+    consecutive umbrella reconciliations therefore recorded "no results" for a
+    track that had produced several. `tools/reconcile.py` now surfaces open issues
+    per sibling; **every** CCS track turns out to keep a source-of-truth issue.
+    A readout held outside the tree is still a readout.
+
+16. **Admissible evidence may support only part of a claim, and must say so.**
+    Evidence entries carry a `scope` of `full` or `partial`; a partial entry must
+    record what it establishes *and* what it leaves open. A claim carrying
+    admissible evidence that is not promoted must state a `held_back_reason`, and
+    a full-scope supporting admissible entry on an unpromoted claim is rejected
+    outright. This exists so that the honest response to a component result is
+    never to quietly reword the claim it partly covers.
 
 ### Added 2026-09-03
 

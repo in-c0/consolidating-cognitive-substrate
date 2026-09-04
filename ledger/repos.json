@@ -7,7 +7,7 @@
     "dag.json, not here, so that 'observed' stays purely machine-fetched."
   ],
   "schema_version": 1,
-  "last_reconciled": "2026-09-03",
+  "last_reconciled": "2026-09-04",
   "repos": [
     {
       "id": "state-promotion",
@@ -40,14 +40,21 @@
         "in-c0/modular-consolidation records that a mechanically valid small-LM engineering pilot has been run and reviewed, and that it was scientifically uninterpretable because the tested soft-prefix plastic representation underlearned; an architecture-matched LoRA representation-sufficiency repair is predeclared. None of that is on main and none of it is admissible CCS evidence.",
         "plasticity-routing describes this track as sitting at the ALLOCATE-to-COMMIT boundary rather than owning COMMIT outright. Recorded as a framing divergence, not corrected from here.",
         "CCS-C5 (adaptive consolidation thresholds) was reassigned here on 2026-09-03 as a COMMIT_INTERNAL follow-on. This track has NOT adopted it into its plan of record and state-promotion/EXP-F1 is an umbrella-side candidate node only.",
-        "2026-09-03: main still 3495d49 with results/ holding only .gitkeep. Off-main EXP-001R work persists and remains NON-ADMISSIBLE for CCS until merged under that track's own rules. main is the authoritative admissible head."
+        "2026-09-03: main still 3495d49 with results/ holding only .gitkeep. Off-main EXP-001R work persists and remains NON-ADMISSIBLE for CCS until merged under that track's own rules. main is the authoritative admissible head.",
+        "2026-09-04 - IMPORTANT RECONCILIATION LESSON: this track publishes its findings in its GITHUB ISSUE TRACKER, not in its repository files. main is unchanged at 3495d49 with an empty results/, yet issues #1, #4, #5 and #6 carry a completed engineering pilot, a representation-sufficiency repair, a Phase-B baseline freeze and a v2 consolidation-sufficiency plan. tools/reconcile.py read only repository metadata and results/ contents and therefore reported 'no results' for three consecutive reconciliations. The tool now surfaces open issues per sibling."
       ],
       "observed": {
         "default_branch": "main",
         "visibility": "public",
-        "pushed_at": "2026-09-03T04:06:31Z",
+        "pushed_at": "2026-09-03T11:09:18Z",
         "head": "3495d49",
-        "results_dir_populated": false
+        "results_dir_populated": false,
+        "open_issue_count": 3,
+        "open_issue_titles": [
+          "#6 EXP-001 v2: consolidation-sufficiency repair on fresh development seeds",
+          "#4 EXP-001R: restore input-conditional plasticity before development seeds",
+          "#1 EXP-001: Run and validate small-LM State Promotion experiment"
+        ]
       }
     },
     {
@@ -96,14 +103,20 @@
         "TERMINOLOGY DIVERGENCE: this track reads COMMIT as an outward-facing or external commitment (tool call, irreversible action) and states that its durable SLOW write is 'not a commitment in the CCS sense'. The umbrella defines COMMIT as the decision that a change becomes durable, which does include an internal durable write. Recorded, not corrected. See docs/TERMINOLOGY.md.",
         "Its EXP-002 (language model) is blocked on review of the first mechanically valid state-promotion engineering pilot. Its EXP-001 is synthetic and not blocked by that gate.",
         "modular-consolidation treats this track as a blocking substrate dependency: it must freeze or export the shared LM backbone, adapter family/rank, training budget and routing substrate before that track's real-model panel and EXP-100 can proceed.",
-        "2026-09-03: PROTOCOL v1.0 FROZEN at commit 61c4935, blockers none, five confirmatory seeds held out and NOT executed. L5a retained as permanently failed and non-gating; predeclared L5b cross-world attribution gate PASSED on spent one-shot audit seeds. A validity and protocol milestone, not empirical support: no CCS status changed and no evidence entry was recorded. The freeze covers the SYNTHETIC SDW-1 protocol only - no common LM/adaptation/routing substrate has been exported, and that track's own EXP-002 language-model experiment remains BLOCKED."
+        "2026-09-03: PROTOCOL v1.0 FROZEN at commit 61c4935, blockers none, five confirmatory seeds held out and NOT executed. L5a retained as permanently failed and non-gating; predeclared L5b cross-world attribution gate PASSED on spent one-shot audit seeds. A validity and protocol milestone, not empirical support: no CCS status changed and no evidence entry was recorded. The freeze covers the SYNTHETIC SDW-1 protocol only - no common LM/adaptation/routing substrate has been exported, and that track's own EXP-002 language-model experiment remains BLOCKED.",
+        "2026-09-04: EXP-001 CONFIRMATORY completed at a767a66 under protocol v1.2 on the five held-out seeds. H1 SUPPORTED; all gates passed; 65 manifests re-validated against the frozen lock. This is the programme's FIRST ADMISSIBLE CONFIRMATORY ARTEFACT. It supports CCS-C4 only partially - allocation content matters under matched budgets - and does not establish separability from COMMIT_INTERNAL, so CCS-C4 was not promoted. Comparator lineage verified: HEURISTIC_EXT was preregistered as the primary H1 comparator before the v1.0 freeze and is the stronger of the two, so the sign flip against the earlier development record reflects a pre-freeze trainer replacement, not a post-hoc comparator swap. Still no LM substrate export; EXP-002 remains BLOCKED."
       ],
       "observed": {
         "default_branch": "main",
         "visibility": "public",
-        "pushed_at": "2026-09-03T01:25:19Z",
-        "head": "b5075ee",
-        "results_dir_populated": true
+        "pushed_at": "2026-09-04T02:51:03Z",
+        "head": "6ade08b",
+        "results_dir_populated": true,
+        "open_issue_count": 2,
+        "open_issue_titles": [
+          "#2 EXP-002 (LM): pre-result design under the State Promotion pilot findings \u2014 execution NOT authorized",
+          "#1 EXP-001: learned write-depth routing on SDW-1 \u2014 research and execution source of truth"
+        ]
       }
     },
     {
@@ -131,14 +144,19 @@
         "Its own track-local ledger records 'consolidation beats a capacity-matched fixed bank (unbounded regime)' as falsified, explained by its EXP-001 interference result. That is a development-simulator finding on a closed-form ridge learner and its own contamination rule states that results from that track are not evidence for any claim in another track.",
         "Declares no dependency in either direction with lifetime-integrity. The umbrella's earlier DAG edge from modular-consolidation to lifetime-integrity was an umbrella-side assumption and has been removed.",
         "2026-09-03: EXP-003 EXECUTED and interpreted (commits 4fc469e, 7dca358), landing after the reconciliation brief was written. This is a readout, not the schema/reporting completion the brief anticipated. Preregistered frozen grid, 600 rows, 2619 merge events, construction VALID - but development seeds 900-907 only, so non-admissible. Recorded against CCS-C11 with direction 'mixed'. That track reports two readings of its own predeclared Pareto rule, notes that the strict reading is unsatisfiable by construction, and explicitly defers the choice to its owner; the umbrella does not resolve it.",
-        "2026-09-03 (later same day): owner decisions D7/D8/D9 landed while this reconciliation was running. D7 adopts the standard nondominated-frontier reading; D8 verdict SIMULATOR FRONTIER CONDITION SATISFIED; D9 keeps the architecture-paper gate CLOSED pending a real-model result. Candidate-diversity predictions predeclared for that pilot, which stays blocked on the plasticity-routing substrate export. No admissibility change: still development seeds."
+        "2026-09-03 (later same day): owner decisions D7/D8/D9 landed while this reconciliation was running. D7 adopts the standard nondominated-frontier reading; D8 verdict SIMULATOR FRONTIER CONDITION SATISFIED; D9 keeps the architecture-paper gate CLOSED pending a real-model result. Candidate-diversity predictions predeclared for that pilot, which stays blocked on the plasticity-routing substrate export. No admissibility change: still development seeds.",
+        "2026-09-04: advanced to 417a63c, instrumentation only - C1-C6 candidate-diversity diagnostics in scripts/policies plus tests, no results, no DEPENDENCIES change. Recorded as implementation/provenance metadata; no evidence or status change."
       ],
       "observed": {
         "default_branch": "main",
         "visibility": "public",
-        "pushed_at": "2026-09-03T04:13:05Z",
-        "head": "28b2c4d",
-        "results_dir_populated": true
+        "pushed_at": "2026-09-03T04:17:54Z",
+        "head": "417a63c",
+        "results_dir_populated": true,
+        "open_issue_count": 1,
+        "open_issue_titles": [
+          "#1 Modular Consolidation \u2014 source of truth: question, novelty boundary, arm lattice, execution gate"
+        ]
       }
     },
     {
@@ -167,9 +185,13 @@
       "observed": {
         "default_branch": "main",
         "visibility": "public",
-        "pushed_at": "2026-09-03T01:24:10Z",
+        "pushed_at": "2026-09-03T04:17:20Z",
         "head": "eb8547c",
-        "results_dir_populated": false
+        "results_dir_populated": false,
+        "open_issue_count": 1,
+        "open_issue_titles": [
+          "#1 Lifetime Integrity: track charter, phase gates, and novelty boundary"
+        ]
       }
     }
   ],
