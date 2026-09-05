@@ -81,7 +81,7 @@ COMMIT_EXTERNAL belongs in the pipeline above is unresolved.
 | [`in-c0/state-promotion`](https://github.com/in-c0/state-promotion) | COMMIT_INTERNAL | ✅ | CCS-C2, C3, C5, C10 | engineering pilot, null on the mechanism |
 | [`in-c0/plasticity-routing`](https://github.com/in-c0/plasticity-routing) | ALLOCATE | ✅ | CCS-C4 | **confirmatory complete, H1 supported** — partial support only |
 | [`in-c0/modular-consolidation`](https://github.com/in-c0/modular-consolidation) | COMMIT_INTERNAL target structure | ✅ | CCS-C6, C11 | preregistered frozen grid, development seeds |
-| [`in-c0/lifetime-integrity`](https://github.com/in-c0/lifetime-integrity) | ACCUMULATE / long horizon | ✅ | CCS-C7 | single-seed pilot, non-evidential |
+| [`in-c0/lifetime-integrity`](https://github.com/in-c0/lifetime-integrity) | ACCUMULATE / long horizon | ✅ | CCS-C7 | **confirmatory complete** — 12 seeds × 5 horizons |
 | `in-c0/adaptive-commitment` | COMMIT_EXTERNAL | ❌ planned | *(none yet)* | — |
 
 Each existing track declares its own results non-evidential and declares that
@@ -98,7 +98,8 @@ they do not travel to other tracks. The umbrella honours those declarations: see
 | `confirmatory-supported` | **0** |
 | `falsified` | 0 |
 
-Ten evidence entries are on file; **one is admissible, and it is partial-scope**.
+Eleven evidence entries are on file; **two are admissible, both partial-scope**
+— and the second points *against* its claim.
 Three of thirteen claims have no runnable test: CCS-C5, CCS-C8 and CCS-C12 — the
 last two because their experiments have no host repository, deliberately.
 

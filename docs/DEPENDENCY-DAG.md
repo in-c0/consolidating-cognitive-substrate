@@ -41,10 +41,10 @@ graph TD
   class modular_consolidation_EXP_100 planned;
   lifetime_integrity_EXP_000["lifetime-integrity<br/>EXP-000<br/><i>pilot only</i>"]
   class lifetime_integrity_EXP_000 pilot;
-  lifetime_integrity_EXP_A001["lifetime-integrity<br/>EXP-A001<br/><i>pre-result</i>"]
-  class lifetime_integrity_EXP_A001 active;
-  lifetime_integrity_EXP_B001["lifetime-integrity<br/>EXP-B001<br/><i>pre-result</i>"]
-  class lifetime_integrity_EXP_B001 active;
+  lifetime_integrity_EXP_A001["lifetime-integrity<br/>EXP-A001<br/><i>confirmatory-complete</i>"]
+  class lifetime_integrity_EXP_A001 planned;
+  lifetime_integrity_EXP_B001["lifetime-integrity<br/>EXP-B001<br/><i>confirmatory-complete</i>"]
+  class lifetime_integrity_EXP_B001 planned;
   ccs_EXP_I1["ccs<br/>EXP-I1<br/><i>not designed</i>"]
   class ccs_EXP_I1 undesigned;
   adaptive_commitment_EXP_A1["adaptive-commitment<br/>EXP-A1<br/><i>repo not created</i>"]
@@ -105,8 +105,8 @@ Solid nodes exist in code. Dashed nodes have no repository. The red node has no 
 | `modular-consolidation/EXP-003` | COMMIT_INTERNAL | development-calibration-complete | CCS-C11 | `modular-consolidation/EXP-002` |
 | `modular-consolidation/EXP-100` | COMMIT_INTERNAL | planned | CCS-C6, CCS-C11 | `modular-consolidation/EXP-003`, `plasticity-routing/EXP-001` |
 | `lifetime-integrity/EXP-000` | ACCUMULATE | pilot-complete | — | — |
-| `lifetime-integrity/EXP-A001` | ACCUMULATE | pre-result-scaffold | CCS-C7 | `lifetime-integrity/EXP-000` |
-| `lifetime-integrity/EXP-B001` | ACCUMULATE | pre-result-scaffold | CCS-C7 | `lifetime-integrity/EXP-000` |
+| `lifetime-integrity/EXP-A001` | ACCUMULATE | confirmatory-complete | CCS-C7 | `lifetime-integrity/EXP-000` |
+| `lifetime-integrity/EXP-B001` | ACCUMULATE | confirmatory-complete | CCS-C7 | `lifetime-integrity/EXP-000` |
 | `ccs/EXP-I1` | ALL | not-designed | CCS-C8, CCS-C1 | `state-promotion/EXP-001`, `plasticity-routing/EXP-001`, `adaptive-commitment/EXP-A1`, `modular-consolidation/EXP-100`, `lifetime-integrity/EXP-A001` |
 | `adaptive-commitment/EXP-A1` | COMMIT_EXTERNAL | planned | CCS-C1 | — |
 | `ccs/EXP-U1` | COMMIT_INTERNAL + COMMIT_EXTERNAL | not-designed | CCS-C12 | `state-promotion/EXP-001`, `adaptive-commitment/EXP-A1` |

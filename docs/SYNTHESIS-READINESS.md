@@ -40,8 +40,12 @@ to be filled in.
       stays unchecked. Note also that even a fully successful EXP-003 would
       settle separability from commitment *timing* only, so this box may need
       two experiments rather than one.
-- [ ] At least one long-horizon result on lifetime coherence
-      (`lifetime-integrity/EXP-A001` — preregistered, not read out)
+- [x] At least one long-horizon result on lifetime coherence —
+      **`lifetime-integrity/EXP-A001`/`B001` read out confirmatory on 2026-09-05.**
+      This box is cleared as *evidence produced*; it does not advance the tier,
+      because the result points against coherence being maintained (every arm's
+      integrity violation exceeds 0.54 at E128) and says nothing about a CCS
+      substrate.
 - [ ] An admissible substrate established by `state-promotion`, without which
       `lifetime-integrity` results cannot license a CCS architecture claim at all
 - [ ] Each component's contribution isolated by ablation
@@ -103,6 +107,20 @@ The correct description of this programme today is: **four well-controlled
 scaffolds, several preregistrations, and no admissible evidence.** That is a
 respectable place to be after one day of parallel work. It is not a substrate,
 and it is not a paper.
+
+### The long-horizon result, and what it does to the rest
+
+`lifetime-integrity`'s Phase-3 confirmatory result is the programme's second
+admissible artefact and the first that points **against** the claim it hangs on.
+It also carries a finding that reaches past its own track: **short-horizon
+mechanism rankings do not predict long-horizon rankings** (ρ = 0.335, all 12
+seeds below 0.6).
+
+Every other CCS track runs short streams. Their results remain valid for their
+stated horizons, but none of them licenses a claim about long-run mechanism
+choice — and this programme's framing is explicitly about lifetimes. Tier 3 does
+not advance on it; if anything the tier got harder, because a long-horizon
+result now exists and it is unfavourable.
 
 ### Why one admissible result advanced nothing
 

@@ -29,8 +29,8 @@ mapped to it is a claim nobody is testing, and the validator rejects it.
 | `modular-consolidation/EXP-003` | yes | development-calibration-complete | CCS-C11 | **no** |
 | `modular-consolidation/EXP-100` | yes | planned | CCS-C6, CCS-C11 | yes |
 | `lifetime-integrity/EXP-000` | yes | pilot-complete | — | **no** |
-| `lifetime-integrity/EXP-A001` | yes | pre-result-scaffold | CCS-C7 | yes |
-| `lifetime-integrity/EXP-B001` | yes | pre-result-scaffold | CCS-C7 | yes |
+| `lifetime-integrity/EXP-A001` | yes | confirmatory-complete | CCS-C7 | yes |
+| `lifetime-integrity/EXP-B001` | yes | confirmatory-complete | CCS-C7 | yes |
 | `ccs/EXP-I1` | **no repo** | not-designed | CCS-C8, CCS-C1 | n/a |
 | `adaptive-commitment/EXP-A1` | **no** | planned | CCS-C1 | n/a |
 | `ccs/EXP-U1` | **no repo** | not-designed | CCS-C12 | n/a |
@@ -57,12 +57,13 @@ mapped to it is a claim nobody is testing, and the validator rejects it.
 | CCS-C6 | `modular-consolidation/experiments/EXP-000-TOY-RESULT.md` | pilot | no | full | against |
 | CCS-C6 | `modular-consolidation/experiments/EXP-001-INTERFERENCE-RESULT.md` | pilot | no | full | against |
 | CCS-C7 | `lifetime-integrity/experiments/EXP-000-PILOT-RECORD.md` | pilot | no | **partial** | mixed |
+| CCS-C7 | `lifetime-integrity/experiments/PHASE-3-CONFIRMATORY-RESULT.md` | confirmatory | **yes** | **partial** | against |
 | CCS-C10 | `state-promotion/issues/1#ENGINEERING_PILOT-01 (findings held in the issue tracker, not in files)` | pilot | no | **partial** | against |
 | CCS-C11 | `modular-consolidation/experiments/EXP-002-CEILING-RESULT.md` | pilot | no | full | mixed |
 | CCS-C11 | `modular-consolidation/experiments/EXP-003-CEILING-PHASE-RESULT.md` | pilot | no | full | mixed |
 | CCS-C13 | `modular-consolidation/experiments/EXP-003-CEILING-PHASE-RESULT.md` | pilot | no | **partial** | for |
 
-**10 evidence entries on file. 1 admissible (0 full-scope, 1 partial).**
+**11 evidence entries on file. 2 admissible (0 full-scope, 2 partial).**
 
 A `partial` entry is admissible evidence that addresses only part of the claim it hangs on. It records what it establishes *and* what it leaves open, so a component result can be logged without narrowing the claim to fit it. A claim carrying admissible evidence that is not promoted must state a `held_back_reason`, and the validator refuses a full-scope supporting admissible entry on an unpromoted claim.
 
@@ -139,6 +140,32 @@ The newer tracks brought controls strong enough to be worth generalising:
 12. **Lock the corruption/difficulty process and hash it into every manifest**
     (from `lifetime-integrity`). Rates may not be retuned after seeing which arm
     won.
+
+### Added 2026-09-05
+
+17. **Short-horizon results do not license long-horizon mechanism claims.**
+    From `lifetime-integrity`'s Phase-3 confirmatory result: mechanism rankings
+    at short horizons do not predict rankings at long ones — mean Spearman
+    ρ(E8, E128) = 0.335, CI [0.252, 0.415], **all 12 seeds below 0.6**. This is
+    confirmatory, not a caution.
+
+    Every other CCS track runs short streams. That does not invalidate their
+    results, which are about their own stated horizons — but it does mean none of
+    them licenses a claim about long-run mechanism *choice*, and the programme's
+    own framing is about lifetimes. A result at horizon *H* must state *H*, and
+    any claim reaching beyond it needs its own long-horizon evidence.
+
+    That track's own development phase demonstrates the effect on itself: two of
+    its seven development findings failed to replicate at confirmatory, both
+    about which cheap arm holds the frontier at a given horizon. The instability
+    is what H2 predicts.
+
+18. **"Better than doing nothing" is not "it works".** From the same result's
+    B001 arm: `excess_net_repair` was significantly positive, yet **every** arm's
+    raw net repair was negative and the culprit slot's accuracy still declined.
+    The positive number means *degrades the state less than inaction does*. A
+    metric defined against a passive baseline must report the absolute quantity
+    alongside the contrast, or a decline reads as a repair.
 
 ### Added 2026-09-04
 

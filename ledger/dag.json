@@ -248,7 +248,7 @@
     {
       "id": "lifetime-integrity/EXP-A001",
       "repo": "lifetime-integrity",
-      "stage": "pre-result-scaffold",
+      "stage": "confirmatory-complete",
       "operator": "ACCUMULATE",
       "question": "Does persistent state gradually depart from the evidence supposed to support it, and what does re-grounding cost at a matched ceiling?",
       "depends_on": [
@@ -257,15 +257,23 @@
       "tests_claims": [
         "CCS-C7"
       ],
-      "readout": null,
+      "readout": "CONFIRMATORY, executed once as frozen, reveal order enforced (manifests -> structural validity -> claim validity -> metrics), no rerun and no early stopping. 118/120 cells structurally valid. Primary tests under Holm at family-wise alpha 0.05 all reject: P1 A001-H2 mean Spearman rho(E8,E128) = 0.3354 CI [0.2517,0.4146]; P2 A001-H1 confidence-decay minus unconstrained-accumulator IVR at E128 = -0.2234 CI [-0.2378,-0.2089] at ZERO evidence reads. HEADLINE: short-horizon mechanism rankings do NOT predict long-horizon rankings - all 12 seeds below rho 0.6. Expensive re-grounding buys nothing: evidence-reconstruction and provenance-regrounding each spend ~245,000 reads at E128 and neither beats a zero-read heuristic; provenance-regrounding is WORSE than free confidence-decay. Two of seven development findings did not replicate, both about which cheap arm holds the frontier - instability itself consistent with H2.",
       "admissible_as_evidence": true,
       "ccs_claim_gate": "state-promotion must establish an admissible substrate before any result here can license a CCS latent-architecture claim. That track declares itself architecture-agnostic and forbids such use of its results.",
-      "gating_note": "Preregistered. Lifetime length is the independent variable; the pilot suggests mechanisms are near-indistinguishable at 8 epochs and separate at 128, which if it replicates would mean short-horizon evaluation misleads about mechanism choice."
+      "gating_note": "Preregistered. Lifetime length is the independent variable; the pilot suggests mechanisms are near-indistinguishable at 8 epochs and separate at 128, which if it replicates would mean short-horizon evaluation misleads about mechanism choice.",
+      "protocol_lock": {
+        "protocol": "phase3-confirmatory-lock, scoring LIS-SCORE-v0.3.0",
+        "freeze_sha": "5b9435a",
+        "execution_sha": "9954ab69cd4d802ccfbffbaff23b6e4f332ad9c0",
+        "corruption_process_hash": "0ebb3e60633de4a4e748c2a474c210927d8026265c86e0786555836bfb4201f4 (unchanged since eb8547c)",
+        "design": "12 frozen seeds x 5 horizons x 2 experiments = 120 cells, 1680 runs",
+        "executed_once": true
+      }
     },
     {
       "id": "lifetime-integrity/EXP-B001",
       "repo": "lifetime-integrity",
-      "stage": "pre-result-scaffold",
+      "stage": "confirmatory-complete",
       "operator": "ACCUMULATE",
       "question": "When a late failure indicates one of several beliefs was wrong without saying which, can offline consolidation repair the culprit without corrupting the others?",
       "depends_on": [
@@ -274,10 +282,18 @@
       "tests_claims": [
         "CCS-C7"
       ],
-      "readout": null,
+      "readout": "CONFIRMATORY, same frozen Phase-3 lock. P3 B001-H1 excess_net_repair for counterfactual-recheck at E64 = +0.0469 CI [+0.0032,+0.0943], rejects under Holm. But EVERY arm's RAW net repair is negative including the winner (-0.093 vs -0.140 for no-consolidation), and the culprit slot's accuracy still DECLINES (-0.033, CI spans zero). Positive excess repair therefore means 'degrades the state less than inaction does', NOT that anything was repaired. That track states plainly: no tested policy demonstrably repairs a culprit belief. The advantage decays with horizon and vanishes at E128 (+0.017, CI spans zero). Two E128 cells were structurally invalid at benchmark floor and are retained as evidence rather than dropped.",
       "admissible_as_evidence": true,
       "ccs_claim_gate": "Same substrate gate as EXP-A001.",
-      "gating_note": "Five credit-assignment rules share one belief substrate so the rule is the only variable."
+      "gating_note": "Five credit-assignment rules share one belief substrate so the rule is the only variable.",
+      "protocol_lock": {
+        "protocol": "phase3-confirmatory-lock, scoring LIS-SCORE-v0.3.0",
+        "freeze_sha": "5b9435a",
+        "execution_sha": "9954ab69cd4d802ccfbffbaff23b6e4f332ad9c0",
+        "corruption_process_hash": "0ebb3e60633de4a4e748c2a474c210927d8026265c86e0786555836bfb4201f4 (unchanged since eb8547c)",
+        "design": "12 frozen seeds x 5 horizons x 2 experiments = 120 cells, 1680 runs",
+        "executed_once": true
+      }
     },
     {
       "id": "ccs/EXP-I1",
