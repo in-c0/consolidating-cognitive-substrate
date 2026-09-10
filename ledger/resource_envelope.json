@@ -190,14 +190,14 @@
         "latency_to_response",
         "intervention_cost"
       ],
-      "note": "Recorded before the repository exists so that it is scaffolded with the envelope in view. Its two native costs have no counterpart in any other track."
+      "note": "Repository launched 2026-09-10 with a charter that explicitly owns this problem. Its two native costs have no counterpart in any other track, and its charter requires any exchange rate to be declared as a choice with results reported across a range. OP-1 is now OWNED, which is a change from 'unowned' - but it is not resolved, and both ccs nodes stay pinned at not-designed until it is."
     }
   },
   "open_problems": [
     {
       "id": "OP-1",
       "title": "No shared exchange rate between internal and external commitment costs",
-      "detail": "COMMIT_INTERNAL costs parameters, writes and interference. COMMIT_EXTERNAL costs latency, intervention and consequence. Comparing them at 'matched total budget' requires an exchange rate that no track has defined and that may not exist non-arbitrarily. This is recorded as the fourth falsifier of CCS-C12: if the cost structures are genuinely incommensurable, the unification claim fails on measurement grounds even if a shared mechanism is buildable.",
+      "detail": "COMMIT_INTERNAL costs parameters, writes and interference. COMMIT_EXTERNAL costs latency, intervention and consequence. Comparing them at 'matched total budget' requires an exchange rate that no track has defined and that may not exist non-arbitrarily. This is recorded as the fourth falsifier of CCS-C12: if the cost structures are genuinely incommensurable, the unification claim fails on measurement grounds even if a shared mechanism is buildable. OWNERSHIP RESOLVED 2026-09-10: in-c0/adaptive-commitment exists and its charter takes this problem explicitly. Still unresolved.",
       "blocks": [
         "ccs/EXP-U1",
         "ccs/EXP-I1"

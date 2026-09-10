@@ -7,7 +7,7 @@
     "dag.json, not here, so that 'observed' stays purely machine-fetched."
   ],
   "schema_version": 1,
-  "last_reconciled": "2026-09-04",
+  "last_reconciled": "2026-09-10",
   "repos": [
     {
       "id": "state-promotion",
@@ -46,12 +46,12 @@
       "observed": {
         "default_branch": "main",
         "visibility": "public",
-        "pushed_at": "2026-09-04T03:51:14Z",
+        "pushed_at": "2026-09-04T04:06:27Z",
         "head": "3495d49",
         "results_dir_populated": false,
         "open_issue_count": 3,
         "open_issue_titles": [
-          "#7 EXP-001 v3: repair latent state in embedding space before any further routing test",
+          "#8 EXP-001 v4: robust representation selection before any further State Promotion development",
           "#4 EXP-001R: restore input-conditional plasticity before development seeds",
           "#1 EXP-001: Run and validate small-LM State Promotion experiment"
         ]
@@ -60,8 +60,7 @@
     {
       "id": "adaptive-commitment",
       "slug": "in-c0/adaptive-commitment",
-      "existence": "planned",
-      "existence_note": "Repository still does not exist as of 2026-09-03. The only uncreated sibling. This entry was corrected before the repository is scaffolded, so that it is not created under the wrong programme contract.",
+      "existence": "exists",
       "role": "Owns COMMIT_EXTERNAL: outward/behavioural commitment timing under streaming evidence - when an agent should WAIT, THINK, ASK, RESPOND or ACT, trading accuracy against latency, compute, intervention cost, uncertainty, and consequence/reversibility.",
       "owns_components": [
         "external-commitment-policy"
@@ -73,12 +72,20 @@
       ],
       "blocked_by": [],
       "notes": [
-        "ROLE CORRECTED 2026-09-03. This track was previously recorded as a refinement of state-promotion's memory-consolidation threshold. That was a mischaracterisation produced by the umbrella's own overloaded use of the word COMMIT; it was never this track's intent.",
-        "It owns NO CCS claim yet, by owner decision. A programme claim for behavioural commitment timing is to be written only after this track's literature audit and preregistration define its exact falsifiable form. Writing one now would be inventing a hypothesis on its behalf.",
-        "NOT blocked by state-promotion. It was deliberately scoped as a separate domain, so the previous blocked_by edge has been removed.",
-        "CCS-C5 (adaptive consolidation thresholds) has been re-scoped away from this track and retained as a state-promotion COMMIT_INTERNAL follow-on. It must not be cited as this track's motivation."
+        "LAUNCHED 2026-09-10. All five CCS sibling repositories now exist.",
+        "CHARTER ONLY: no literature audit, no benchmark, no preregistration, no code, no result. It holds NO claim and the umbrella records none against it, per the standing owner decision that a behavioural-commitment claim is written only after this track's own audit defines a falsifiable one. Writing one now would be inventing a hypothesis on its behalf.",
+        "Execution order is gated and mechanically enforced by its own `make check`: literature audit, then a falsifiable claim, then the cost model, then the benchmark. Nothing below step 2 may be built first, on the grounds that a benchmark written before the claim encodes the claim.",
+        "OWNS UMBRELLA OPEN PROBLEM OP-1. Its two native costs - latency borne by whoever waits, and the price of an unnecessary question or an irreversible action - are the resource envelope's only INCOMMENSURABLE dimensions and currently block ccs/EXP-I1 and ccs/EXP-U1. Its charter requires any exchange rate to be declared as a choice, with results reported across a range rather than at one flattering point.",
+        "NOT blocked on state-promotion. It is currently the only CCS track that could produce an admissible result without the state pipeline reading out."
       ],
-      "observed": null
+      "observed": {
+        "default_branch": "main",
+        "visibility": "public",
+        "pushed_at": "2026-09-10T02:57:02Z",
+        "head": "98378e3",
+        "open_issue_count": 0,
+        "open_issue_titles": []
+      }
     },
     {
       "id": "plasticity-routing",
@@ -110,7 +117,7 @@
       "observed": {
         "default_branch": "main",
         "visibility": "public",
-        "pushed_at": "2026-09-04T03:54:50Z",
+        "pushed_at": "2026-09-10T02:54:59Z",
         "head": "9c2ddc3",
         "results_dir_populated": true,
         "open_issue_count": 2,
@@ -152,8 +159,8 @@
       "observed": {
         "default_branch": "main",
         "visibility": "public",
-        "pushed_at": "2026-09-04T02:56:53Z",
-        "head": "81b1f6f",
+        "pushed_at": "2026-09-05T04:10:07Z",
+        "head": "d11295b",
         "results_dir_populated": true,
         "open_issue_count": 1,
         "open_issue_titles": [
@@ -189,7 +196,7 @@
       "observed": {
         "default_branch": "main",
         "visibility": "public",
-        "pushed_at": "2026-09-04T03:30:15Z",
+        "pushed_at": "2026-09-04T03:58:52Z",
         "head": "1693119",
         "results_dir_populated": true,
         "open_issue_count": 1,

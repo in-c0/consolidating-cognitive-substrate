@@ -37,6 +37,10 @@ EVIDENCE_CLASSES = {"pilot", "confirmatory"}
 #              it leaves open, so that admissible evidence for a component can
 #              be recorded without silently narrowing the claim to fit it.
 EVIDENCE_SCOPES = {"full", "partial"}
+# What a claim is ABOUT. A methodology claim can reach confirmatory-supported
+# without the architecture thesis advancing at all, so the two are counted
+# separately everywhere and a methodology claim may never advance readiness.
+CLAIM_CLASSES = {"architecture", "methodology"}
 STAGES = {
     "not-designed",
     "planned",
@@ -123,6 +127,31 @@ def check_claims(claims_doc: dict, dag_doc: dict, repos_doc: dict) -> None:
         status = c.get("status")
         if status not in STATUSES:
             err(f"{cid}: status {status!r} not in the ledger vocabulary")
+
+        klass = c.get("claim_class")
+        if klass not in CLAIM_CLASSES:
+            err(f"{cid}: claim_class {klass!r} must be one of {sorted(CLAIM_CLASSES)}")
+        adv = c.get("advances_synthesis_readiness")
+        if adv not in (True, False):
+            err(f"{cid}: advances_synthesis_readiness must be true or false")
+        elif klass == "methodology" and adv:
+            err(
+                f"{cid}: a methodology claim may not advance synthesis readiness. "
+                f"Readiness is about the architecture thesis; a claim about how to "
+                f"evaluate mechanisms cannot clear a tier about whether the "
+                f"substrate works."
+            )
+
+        # A claim that enters already supported must say where it came from, or
+        # it is indistinguishable from one written after seeing the result.
+        if c.get("status") in {"pilot-supported", "confirmatory-supported"}:
+            if not c.get("inherited_from") and not c.get("preregistered_as"):
+                err(
+                    f"{cid}: status {c['status']!r} requires 'inherited_from' or "
+                    f"'preregistered_as' naming the pre-existing hypothesis this "
+                    f"claim descends from, so that a post-hoc claim cannot enter "
+                    f"the ledger already supported"
+                )
 
         impl = c.get("implementation")
         if impl not in IMPLEMENTATION_LEVELS:
@@ -497,23 +526,39 @@ def main() -> int:
 
     claims = claims_doc.get("claims", [])
     if not errors:
+        arch = [c for c in claims if c.get("claim_class") == "architecture"]
+        meth = [c for c in claims if c.get("claim_class") == "methodology"]
         counts: dict[str, int] = {}
-        for c in claims:
+        for c in arch:
             counts[c["status"]] = counts.get(c["status"], 0) + 1
-        print(f"OK    {len(claims)} claims, {len(dag_doc.get('nodes', []))} DAG nodes")
+        print(
+            f"OK    {len(claims)} claims "
+            f"({len(arch)} architecture, {len(meth)} methodology), "
+            f"{len(dag_doc.get('nodes', []))} DAG nodes"
+        )
+        print("      -- architecture claims --")
         for s in STATUSES:
             if counts.get(s):
                 print(f"      {s}: {counts[s]}")
         supported = sum(
             counts.get(s, 0) for s in ("pilot-supported", "confirmatory-supported")
         )
+        msup = sum(
+            1 for c in meth
+            if c["status"] in ("pilot-supported", "confirmatory-supported")
+        )
         ev = [e for c in claims for e in c["evidence"]]
         adm = [e for e in ev if e.get("admissible")]
         adm_full = [e for e in adm if e.get("scope") == "full"]
         print(
-            f"      claims with empirical support: {supported}"
-            + ("" if supported else "  <- no claim is established yet")
+            f"      ARCHITECTURE claims with empirical support: {supported}"
+            + ("" if supported else "  <- the substrate thesis is not established")
         )
+        if meth:
+            print(
+                f"      -- methodology claims -- {msup} of {len(meth)} supported "
+                f"(these do NOT advance synthesis readiness)"
+            )
         print(
             f"      evidence entries: {len(ev)}, admissible: {len(adm)} "
             f"({len(adm_full)} full-scope, {len(adm) - len(adm_full)} partial)"

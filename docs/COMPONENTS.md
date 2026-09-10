@@ -95,9 +95,10 @@ without an admissible substrate from `state-promotion`.
 ## Components with no implementation anywhere
 
 These are named so the DAG can reference them. Naming a component is not
-designing it.
+designing it. As of 2026-09-10 every component has a host repository; what
+several still lack is a design.
 
-### External commitment policy — `adaptive-commitment` *(the only uncreated sibling)*
+### External commitment policy — `adaptive-commitment` *(launched 2026-09-10, charter only)*
 
 **Role corrected 2026-09-03.** This component was previously described here as an
 adaptive *consolidation threshold* — a refinement of `state-promotion`. That was

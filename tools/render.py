@@ -46,25 +46,31 @@ def splice(path: pathlib.Path, key: str, body: str) -> None:
 
 def render_claims(claims: dict, dag: dict) -> str:
     rows = [
-        "| Claim | Domain | Statement (abbreviated) | Status | Implementation | Tested by |",
-        "|---|---|---|---|---|---|",
+        "| Claim | Class | Domain | Statement (abbreviated) | Status | Implementation | Tested by |",
+        "|---|---|---|---|---|---|---|",
     ]
     for c in claims["claims"]:
         stmt = c["statement"]
         stmt = stmt if len(stmt) <= 110 else stmt[:107].rsplit(" ", 1)[0] + "…"
         tests = ", ".join(f"`{s}`" for s in c["supported_by"]) or "—"
+        kl = c.get("claim_class", "—")
         rows.append(
-            f"| **{c['id']}** {c['title']} | {c.get('domain', '—')} | {stmt} "
+            f"| **{c['id']}** {c['title']} "
+            f"| {'**METHOD**' if kl == 'methodology' else 'arch'} "
+            f"| {c.get('domain', '—')} | {stmt} "
             f"| `{STATUS_MARK[c['status']]}` | {c['implementation']} | {tests} |"
         )
-    counts: dict[str, int] = {}
-    for c in claims["claims"]:
-        counts[c["status"]] = counts.get(c["status"], 0) + 1
-    supported = counts.get("pilot-supported", 0) + counts.get("confirmatory-supported", 0)
+    SUP = ("pilot-supported", "confirmatory-supported")
+    arch = [c for c in claims["claims"] if c.get("claim_class") == "architecture"]
+    meth = [c for c in claims["claims"] if c.get("claim_class") == "methodology"]
+    asup = sum(1 for c in arch if c["status"] in SUP)
+    msup = sum(1 for c in meth if c["status"] in SUP)
     summary = (
-        f"\n**{len(claims['claims'])} claims. "
-        f"{supported} with empirical support. "
-        f"{counts.get('confirmatory-supported', 0)} confirmatory.**\n"
+        f"\n**Architecture claims: {len(arch)}. "
+        f"{asup} with empirical support.**"
+        f"\n\n**Methodology claims: {len(meth)}. {msup} with empirical support "
+        f"— these are claims about how mechanisms must be EVALUATED, and none of "
+        f"them advances synthesis readiness or says the substrate works.**\n"
     )
     return "\n".join(rows) + "\n" + summary
 

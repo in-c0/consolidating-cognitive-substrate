@@ -32,7 +32,7 @@ mapped to it is a claim nobody is testing, and the validator rejects it.
 | `lifetime-integrity/EXP-A001` | yes | confirmatory-complete | CCS-C7 | yes |
 | `lifetime-integrity/EXP-B001` | yes | confirmatory-complete | CCS-C7 | yes |
 | `ccs/EXP-I1` | **no repo** | not-designed | CCS-C8, CCS-C1 | n/a |
-| `adaptive-commitment/EXP-A1` | **no** | planned | CCS-C1 | n/a |
+| `adaptive-commitment/EXP-A1` | yes | planned | CCS-C1 | n/a |
 | `ccs/EXP-U1` | **no repo** | not-designed | CCS-C12 | n/a |
 | `modular-consolidation/CANDIDATE-DIVERSITY` | yes | pre-result-scaffold | CCS-C13 | yes |
 | `plasticity-routing/EXP-003` | yes | not-designed | CCS-C4, CCS-C1 | n/a |
@@ -44,8 +44,9 @@ mapped to it is a claim nobody is testing, and the validator rejects it.
 | **CCS-C5** | `state-promotion/EXP-F1` is not-designed |
 | **CCS-C8** | no integration repository — deliberately undesigned |
 | **CCS-C12** | no integration repository — deliberately undesigned |
+| **CCS-C14** | no experiment mapped |
 
-**3 of 13 claims have no runnable test.**
+**4 of 14 claims have no runnable test.**
 
 ### Evidence on file
 
@@ -62,8 +63,9 @@ mapped to it is a claim nobody is testing, and the validator rejects it.
 | CCS-C11 | `modular-consolidation/experiments/EXP-002-CEILING-RESULT.md` | pilot | no | full | mixed |
 | CCS-C11 | `modular-consolidation/experiments/EXP-003-CEILING-PHASE-RESULT.md` | pilot | no | full | mixed |
 | CCS-C13 | `modular-consolidation/experiments/EXP-003-CEILING-PHASE-RESULT.md` | pilot | no | **partial** | for |
+| CCS-C14 | `lifetime-integrity/experiments/PHASE-3-CONFIRMATORY-RESULT.md` | confirmatory | **yes** | full | for |
 
-**11 evidence entries on file. 2 admissible (0 full-scope, 2 partial).**
+**12 evidence entries on file. 3 admissible (1 full-scope, 2 partial).**
 
 A `partial` entry is admissible evidence that addresses only part of the claim it hangs on. It records what it establishes *and* what it leaves open, so a component result can be logged without narrowing the claim to fit it. A claim carrying admissible evidence that is not promoted must state a `held_back_reason`, and the validator refuses a full-scope supporting admissible entry on an unpromoted claim.
 

@@ -333,7 +333,7 @@
       ],
       "readout": null,
       "admissible_as_evidence": null,
-      "gating_note": "Repository still does not exist. Rewritten 2026-09-03: this track was previously recorded, incorrectly, as a refinement of state-promotion's memory-consolidation threshold. It is the outward/behavioural commitment track and was deliberately scoped separately from state-promotion. It is therefore NOT blocked on state-promotion/EXP-001. No CCS claim for behavioural commitment timing has been added yet, by owner decision: that claim is to be written only after this track's own literature audit and preregistration define its exact falsifiable form. Until then this node tests only CCS-C1, and adding a placeholder claim would be inventing a hypothesis on the track's behalf."
+      "gating_note": "Repository LAUNCHED 2026-09-10, charter only. Stage stays 'planned', not 'pre-result-scaffold': a charter is not a design, and that track's own execution order forbids building a benchmark before its literature audit and a falsifiable claim exist. No CCS claim for behavioural commitment timing has been added, by owner decision - the claim is written after the audit defines it, not before. Until then this node tests only CCS-C1."
     },
     {
       "id": "ccs/EXP-U1",

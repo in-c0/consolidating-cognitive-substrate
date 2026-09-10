@@ -8,10 +8,11 @@
     "RULE 4: Every claim must name at least one experiment able to FALSIFY it.",
     "RULE 5: Nothing in this file may be restated as a result anywhere in this repo.",
     "tools/validate_ledger.py enforces rules 3 and 4 mechanically.",
-    "Evidence entries carry a 'scope' relative to the claim they are attached to. 'partial' entries must state what they establish and what they leave open, so that admissible component evidence can be recorded WITHOUT narrowing the claim post hoc to fit it. A claim carrying admissible evidence that is not promoted must carry 'held_back_reason'."
+    "Evidence entries carry a 'scope' relative to the claim they are attached to. 'partial' entries must state what they establish and what they leave open, so that admissible component evidence can be recorded WITHOUT narrowing the claim post hoc to fit it. A claim carrying admissible evidence that is not promoted must carry 'held_back_reason'.",
+    "Every claim declares a 'claim_class': 'architecture' (about the CCS substrate and its operators) or 'methodology' (about how continual-memory mechanisms must be EVALUATED). A methodology claim may reach confirmatory-supported without the programme's architecture thesis advancing one step, so the two are counted separately everywhere and a methodology claim must carry advances_synthesis_readiness: false."
   ],
   "schema_version": 1,
-  "last_reviewed": "2026-09-05",
+  "last_reviewed": "2026-09-10",
   "status_vocabulary": [
     "theoretical-conjecture",
     "implemented",
@@ -44,7 +45,9 @@
       ],
       "notes": "Still a research framing, not a finding. Repository creation is not evidence. Revised 2026-09-03: COMMIT was overloaded, covering both a durable state write and an outward behavioural release. The decomposition above is now explicitly the STATE pipeline and terminates in COMMIT_INTERNAL. Whether COMMIT_EXTERNAL belongs in the same pipeline, runs alongside it, or is governed by a shared principle is tracked as CCS-C12 and is not assumed here. A second, unresolved ambiguity in the same family: this repository has read ACCUMULATE as 'retain candidate experience', while plasticity-routing reads it as 'continue gathering / thinking'. Those are not obviously the same operator, and the second reading is closer to COMMIT_EXTERNAL's WAIT/THINK actions than to state retention. ACCUMULATE has NOT been split, because no track has yet operationalised either reading. modular-consolidation's contamination rules name the decomposition as a conjecture and forbid citing that track as support for it; plasticity-routing scopes itself to ALLOCATE only; lifetime-integrity is architecture-agnostic by construction. 2026-09-04: EXP-003's design gives this claim its first mapped experiment capable of REFUTING it rather than merely failing to support it. Most of the programme's designs can only decline to support the decomposition; a factorial can kill it, via a sign-flipping interaction. 2026-09-05: lifetime-integrity's confirmatory H2 result - short-horizon rankings do not predict long-horizon rankings - applies to the decomposition's own evidence base. Every experiment mapped to CCS-C1 runs short streams, so support accumulated from them is support about short horizons, whatever the decomposition claims about lifetimes.",
       "review_by": "state-promotion/EXP-001 confirmatory readout",
-      "domain": "cross-operator"
+      "domain": "cross-operator",
+      "claim_class": "architecture",
+      "advances_synthesis_readiness": true
     },
     {
       "id": "CCS-C2",
@@ -77,7 +80,9 @@
       ],
       "notes": "Status is 'unresolved' rather than 'pilot-supported': the only pilot returned a null result and its fixed-consolidation arm was degenerate by construction. As of 2026-09-02 main is unchanged at 3495d49 with an empty results/. A sibling records that an off-main small-LM engineering pilot was run and reviewed and was scientifically uninterpretable because the tested soft-prefix plastic representation underlearned, with an architecture-matched LoRA representation-sufficiency repair predeclared. That work is not merged, not on main, and not admissible. 2026-09-04: ENGINEERING_PILOT-01 exposed a live budget-matching defect - adaptation-token exposure spans 2x across arms (10,080 sequential/random, ~20,200 replay/fixed, 13,447 promotion), and that track's validator does not currently enforce the envelope even though Amendment A names it a primary matched resource. Any B5-versus-replay/fixed comparison is confounded by token exposure until this is equalised or reported as an efficiency curve. This is inherited admissibility rule 2 failing in practice, caught by that track's own pilot before any comparative score was inspected.",
       "review_by": "state-promotion/EXP-001 confirmatory readout",
-      "domain": "COMMIT_INTERNAL"
+      "domain": "COMMIT_INTERNAL",
+      "claim_class": "architecture",
+      "advances_synthesis_readiness": true
     },
     {
       "id": "CCS-C3",
@@ -97,7 +102,9 @@
       ],
       "notes": "This is state-promotion H2. EXP-001 Amendment D architecture-matched latent state across B3/B4/B5 so that the routing comparison is not confounded with latent-state access; that makes the H2 ablation the only clean test of this claim. As of 2026-09-02 main is unchanged at 3495d49 with an empty results/. A sibling records that an off-main small-LM engineering pilot was run and reviewed and was scientifically uninterpretable because the tested soft-prefix plastic representation underlearned, with an architecture-matched LoRA representation-sufficiency repair predeclared. That work is not merged, not on main, and not admissible.",
       "review_by": "state-promotion/EXP-001 confirmatory readout",
-      "domain": "COMMIT_INTERNAL"
+      "domain": "COMMIT_INTERNAL",
+      "claim_class": "architecture",
+      "advances_synthesis_readiness": true
     },
     {
       "id": "CCS-C4",
@@ -145,7 +152,9 @@
       "notes": "Status moved from theoretical-conjecture to unresolved because the claim is now implemented and under inconclusive development calibration. This is NOT an evidence promotion: both statuses assert zero empirical support, and the move was not made because a repository appeared. The K1/K2 split matters for how the claim should eventually be read: a learned allocator failing to beat a calibrated fixed rule would not by itself falsify CCS-C4, because CCS-C4 is about allocation being a separable lever, not about the policy being learned. That distinction must be preserved when EXP-001 reads out. Updated 2026-09-03: plasticity-routing froze Protocol v1.0 with no blockers, a pinned commit and source-tree hash, and five held-out confirmatory seeds that have NOT been executed. Its L5a leakage control is retained as permanently failed and non-gating, and the predeclared L5b cross-world attribution gate passed on spent one-shot audit seeds. This is a validity and protocol milestone and adds NO evidence entry here: a frozen protocol is a statement about what may be run, not a result. The claim's status is unchanged and no evidence was recorded. Updated 2026-09-04. plasticity-routing/EXP-001 read out and is the programme's first admissible confirmatory artefact. CCS-C4 is NOT promoted, for a structural reason rather than a cautious one: the experiment has no COMMIT_INTERNAL control to hold fixed, so it is the wrong shape to settle a separability claim however strong its numbers. The prediction recorded here on 2026-09-02 - that K1 firing against a learned router would not falsify CCS-C4, because C4 is about allocation being a separable lever rather than about the policy being learned - now holds in the mirror image: K1 firing FOR the learned router does not confirm it either. The same distinction cuts both ways, which is some evidence the distinction was real. 2026-09-04: the gap this claim has been stuck on is now the subject of a drafted factorial design. Note what that design concedes in advance - even if it succeeds completely it settles separability from commitment TIMING only, because its commitment operator is a schedule rather than an evidence gate. CCS-C4 does not restrict the commit family, so this claim may need two settlement steps rather than one.",
       "review_by": "plasticity-routing/EXP-001 confirmatory readout",
       "domain": "ALLOCATE",
-      "held_back_reason": "The admissible confirmatory result is scoped 'partial'. It establishes that allocation content matters under matched budgets; CCS-C4 claims that allocation is SEPARABLE from COMMIT_INTERNAL - that one can be varied while the other is held fixed. EXP-001 contains no independently manipulable COMMIT_INTERNAL policy, so no run of it could settle that. The claim is deliberately NOT narrowed post hoc to match the evidence: narrowing it would convert an unanswered question into an answered one by editing the question. It stays 'unresolved' until an experiment holds a commit policy fixed as an independent control. A settlement path now exists in design: plasticity-routing/EXP-003 crosses allocation against a schedule-only commitment operator and predeclares F-C4 as the criterion under which the allocation advantage is judged fully explained by commitment. It is DESIGN ONLY and unadopted, so it changes nothing about this claim's status - it means the gap is now addressable rather than merely named."
+      "held_back_reason": "The admissible confirmatory result is scoped 'partial'. It establishes that allocation content matters under matched budgets; CCS-C4 claims that allocation is SEPARABLE from COMMIT_INTERNAL - that one can be varied while the other is held fixed. EXP-001 contains no independently manipulable COMMIT_INTERNAL policy, so no run of it could settle that. The claim is deliberately NOT narrowed post hoc to match the evidence: narrowing it would convert an unanswered question into an answered one by editing the question. It stays 'unresolved' until an experiment holds a commit policy fixed as an independent control. A settlement path now exists in design: plasticity-routing/EXP-003 crosses allocation against a schedule-only commitment operator and predeclares F-C4 as the criterion under which the allocation advantage is judged fully explained by commitment. It is DESIGN ONLY and unadopted, so it changes nothing about this claim's status - it means the gap is now addressable rather than merely named.",
+      "claim_class": "architecture",
+      "advances_synthesis_readiness": true
     },
     {
       "id": "CCS-C5",
@@ -165,7 +174,9 @@
       ],
       "notes": "Re-scoped 2026-09-03. This claim was previously attached to adaptive-commitment, which was a mischaracterisation: that track is about outward/behavioural commitment timing, not about memory-consolidation thresholds. The claim is retained here as a State Promotion FOLLOW-ON and is now explicitly a COMMIT_INTERNAL claim. It is not owned by adaptive-commitment and must not be cited as that track's motivation. state-promotion has not committed to running it; state-promotion/EXP-F1 is an umbrella-side candidate node, not that track's roadmap. Still only worth testing if CCS-C2 survives: a threshold that adapts is a refinement of a mechanism that must first be shown to matter at all.",
       "review_by": "state-promotion/EXP-001 confirmatory readout",
-      "domain": "COMMIT_INTERNAL"
+      "domain": "COMMIT_INTERNAL",
+      "claim_class": "architecture",
+      "advances_synthesis_readiness": true
     },
     {
       "id": "CCS-C6",
@@ -205,7 +216,9 @@
       ],
       "notes": "Held at unresolved rather than falsified, deliberately. The owning track records the unbounded-regime form as falsified in its OWN ledger, but that finding is a development simulator on a closed-form ridge learner, and that track's contamination rule states its results are not evidence for any claim in another track. Promoting a CCS-level status on it would violate both repositories' rules. The claim is NOT rewritten to dodge the negative signal: the unbounded form is kept here with the against-direction evidence attached, and the live constrained question is tracked separately as CCS-C11. Anyone reading CCS-C6 should expect it to end at falsified.",
       "review_by": "modular-consolidation/EXP-100 readout, or an admissible real-model test of the unbounded regime",
-      "domain": "COMMIT_INTERNAL"
+      "domain": "COMMIT_INTERNAL",
+      "claim_class": "architecture",
+      "advances_synthesis_readiness": true
     },
     {
       "id": "CCS-C7",
@@ -250,7 +263,9 @@
       "notes": "Status moved to unresolved because a harness and preregistrations now exist, not because anything was shown. A hard external constraint now applies: lifetime-integrity declares itself architecture-agnostic and states that no result from it may be used to claim a CCS latent architecture is validated without an admissible substrate from state-promotion and subsequent routing work. CCS-C7 therefore cannot reach an empirical-support status from that track alone, however strong its results, until state-promotion/EXP-001 reads out admissibly. The pilot's lifetime-length signal, if it replicates, would also mean any short-horizon result in this programme is uninformative about mechanism choice. Updated 2026-09-05 after the Phase-3 confirmatory readout. The pilot's provisional lifetime-length signal is now CONFIRMATORY and is the single most consequential finding the programme has produced: short-horizon mechanism rankings do not predict long-horizon rankings (mean Spearman rho 0.335, all 12 seeds below 0.6). Every other CCS track runs short streams. This does not invalidate their results, which are about their own stated horizons, but it does mean none of them licenses a claim about long-run mechanism CHOICE - including this programme's own framing, which is about lifetimes.",
       "review_by": "lifetime-integrity/EXP-A001 readout AND an admissible state-promotion substrate",
       "domain": "ACCUMULATE",
-      "held_back_reason": "The admissible confirmatory result is scoped 'partial' and points AGAINST the claim, but it cannot settle it in either direction. lifetime-integrity is architecture-agnostic by construction and states that nothing from it may be claimed about a CCS latent substrate without an admissible substrate from state-promotion, which does not exist. So the claim cannot be promoted, and equally cannot be marked falsified: no CCS substrate was tested. Recording it as 'against' rather than promoting or falsifying is the only move the evidence licenses."
+      "held_back_reason": "The admissible confirmatory result is scoped 'partial' and points AGAINST the claim, but it cannot settle it in either direction. lifetime-integrity is architecture-agnostic by construction and states that nothing from it may be claimed about a CCS latent substrate without an admissible substrate from state-promotion, which does not exist. So the claim cannot be promoted, and equally cannot be marked falsified: no CCS substrate was tested. Recording it as 'against' rather than promoting or falsifying is the only move the evidence licenses.",
+      "claim_class": "architecture",
+      "advances_synthesis_readiness": true
     },
     {
       "id": "CCS-C8",
@@ -271,7 +286,9 @@
       ],
       "notes": "This is the claim a synthesis paper would exist to make. Four of five component tracks now exist and three have development results, but ccs/EXP-I1 remains undesigned by decision, not by oversight: a non-arbitrary composition test cannot be specified until enough component mechanisms have admissible evidence, and designing it now would bake unsupported component choices into the synthesis programme.",
       "review_by": "synthesis readiness review",
-      "domain": "cross-operator"
+      "domain": "cross-operator",
+      "claim_class": "architecture",
+      "advances_synthesis_readiness": true
     },
     {
       "id": "CCS-C9",
@@ -292,7 +309,9 @@
       ],
       "notes": "The programme's own related work already places multi-timescale learning in prior art. This claim is about necessity under matched budgets, which is the only version that is still open. plasticity-routing's development calibration shows every single-depth arm well below its routed arms (best single depth ALL_FAST at 0.230 against LEARNED 0.386), and its K4 criterion would have invalidated the benchmark had a single depth matched. That is a development signal on a synthetic world, not evidence.",
       "review_by": "state-promotion/EXP-001 confirmatory readout",
-      "domain": "cross-operator"
+      "domain": "cross-operator",
+      "claim_class": "architecture",
+      "advances_synthesis_readiness": true
     },
     {
       "id": "CCS-C10",
@@ -324,7 +343,9 @@
       ],
       "notes": "state-promotion Amendment E locked this before results and forbids describing B5 as compute-matched without qualification. This is a genuine falsifier for the practical version of CCS-C2, not a caveat. As of 2026-09-02 main is unchanged at 3495d49 with an empty results/. A sibling records that an off-main small-LM engineering pilot was run and reviewed and was scientifically uninterpretable because the tested soft-prefix plastic representation underlearned, with an architecture-matched LoRA representation-sufficiency repair predeclared. That work is not merged, not on main, and not admissible. Updated 2026-09-04. The long-carried question of whether B5 routing overhead had been quantified is now ANSWERED, and unfavourably: 72.4% of total algorithmic compute, about 2.6x more spent deciding than adapting. This raises the bar CCS-C10 has to clear rather than settling it - a method that must be 2.6x cheaper per unit of adaptation to break even on total compute is a much stronger claim than the adaptation-matched version. The finding lives in that track's ISSUE TRACKER rather than its files, which is why earlier reconciliations recorded state-promotion as having produced nothing.",
       "review_by": "state-promotion/EXP-001 confirmatory readout",
-      "domain": "COMMIT_INTERNAL"
+      "domain": "COMMIT_INTERNAL",
+      "claim_class": "architecture",
+      "advances_synthesis_readiness": true
     },
     {
       "id": "CCS-C11",
@@ -366,7 +387,9 @@
       ],
       "notes": "Added at the 2026-09-02 reconciliation to keep the live question separate from the unbounded-regime form in CCS-C6, rather than rewriting CCS-C6 to follow the evidence. Two cautions carried from the owning track: 'deny' is a strong and usually-missing baseline that currently leads on retention, and the merge-versus-deny null conceals a significant two-way trade, so a single retention headline would misreport it. Updated 2026-09-03 after EXP-003. Status deliberately UNCHANGED at unresolved: the run used development seeds only and no confirmatory seed set has been drawn, so it is not admissible however well constructed it is. The claim is NOT rewritten to follow the evidence, on the same principle applied to CCS-C6. But the reader should know that its motivating intuition is now under direct pressure: 'under a hard capacity ceiling' was meant to point at high pressure, and high pressure is exactly where the deny half fails - merging needs slack to select well and degenerates when forced. If this survives confirmatory seeds, the honest successor claim is about absolute skill count and selection headroom, not about ceiling tightness. That successor must be ADDED, not substituted. That track has since re-scoped its own corresponding claim to 'regime-dependent' - no at K*=6, yes at K*=12 and K*=24 for ratios 1/3-5/6 - and formalised the successor mechanism as candidate diversity, now tracked here as CCS-C13. Per the rule stated above, CCS-C13 was ADDED and CCS-C11 was left standing with its tension intact.",
       "review_by": "a modular-consolidation run on a drawn confirmatory seed set",
-      "domain": "COMMIT_INTERNAL"
+      "domain": "COMMIT_INTERNAL",
+      "claim_class": "architecture",
+      "advances_synthesis_readiness": true
     },
     {
       "id": "CCS-C12",
@@ -388,7 +411,9 @@
         "The cost structures proving incommensurable - an internal write costs parameters and interference, an external action costs latency and consequence - such that no single objective expresses both without an arbitrary exchange rate."
       ],
       "notes": "Added 2026-09-03 as the explicit, falsifiable home for a unification that the programme's earlier vocabulary asserted by accident. Until 2026-09-03 the umbrella used one word, COMMIT, for both domains, which presupposed this claim rather than testing it. Separating the vocabulary is what makes the claim statable. It is NOT to be treated as a terminology question or as a tidy-up: it is a research hypothesis with a low prior, since the two domains differ in reversibility, cost structure, and who bears the consequence. The last falsifier is the one to watch, because it can hold even if a shared mechanism is buildable.",
-      "review_by": "adaptive-commitment preregistration, and state-promotion/EXP-001 confirmatory readout"
+      "review_by": "adaptive-commitment preregistration, and state-promotion/EXP-001 confirmatory readout",
+      "claim_class": "architecture",
+      "advances_synthesis_readiness": true
     },
     {
       "id": "CCS-C13",
@@ -423,7 +448,43 @@
         "The effect failing to appear on gradient-trained adapters, where the merge operator is expected to carry far more of the damage than in a closed-form learner."
       ],
       "notes": "Added 2026-09-03. This is the successor mechanism CCS-C11's notes anticipated, and it was ADDED rather than substituted so that CCS-C11 stands with its contradicted framing visible. Status is unresolved, not pilot-supported: the only evidence is a development-seed simulator, and the owning track's real-model predictions are predeclared but unrunnable while blocked on the plasticity-routing substrate export. Worth noting what this claim costs the programme: it makes consolidation's usefulness conditional on a regime the deploying system does not control, which is a weaker and more honest position than 'consolidation helps under pressure'.",
-      "review_by": "modular-consolidation real-model pilot, once the substrate export unblocks it"
+      "review_by": "modular-consolidation real-model pilot, once the substrate export unblocks it",
+      "claim_class": "architecture",
+      "advances_synthesis_readiness": true
+    },
+    {
+      "id": "CCS-C14",
+      "title": "Short-horizon rankings are unreliable proxies for long-horizon rankings",
+      "statement": "On LIS-v0, across the nine reference maintenance mechanisms tested, mechanism rankings measured at short lifetimes are not reliable proxies for rankings at long lifetimes: the rank correlation between the shortest and longest tested horizons is far from unity.",
+      "kind": "empirical",
+      "claim_class": "methodology",
+      "advances_synthesis_readiness": false,
+      "domain": "ACCUMULATE",
+      "status": "confirmatory-supported",
+      "implementation": "implemented",
+      "implementation_note": "Implemented and executed in lifetime-integrity as the preregistered A001 H2, under the frozen Phase-3 lock with the corruption process hashed and unchanged.",
+      "inherited_from": "lifetime-integrity EXP-A001-PREREG.md hypothesis H2, PREREGISTERED BEFORE CONFIRMATORY EXECUTION. This claim is a direct inheritance of that pre-existing sibling hypothesis, not a claim formulated after seeing the result. That distinction is the ONLY reason it may enter the ledger already at confirmatory-supported, and it must not become a precedent for admitting any claim written after a readout.",
+      "evidence": [
+        {
+          "repo": "lifetime-integrity",
+          "artefact": "experiments/PHASE-3-CONFIRMATORY-RESULT.md",
+          "class": "confirmatory",
+          "admissible": true,
+          "scope": "full",
+          "direction": "for",
+          "summary": "Mean Spearman rho(E8,E128) = 0.3354, 95% CI [0.2517, 0.4146], p = 0.0001, rejecting under Holm at family-wise alpha 0.05. All 12 seed-level correlations below 0.6 (max 0.548). One-shot execution under the frozen Phase-3 lock, 12 seeds x 5 horizons, reveal order enforced, 118/120 cells structurally valid. Development agreed closely (0.330 / 0.395 / 0.580 against confirmatory 0.335). The track's own development phase demonstrated the effect on itself: two of seven development findings failed to replicate, both about which cheap arm holds the frontier at a given horizon, which is exactly the instability H2 predicts."
+        }
+      ],
+      "supported_by": [
+        "lifetime-integrity/EXP-A001"
+      ],
+      "falsified_by": [
+        "A replication on LIS-v0 with the same frozen estimator and horizon pair finding a mean rank correlation at or above 0.6, or a CI overlapping high correlation.",
+        "Demonstration that the low correlation is an artefact of the E8 horizon sitting below the benchmark's measurement floor rather than a real ranking instability.",
+        "Demonstration that the instability is seed noise rather than a horizon effect, once per-seed variance is properly attributed."
+      ],
+      "notes": "Added 2026-09-10 on an explicit owner decision, and only after settling a prior question: does this umbrella carry methodological claims at all? It does. It already carries eighteen inherited admissibility rules, every one a methodological assertion, and refusing to carry a CONFIRMATORY methodological claim while carrying eighteen untested methodological rules would be incoherent. SCOPE IS DELIBERATELY NARROW: LIS-v0 and the nine tested mechanisms. It does NOT generalise to all agents, benchmarks or mechanism families, and the ledger should refuse any later attempt to widen it without its own evidence. WHY THIS IS NOT THE PROGRAMME PROGRESSING: this is the first CCS claim to reach confirmatory-supported, and it is a claim about EVALUATION METHOD, not about the substrate. Zero architecture claims have empirical support, before and after. The claim_class axis exists so that this cannot be misread, and advances_synthesis_readiness is false. Its practical bite falls on this programme: every other CCS track runs short streams, so their results are about their stated horizons and none licenses a claim about long-run mechanism choice.",
+      "review_by": "a LIS-v0 replication, or any attempt to generalise the claim beyond LIS-v0"
     }
   ]
 }

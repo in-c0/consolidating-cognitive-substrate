@@ -6,18 +6,20 @@ evidence status.
 
 > ## Status: no claim in this programme has empirical support.
 >
-> Reconciled 2026-09-04. **The programme has its first admissible confirmatory
-> result**: `plasticity-routing/EXP-001` passed every preregistered gate on five
-> held-out seeds. It supports CCS-C4 **partially** — allocation *content* matters
-> under matched budgets — and does not establish CCS-C4's separability statement,
-> because the experiment contains no independently manipulable COMMIT_INTERNAL
-> policy to hold fixed.
+> Reconciled 2026-09-10. All five sibling repositories now exist. Two admissible
+> confirmatory artefacts are on file, and a third claim reached
+> `confirmatory-supported` — **and the architecture thesis has not advanced one
+> step.**
 >
-> **CCS-C4 stays `unresolved`, and was not narrowed to fit the result.** No claim
-> has empirical support. **0 of 4 synthesis-readiness tiers are cleared.**
+> ### Architecture claims with empirical support: 0 of 13.
 >
-> A component result is not evidence that the decomposition composes. This
-> repository exists to keep that distinction visible.
+> The supported claim is **CCS-C14**, a *methodological* claim about how
+> mechanisms must be evaluated. The ledger separates **architecture** from
+> **methodology** claims precisely so this cannot be misread as the substrate
+> working. A methodology claim may never advance synthesis readiness, and the
+> validator enforces it.
+>
+> **0 of 4 synthesis-readiness tiers are cleared.**
 
 ## What this repository is
 
@@ -82,7 +84,11 @@ COMMIT_EXTERNAL belongs in the pipeline above is unresolved.
 | [`in-c0/plasticity-routing`](https://github.com/in-c0/plasticity-routing) | ALLOCATE | ✅ | CCS-C4 | **confirmatory complete, H1 supported** — partial support only |
 | [`in-c0/modular-consolidation`](https://github.com/in-c0/modular-consolidation) | COMMIT_INTERNAL target structure | ✅ | CCS-C6, C11 | preregistered frozen grid, development seeds |
 | [`in-c0/lifetime-integrity`](https://github.com/in-c0/lifetime-integrity) | ACCUMULATE / long horizon | ✅ | CCS-C7 | **confirmatory complete** — 12 seeds × 5 horizons |
-| `in-c0/adaptive-commitment` | COMMIT_EXTERNAL | ❌ planned | *(none yet)* | — |
+| [`in-c0/adaptive-commitment`](https://github.com/in-c0/adaptive-commitment) | COMMIT_EXTERNAL | ✅ | *(none — by design)* | charter only |
+
+`adaptive-commitment` launched 2026-09-10 as charter only and deliberately holds
+**no claim**: a behavioural-commitment claim is written after its literature audit
+defines a falsifiable one, not before.
 
 Each existing track declares its own results non-evidential and declares that
 they do not travel to other tracks. The umbrella honours those declarations: see
@@ -98,8 +104,9 @@ they do not travel to other tracks. The umbrella honours those declarations: see
 | `confirmatory-supported` | **0** |
 | `falsified` | 0 |
 
-Eleven evidence entries are on file; **two are admissible, both partial-scope**
-— and the second points *against* its claim.
+Twelve evidence entries are on file; **three are admissible**. Two are
+partial-scope against architecture claims — the second points *against* its claim
+— and one is full-scope, supporting the methodology claim CCS-C14.
 Three of thirteen claims have no runnable test: CCS-C5, CCS-C8 and CCS-C12 — the
 last two because their experiments have no host repository, deliberately.
 

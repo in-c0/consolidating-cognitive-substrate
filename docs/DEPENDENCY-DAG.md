@@ -47,7 +47,7 @@ graph TD
   class lifetime_integrity_EXP_B001 planned;
   ccs_EXP_I1["ccs<br/>EXP-I1<br/><i>not designed</i>"]
   class ccs_EXP_I1 undesigned;
-  adaptive_commitment_EXP_A1["adaptive-commitment<br/>EXP-A1<br/><i>repo not created</i>"]
+  adaptive_commitment_EXP_A1["adaptive-commitment<br/>EXP-A1<br/><i>planned</i>"]
   class adaptive_commitment_EXP_A1 planned;
   ccs_EXP_U1["ccs<br/>EXP-U1<br/><i>not designed</i>"]
   class ccs_EXP_U1 undesigned;

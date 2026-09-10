@@ -5,6 +5,30 @@ Every programme-level claim, its evidence status, and what would kill it.
 **Source of truth is [`ledger/claims.json`](../ledger/claims.json).** The table
 below is generated from it by `tools/render.py`. Do not edit the table by hand.
 
+## Two classes of claim
+
+Every claim declares a **`claim_class`**:
+
+| class | about | can it advance synthesis readiness? |
+|---|---|---|
+| `architecture` | the CCS substrate and its operators | yes |
+| `methodology` | how continual-memory mechanisms must be **evaluated** | **never** |
+
+This axis was added on 2026-09-10, when the first claim reached
+`confirmatory-supported` and it was a methodological one. Counting it alongside
+the architecture claims would have turned "0 claims supported" into "1 claim
+supported" and invited exactly the misreading this repository exists to prevent.
+
+The validator enforces the separation: a methodology claim must carry
+`advances_synthesis_readiness: false`, and the headline counts the two classes
+apart.
+
+A second rule arrived with it. **A claim entering the ledger already at a
+supported status must name the pre-existing preregistered hypothesis it descends
+from** (`inherited_from`), or it is indistinguishable from a claim written after
+seeing the result. CCS-C14 qualifies only because `lifetime-integrity`'s A001 H2
+was preregistered before confirmatory execution.
+
 ## Status vocabulary
 
 | Status | Means | Requires |
@@ -28,23 +52,26 @@ Two things this vocabulary deliberately refuses to allow:
 
 <!-- GENERATED:claims -- do not edit by hand; run tools/render.py -->
 
-| Claim | Domain | Statement (abbreviated) | Status | Implementation | Tested by |
-|---|---|---|---|---|---|
-| **CCS-C1** Three-operator decomposition | cross-operator | Continual-agent competence over a lifetime decomposes usefully into ACCUMULATE (retain candidate… | `conjecture` | partial | `state-promotion/EXP-001`, `plasticity-routing/EXP-001`, `plasticity-routing/EXP-003`, `adaptive-commitment/EXP-A1` |
-| **CCS-C2** Evidence-gated commitment beats scheduled commitment | COMMIT_INTERNAL | Under matched trainable-parameter capacity, replay budget, online-token budget and parameter-write… | `unresolved` | implemented | `state-promotion/EXP-001`, `state-promotion/EXP-002`, `state-promotion/EXP-003` |
-| **CCS-C3** Persistent latent state carries context-dependent exceptions | COMMIT_INTERNAL | A bounded persistent latent state carried across stream items contributes specifically to handling… | `unresolved` | implemented | `state-promotion/EXP-001` |
-| **CCS-C4** Allocation is a separable lever from commitment | ALLOCATE | Where an experience is routed within the substrate affects the stability-plasticity trade-off… | `unresolved` | implemented | `plasticity-routing/EXP-001`, `plasticity-routing/EXP-002`, `plasticity-routing/EXP-003` |
-| **CCS-C5** Adaptive consolidation thresholds beat fixed thresholds | COMMIT_INTERNAL | For COMMIT_INTERNAL, a consolidation criterion that adapts to observed stream statistics outperforms a… | `conjecture` | none | `state-promotion/EXP-F1` |
-| **CCS-C6** Modular slow state reduces interference | COMMIT_INTERNAL | In an unbounded-capacity regime, consolidating durable knowledge into separable modules produces less… | `unresolved` | implemented | `modular-consolidation/EXP-100` |
-| **CCS-C7** Lifetime coherence is maintainable | ACCUMULATE | A multi-timescale substrate can be operated over lifetimes far longer than any single experiment stream… | `unresolved` | implemented | `lifetime-integrity/EXP-A001`, `lifetime-integrity/EXP-B001` |
-| **CCS-C8** The components compose | cross-operator | A system combining accumulation, allocation and commitment outperforms the best single-component system… | `conjecture` | none | `ccs/EXP-I1` |
-| **CCS-C9** Multiple timescales are necessary, not merely sufficient | cross-operator | A single-timescale controller given the same total capacity, write budget and compute cannot match a… | `unresolved` | partial | `state-promotion/EXP-001`, `plasticity-routing/EXP-001` |
-| **CCS-C10** Gating overhead does not erase the gain | COMMIT_INTERNAL | The decision-time inference cost of evidence gating is small enough that the method retains its advantage… | `unresolved` | implemented | `state-promotion/EXP-001` |
-| **CCS-C11** Under a binding capacity ceiling, pooling beats destroying | COMMIT_INTERNAL | Under a hard capacity ceiling below the number of distinct skills, and at identical live module count,… | `unresolved` | implemented | `modular-consolidation/EXP-003`, `modular-consolidation/EXP-100` |
-| **CCS-C12** Internal and external commitment share one mechanism | COMMIT_INTERNAL + COMMIT_EXTERNAL | COMMIT_INTERNAL and COMMIT_EXTERNAL are instances of a single commitment principle: one learned mechanism,… | `conjecture` | none | `ccs/EXP-U1` |
-| **CCS-C13** Useful consolidation needs pressure AND candidate diversity | COMMIT_INTERNAL | Consolidation improves the retention-plasticity frontier only when capacity pressure coincides with enough… | `unresolved` | implemented | `modular-consolidation/CANDIDATE-DIVERSITY`, `modular-consolidation/EXP-100` |
+| Claim | Class | Domain | Statement (abbreviated) | Status | Implementation | Tested by |
+|---|---|---|---|---|---|---|
+| **CCS-C1** Three-operator decomposition | arch | cross-operator | Continual-agent competence over a lifetime decomposes usefully into ACCUMULATE (retain candidate… | `conjecture` | partial | `state-promotion/EXP-001`, `plasticity-routing/EXP-001`, `plasticity-routing/EXP-003`, `adaptive-commitment/EXP-A1` |
+| **CCS-C2** Evidence-gated commitment beats scheduled commitment | arch | COMMIT_INTERNAL | Under matched trainable-parameter capacity, replay budget, online-token budget and parameter-write… | `unresolved` | implemented | `state-promotion/EXP-001`, `state-promotion/EXP-002`, `state-promotion/EXP-003` |
+| **CCS-C3** Persistent latent state carries context-dependent exceptions | arch | COMMIT_INTERNAL | A bounded persistent latent state carried across stream items contributes specifically to handling… | `unresolved` | implemented | `state-promotion/EXP-001` |
+| **CCS-C4** Allocation is a separable lever from commitment | arch | ALLOCATE | Where an experience is routed within the substrate affects the stability-plasticity trade-off… | `unresolved` | implemented | `plasticity-routing/EXP-001`, `plasticity-routing/EXP-002`, `plasticity-routing/EXP-003` |
+| **CCS-C5** Adaptive consolidation thresholds beat fixed thresholds | arch | COMMIT_INTERNAL | For COMMIT_INTERNAL, a consolidation criterion that adapts to observed stream statistics outperforms a… | `conjecture` | none | `state-promotion/EXP-F1` |
+| **CCS-C6** Modular slow state reduces interference | arch | COMMIT_INTERNAL | In an unbounded-capacity regime, consolidating durable knowledge into separable modules produces less… | `unresolved` | implemented | `modular-consolidation/EXP-100` |
+| **CCS-C7** Lifetime coherence is maintainable | arch | ACCUMULATE | A multi-timescale substrate can be operated over lifetimes far longer than any single experiment stream… | `unresolved` | implemented | `lifetime-integrity/EXP-A001`, `lifetime-integrity/EXP-B001` |
+| **CCS-C8** The components compose | arch | cross-operator | A system combining accumulation, allocation and commitment outperforms the best single-component system… | `conjecture` | none | `ccs/EXP-I1` |
+| **CCS-C9** Multiple timescales are necessary, not merely sufficient | arch | cross-operator | A single-timescale controller given the same total capacity, write budget and compute cannot match a… | `unresolved` | partial | `state-promotion/EXP-001`, `plasticity-routing/EXP-001` |
+| **CCS-C10** Gating overhead does not erase the gain | arch | COMMIT_INTERNAL | The decision-time inference cost of evidence gating is small enough that the method retains its advantage… | `unresolved` | implemented | `state-promotion/EXP-001` |
+| **CCS-C11** Under a binding capacity ceiling, pooling beats destroying | arch | COMMIT_INTERNAL | Under a hard capacity ceiling below the number of distinct skills, and at identical live module count,… | `unresolved` | implemented | `modular-consolidation/EXP-003`, `modular-consolidation/EXP-100` |
+| **CCS-C12** Internal and external commitment share one mechanism | arch | COMMIT_INTERNAL + COMMIT_EXTERNAL | COMMIT_INTERNAL and COMMIT_EXTERNAL are instances of a single commitment principle: one learned mechanism,… | `conjecture` | none | `ccs/EXP-U1` |
+| **CCS-C13** Useful consolidation needs pressure AND candidate diversity | arch | COMMIT_INTERNAL | Consolidation improves the retention-plasticity frontier only when capacity pressure coincides with enough… | `unresolved` | implemented | `modular-consolidation/CANDIDATE-DIVERSITY`, `modular-consolidation/EXP-100` |
+| **CCS-C14** Short-horizon rankings are unreliable proxies for long-horizon rankings | **METHOD** | ACCUMULATE | On LIS-v0, across the nine reference maintenance mechanisms tested, mechanism rankings measured at short… | `CONFIRMATORY` | implemented | `lifetime-integrity/EXP-A001` |
 
-**13 claims. 0 with empirical support. 0 confirmatory.**
+**Architecture claims: 13. 0 with empirical support.**
+
+**Methodology claims: 1. 1 with empirical support — these are claims about how mechanisms must be EVALUATED, and none of them advances synthesis readiness or says the substrate works.**
 
 <!-- /GENERATED:claims -->
 
