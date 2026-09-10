@@ -144,6 +144,27 @@ The newer tracks brought controls strong enough to be worth generalising:
     (from `lifetime-integrity`). Rates may not be retuned after seeing which arm
     won.
 
+### Added 2026-09-10
+
+19. **A displayed trust boundary must not be closeable from inside it.** Found
+    while verifying the programme's inbound relay: a GitHub comment containing a
+    forged frame terminator, a forged tool line (`status = approved`) and a
+    forged frame opener rendered verbatim and flush-left *inside* the
+    "untrusted content" banner. Nothing could execute — approval is a separate
+    act against an id — but the frame exists for a human skimming or an LLM
+    consuming the text, and both can be misled by content that appears to sit
+    after the region ended.
+
+    Any tool in this programme that renders untrusted content inside a frame
+    must gutter every line of that content, so no in-body text can impersonate
+    the frame or the tool's own output.
+
+20. **Content asserting its own authority is the highest-risk class.** A comment
+    saying it has already been approved targets the *reviewer*, not the
+    repository, and defeats a boundary that no amount of repository-side
+    permission checking protects. Triage should weight autonomy-pressure
+    language at least as heavily as directive language.
+
 ### Added 2026-09-05
 
 17. **Short-horizon results do not license long-horizon mechanism claims.**
