@@ -39,7 +39,10 @@ to be filled in.
       schedule-only commitment operator. A design is not a result and this box
       stays unchecked. Note also that even a fully successful EXP-003 would
       settle separability from commitment *timing* only, so this box may need
-      two experiments rather than one.
+      two experiments rather than one. **Both are now designed** — `EXP-003`
+      (exogenous timing) and `EXP-004` (endogenous policy) — and **neither is
+      adopted**, so this box is no closer to being ticked than it was. What
+      changed is that the gap is fully specified rather than partly named.
 - [x] At least one long-horizon result on lifetime coherence —
       **`lifetime-integrity/EXP-A001`/`B001` read out confirmatory on 2026-09-05.**
       This box is cleared as *evidence produced*; it does not advance the tier,

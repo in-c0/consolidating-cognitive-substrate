@@ -55,6 +55,8 @@ graph TD
   class modular_consolidation_CANDIDATE_DIVERSITY active;
   plasticity_routing_EXP_003["plasticity-routing<br/>EXP-003<br/><i>not designed</i>"]
   class plasticity_routing_EXP_003 undesigned;
+  plasticity_routing_EXP_004["plasticity-routing<br/>EXP-004<br/><i>not designed</i>"]
+  class plasticity_routing_EXP_004 undesigned;
 
   state_promotion_EXP_000 --> state_promotion_EXP_001
   state_promotion_EXP_001 --> state_promotion_EXP_002
@@ -80,6 +82,7 @@ graph TD
   modular_consolidation_EXP_003 --> modular_consolidation_CANDIDATE_DIVERSITY
   plasticity_routing_EXP_001 --> modular_consolidation_CANDIDATE_DIVERSITY
   plasticity_routing_EXP_001 --> plasticity_routing_EXP_003
+  plasticity_routing_EXP_003 --> plasticity_routing_EXP_004
 
   classDef active fill:#1f6feb,stroke:#1f6feb,color:#fff;
   classDef pilot fill:#8b5cf6,stroke:#8b5cf6,color:#fff;
@@ -112,6 +115,7 @@ Solid nodes exist in code. Dashed nodes have no repository. The red node has no 
 | `ccs/EXP-U1` | COMMIT_INTERNAL + COMMIT_EXTERNAL | not-designed | CCS-C12 | `state-promotion/EXP-001`, `adaptive-commitment/EXP-A1` |
 | `modular-consolidation/CANDIDATE-DIVERSITY` | COMMIT_INTERNAL | pre-result-scaffold | CCS-C13 | `modular-consolidation/EXP-003`, `plasticity-routing/EXP-001` |
 | `plasticity-routing/EXP-003` | ALLOCATE + COMMIT_INTERNAL | not-designed | CCS-C4, CCS-C1 | `plasticity-routing/EXP-001` |
+| `plasticity-routing/EXP-004` | ALLOCATE + COMMIT_INTERNAL | not-designed | CCS-C4, CCS-C1 | `plasticity-routing/EXP-003` |
 
 <!-- /GENERATED:dag -->
 
@@ -172,6 +176,28 @@ at `unresolved` while carrying admissible evidence.
 `plasticity-routing/EXP-003` is the first design that crosses a pair. It is
 recorded at stage `not-designed` because the owning track has not adopted it —
 a design document existing is not a design decision.
+
+### CCS-C4's settlement path is now fully specified
+
+Two designs, neither adopted, which together cover the claim:
+
+| | commitment operator | what it settles |
+|---|---|---|
+| `EXP-003` | exogenous clock | separability from commitment **timing** |
+| `EXP-004` | endogenous policy, four information rungs | separability from commitment **policy** |
+
+EXP-003 alone was never going to be enough, and said so in its own scope section.
+A clock has no inputs, so nothing the allocator does can change what it does —
+separability from a clock is close to trivial. EXP-004 exists because the
+non-trivial case is a commit policy reading the substrate the allocator just
+modified.
+
+The design's move is to make the commit policy's **information set** the
+independent variable, using a partition that already exists in
+`plasticity-routing`'s feature whitelist: stream-derived features are
+allocation-invariant, substrate-derived ones are not. Separability then becomes a
+function of how much the commit policy can see, and the ladder locates where it
+breaks rather than asking whether it breaks.
 
 ### Parallelism did not remove the risk
 

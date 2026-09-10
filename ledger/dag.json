@@ -393,6 +393,32 @@
         "scope_limit": "Commitment is operationalised as a SCHEDULE, not an evidence gate, because importing an unvalidated State Promotion mechanism is forbidden. A result would therefore settle separability from commitment TIMING only. CCS-C4 as written does not restrict the commit family, so even a fully successful EXP-003 leaves an evidence-gated residue and would itself be partial-scope evidence.",
         "identifiability_caveat": "The factors are not fully orthogonal: allocation determines the SUPPLY of commit candidates. This is handled for the primary contrast by construction, but only partly for the interaction term, where arms differ in commit supply as well as allocation content. Recorded before execution rather than discovered after."
       }
+    },
+    {
+      "id": "plasticity-routing/EXP-004",
+      "repo": "plasticity-routing",
+      "stage": "not-designed",
+      "operator": "ALLOCATE + COMMIT_INTERNAL",
+      "question": "Is allocation content separable from an ENDOGENOUS internal-commitment policy - one that decides when to commit from what it has observed - and does separability depend on how much of the substrate that policy can see?",
+      "depends_on": [
+        "plasticity-routing/EXP-003"
+      ],
+      "tests_claims": [
+        "CCS-C4",
+        "CCS-C1"
+      ],
+      "readout": null,
+      "admissible_as_evidence": null,
+      "gating_note": "DESIGN ONLY, NOT ADOPTED. Drafted 2026-09-10 on branch design/exp004-endogenous-commitment; main untouched at 57cb8e5. Stage is 'not-designed' because the owning track has not adopted it. Depends on EXP-003 being adopted and read out: EXP-004's C0 rung IS EXP-003's regime and is the bridge that makes the two comparable. OWNERSHIP FLAGGED, NOT DECIDED: this reaches into COMMIT_INTERNAL, which state-promotion owns, though it imports nothing from that track - commitment here chooses WHEN a pending window promotes, never WHICH items. plasticity-routing is recommended as host on continuity grounds (same substrate, world, lock machinery, leakage suite; T2 reuses L5b directly).",
+      "settlement_path_for": {
+        "claim": "CCS-C4",
+        "closes": "The residue EXP-003 explicitly declines: separability from a LEARNED OR ADAPTIVE internal-commit policy. A clock cannot interact with allocation because it has no inputs; an endogenous policy reads the substrate the allocator just modified.",
+        "identification_strategy": "The commit policy's INFORMATION SET is the independent variable. The existing 15-feature decision-time whitelist already partitions into S-features (stream-derived, allocation-invariant) and X-features (substrate-derived, allocation-coupled, including pred_error which reads answers back out of the substrate). Four rungs: EXOGENOUS (clock), STREAM-ADAPTIVE (S only, provably allocation-blind), STATE-COUPLED (S+X), LEARNED (S+X trained). Separability is treated as a function of how much the commit policy can see, not as a binary.",
+        "primary_criteria": "T1 oracle-mapping invariance - exhaustive search over 81 mappings per rung, no policy involved; T2 transplant penalty - train the allocator under one rung and evaluate under another, reusing the L5b crossover machinery; T3 interaction EQUIVALENCE by TOST against a predeclared margin, with 'inconclusive/underpowered' declared in advance as a third outcome so a wide interval cannot be reported as support.",
+        "predeclared_failure": "T1 refuting - the optimal class-to-action mapping differing across commitment rungs - FALSIFIES CCS-C4 in the world itself, and CCS-C1's separability premise takes the same hit. Separately, if satisfiability gate G1 fails (commitment timing does not measurably matter on SDW-1) then NO separability claim is produced in any direction.",
+        "identifiability_caveat": "Clean only at the allocation-blind rung. At the coupled rungs realized commit behaviour is a MEDIATOR of allocation's effect: the total effect is always estimable, but the controlled direct effect is identifiable ONLY because this is a simulator with randomized assignment and full observability, and the protocol requires that sentence to accompany it whenever reported. Matching on realized commits - the obvious repair - is conditioning on a mediator and would remove part of the effect being measured.",
+        "residue_if_successful": "Benchmark generality, not commit-family coverage. A full success would let CCS-C4 move to confirmatory-supported scoped to SDW-1 synthetic substrates, leaving an ordinary external-validity gap rather than the structural one EXP-003 leaves."
+      }
     }
   ]
 }
